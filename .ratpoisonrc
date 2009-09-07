@@ -1,0 +1,57 @@
+#
+# ratpoison config
+# by joshua stein <jcs@jcs.org>
+#
+
+# call them as i sees them
+set winname title
+
+# look pretty
+set font Sans:size=8
+set barborder 2
+set fgcolor black
+set border 2
+set fwcolor orange
+
+# be like screen
+escape C-a
+bind s hsplit
+bind C-s hsplit
+bind S split
+bind C-S split
+
+bind c exec xterm
+bind C-c exec xterm
+
+# don't do that
+warp off
+
+# i like tab just going between the same two windows
+bind Tab focuslast
+bind grave focus
+
+# openbsd-specific settings
+#
+# ## reserve space for dzen2
+# #set padding 0 0 0 0
+# 
+# ## swap workspaces
+# #bind 1 vselect 1
+# #bind 2 vselect 2
+# #bind 3 vselect 3
+# #bind 4 vselect 4
+# #bind 5 vselect 5
+# 
+# ## refresh monitor changes
+# #bind 0 exec ruby ~/bin/mon.rb
+# # lock the screen
+# #bind L exec pkill -USR1 xidle
+
+# initialize the pointer
+exec xsetroot -solid black -cursor_name left_ptr
+
+# initialize workspaces
+vinit
+
+# wider left panel for mutt
+frestore (frame :number 0 :x 0 :y 0 :width 730 :height 778 :screenw 1280 :screenh 778 :window 12582925 :last-access 165 :dedicated 0),(frame :number 1 :x 730 :y 0 :width 550 :height 778 :screenw 1280 :screenh 778 :window 10485773 :last-access 164 :dedicated 0),
