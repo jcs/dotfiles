@@ -1,0 +1,42 @@
+! vim:ts=8
+!
+! .Xdefaults
+! joshua stein <jcs@jcs.org>
+!
+
+! xterm
+.xterm*background:		white
+.xterm*cursorColor:		blue
+.xterm*foreground:		black
+.xterm*saveLines:		5000
+.xterm*scrollBar:		true
+.xterm*scrollbar*width:		10
+.xterm*utmpInhibit:		true
+! ! needed by ratpoison
+.xterm*allowSendEvents:		true
+.xterm*borderColor:		black
+! .xterm*sessionMgt:		false
+.xterm*title:			xterm
+.xterm*termName:		xterm-256color
+.xterm*selectToClipboard:	true
+.xterm*visualBell:		false
+
+!.qconsole*background:		black
+!.qconsole*foreground:		grey70
+.qconsole*internalBorder:	5
+.qconsole*utmpInhibit:		true
+.qconsole*rightScrollBar:	true
+
+! prompted me for passwords
+vncviewer*passwordDialog:	true
+vncviewer*grabKeyboard:		false
+
+! stand out
+.ratmen*background:		gray
+.ratmen*foreground:		black
+
+Xft.antialias: 1
+Xft.dpi: 96
+Xft.hinting: 1
+Xft.hintstyle: hintslight
+Xft.rgba: rgb
