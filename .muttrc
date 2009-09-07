@@ -1,0 +1,174 @@
+# vim:ts=3:et:ft=muttrc
+#
+# mutt 1.5 (with sidebar patch) config
+# joshua stein <jcs@jcs.org>
+#
+
+# things to set
+set ascii_chars=yes                             # looks better
+set alias_file=~/.muttrc.aliases                # good place, yeah?
+set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
+unset attribution                               # you know what you wrote
+set confirmappend=no                            # append without asking
+set connect_timeout=3                           # die quickly when i move
+set delete=yes                                  # don't ask me dammit
+set editor="vim"                                # yay vim
+set fast_reply=yes                              # quick like a ninja
+set folder=~/Mail                               # overridden by imap
+set forward_format="fwd: %s"                    # simple enough
+set header_cache=~/.mutt-cache/                 # header caching
+set imap_passive=no                             # open all
+set include=yes                                 # what'd you say?
+set index_format="%[!%m%d] [%Z] [%4c] %-52.52s %F" # ok
+set ispell="aspell --mode=email --add-email-quote=%,#,:,} --check"
+set mail_check=60                               # freq
+set mark_old=no                                 # keep unread mail new
+set markers=no                                  # this isn't ircII
+set mbox=~/Mail/inbox                           # overridden by imap anyway
+set message_cache_clean=yes                     # keep a tidy house
+set message_cachedir=~/.mutt-cache/             # yaz
+set metoo=no                                    # i know what i'm saying
+set mime_forward=ask-no                         # to forward attachments
+set move=no                                     # just move them dammit
+set narrow_tree=yes                             # huzzah
+set pager_context=2                             # i'm paranoid
+set pager_stop=yes                              # whoa horsey
+set pager_format=" -- %s "                      # yeah
+set pipe_decode=yes                             # fix piping to patch and such
+set postpone=ask-no                             # stop bothering me
+set postponed="=postponed"                      # get out of my home
+set quit=ask-yes                                # i keep hitting q by accident
+set record=~/Mail/sent                          # overridden by imap
+set smart_wrap=yes                              # smart like a fox
+set sort=threads                                # neat
+set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
+set status_on_top=yes                           # looks better with sidebar
+set tilde=yes                                   # don't you hide from me
+set timeout=15                                  # update the current box quickly
+set use_envelope_from=yes                       # sooper sekrit
+unset user_agent                                # i don't use mutt, i swear
+
+# these only work with the sidebar patch
+set sidebar_delim="] "                          # separate
+set sidebar_visible=yes                         # yep
+set sidebar_width=21                            # enough for me
+
+# things to bind keys to
+bind pager <down> next-line                     # makes sense
+bind pager <up> previous-line                   # as does this
+bind pager <left> exit                          # and how about this
+bind pager <right> next-entry                   # this too
+bind pager \CF next-page                        # make control+f and b scroll
+bind pager \CB previous-page                    #  like everything else
+bind index <delete> delete-message              # when i get super lazy
+bind index <space> display-message              # sure
+bind index <right> display-message              # tin
+bind index <tab> next-unread                    # ok
+bind index G last-entry                         # makes more sense
+bind index \CF next-page                        # make control+f and b scroll
+bind index \CB previous-page                    #  like everything else
+bind compose F edit-from                        # i am not me
+
+# act like normal vi keys but browse sidebar folders
+macro index K  ':push <sidebar-prev><sidebar-open><enter>'
+macro index J  ':push <sidebar-next><sidebar-open><enter>'
+
+# things to automate
+macro index S "s=Junk\n$"                       # spam
+macro index i "c!\n"                            # go home
+macro index n "c\n"                             # go to box with new mail
+macro index p "c<up><up>\n"                     # go back to the previous box
+# broken: if no messages are tagged, it deletes the current message :(
+#macro index P "T~d >1m\n;d$"                   # tag and delete old mail, sync
+macro index P "T~d >60d\n"                      # prune: tag+delete old mail
+macro index R "Wn"                              # mark as read
+macro pager i "c!\n"                            # go to the inbox
+macro pager n "c\n"                             # go to box with new mail
+macro pager p "c<up><up>\n"                     # go back to the previous box
+
+# imitate the old search-body function, but expensive for imap
+macro index <Esc>b '/~B ' 'search in message bodies'
+
+# sidebar shenanigans
+macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+
+# automation for majordomo approvals
+macro index A "|/usr/local/lib/majordomo/bin/approve\nd"
+macro pager A "|/usr/local/lib/majordomo/bin/approve\nd"
+
+# things to happen
+folder-hook . set sort=threads                  # everything else
+folder-hook . set strict_threads=no             # compensate for stupid clients
+folder-hook inbox set sort=mailbox-order        # threads hide new replies
+folder-hook sent set sort=date-sent             # when did i send that?
+folder-hook sent set strict_threads=yes         # don't group incorrectly
+folder-hook ^allmail.*$ set sort=mailbox-order  # don't sort, for fast loading
+folder-hook ^allmail.*$ push <toggle-write>     # don't save changes, read-only
+
+# things to display (or not)
+ignore *
+unignore from: resent-from: sender: reply-to: to: resent-to: cc: bcc: x-mailing-list: date: resent-date: organization: organisation: x-mailer: x-newsreader: x-agent: x-editor: user-agent: priority: importance: message-id: resent-message-id: subject: old-return-receipt-to: old-disposition-notification-to:
+unhdr_order *
+hdr_order from: resent-from: sender: reply-to: to: resent-to: cc: bcc: x-mailing-list: date: resent-date: organization: organisation: x-mailer: x-newsreader: x-agent: x-editor: user-agent: priority: importance: message-id: resent-message-id: old-return-receipt-to: old-disposition-notification-to: subject:
+
+# new stah
+mono attachment bold                                      # evil!
+mono body underline "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
+mono body underline "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"      # email addresses
+mono body bold "-----Original Message-----"               # outlook is lame
+mono body bold "[;:]-[)/(|]"                              # smiley faces suck
+mono header none .                                        # default headers
+mono header bold "^From: "                                # who are you?
+mono header bold "^Resent-From: "                         # sneakily!
+mono header bold "^To: "                                  # me, probably
+mono header bold "^Subject: "                             # oh yeah
+mono header bold "^Organi[zs]ation: "                     # where ya from
+mono header bold "^Priority: Urgent"                      # like i care
+mono header bold "^Importance: high"                      # right...
+mono index bold '~U'                                      # {S gotmail.wav
+mono index bold '~F'                                      # highlight flagged
+mono indicator reverse                                    # stick out
+mono signature bold                                       # ok
+mono sidebar_new bold                                     # same
+mono tilde bold                                           # yeah.
+mono tree bold                                            # threads
+mono quoted bold                                          # quoting
+
+# since i now have to use an xterm-color $TERM, init color versions of the
+# same using brightcolor16 as a bright black
+color normal default default                              # init to black-on-white
+color attachment brightcolor16 default
+color body brightblue default "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
+color body brightcolor16 default "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"
+color body brightcolor16 default "-----Original Message-----"
+color body brightcolor16 default "[;:]-[)/(|]"
+color header default default .
+color header brightcolor16 default "^From: "
+color header brightcolor16 default "^Resent-From: "
+color header brightcolor16 default "^To: "
+color header brightcolor16 default "^Subject: "
+color header brightcolor16 default "^Organi[zs]ation: "
+color header brightcolor16 default "^Priority: Urgent"
+color header brightcolor16 default "^Importance: high"
+color header brightcolor16 default '~U'
+color header brightcolor16 default '~F'
+color index brightcolor16 default '~U'
+color index brightcolor16 default '~F'
+#color indicator brightcolor7 black
+color signature brightcolor16 default
+color sidebar_new brightcolor16 default
+color tilde brightcolor16 default
+color tree brightcolor16 default
+color quoted brightcolor16 default
+
+# things i can see in mutt (with external programs through ~/.mailcap)
+auto_view text/html application/msword                    # html with lynx,
+                                                          # .doc with antiword
+
+# but that doesn't mean i don't like text/plain
+alternative_order text/plain text/html
+
+# things to load in
+source $alias_file
+source ~/.muttrc.personal                                 # mailboxes, etc.

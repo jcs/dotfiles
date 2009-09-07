@@ -1,0 +1,127 @@
+# vim:ts=3:et:ft=
+#
+# tcsh 6 config
+# joshua sein <jcs@jcs.org>
+#
+
+# environment variables
+setenv BLOCKSIZE 1k
+setenv CVS_RSH /usr/bin/ssh
+setenv IRCNAME "*Unknown*"
+
+# ow my security
+setenv MYSQL_HISTFILE /dev/null
+# pass through to bash in case it somehow gets invoked
+setenv HISTFILE
+
+# let my ~/bins override, find other bins quickly
+setenv PATH ~/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/X11R6/bin
+
+# on non-interactive shells, just exit here to speed things up
+if ($?USER == 0 || $?prompt == 0 || $tty == "") then
+	exit
+endif
+
+# i'm too lazy to type these out
+alias ccom 'cvs -q diff -upRN \!* || (echo; echo enter to commit; sh -c read && cvs com \!*)'
+alias cdu 'cvs -q diff -upRN'
+alias cp 'cp -i'
+alias hg 'history | grep '
+alias ll 'ls -alF'
+alias lo 'logout'
+alias ls 'ls -aF'
+alias manfile 'groff -man -Tascii \!* | less'
+alias mv 'mv -i'
+alias offline_mutt 'mutt -R -F ~/.muttrc.offline'
+alias ph 'ps auwwx | head'
+alias pg 'ps auwwx | grep'
+alias refetch 'cvs -q up -PACd'
+alias telnet 'telnet -K'
+alias tin 'tin -arQ'
+alias u 'cvs -q up -PAd'
+
+# for openbsd ports
+alias remake 'cd ../../; rm w-*/.build*; make; cd -'
+
+if ("$OSTYPE" == "darwin") then
+   # mac os'isms
+   alias ldd 'otool -L'
+   alias sha1 'openssl dgst -sha1'
+else
+   # probably openbsd
+   setenv PKG_PATH ftp://rt.fm/pub/OpenBSD/snapshots/packages/`arch -s`/
+   alias pkg_replace 'sudo pkg_add -r -F installed'
+   alias watchbw 'netstat -w1 -b -I'
+endif
+
+# when i say vi i mean vim (if it's installed)
+if (-x "`which vim`") then
+   alias vi 'vim'
+   alias view 'vim -R'
+   setenv EDITOR `which vim`
+else
+   setenv EDITOR /usr/bin/vi
+endif
+
+# keybindings
+bindkey ^[[1~ beginning-of-line      # home key
+bindkey ^[[4~ end-of-line            # end key
+bindkey ^T load-average              # siginfo
+bindkey ^W backward-delete-word      # just a word, thanks
+
+# i never need to look in these
+set fignore="CVS"
+
+# super duper tab completion
+set noglob
+  # jobs
+  complete {fg,bg,stop}  c/%/j/ p/1/"(%)"//
+
+  # settings
+  complete {,un}alias  'p/1/a/' 'p/2/c/'
+  complete bindkey 'C/*/b/'
+  complete env 'c/*=/f/' 'p/1/e/=/' 'p/2/c/'
+  complete {,un}limit c/-/"(h)"/ n/*/l/
+  complete {,un}setenv   'p/1/e/' 'c/*:/f/'
+  complete {,un}set   'c/*=/f/' 'p/1/s/=' 'n/=/f/'
+
+  # only cd to dirs
+  complete cd p/1/d/
+
+  # show bins
+  complete {man,which,where,whereis}  'C/*/c/'
+
+  # let me tab complete ssh hosts 
+  if ( -r $HOME/.ssh/known_hosts ) then
+    set hosts=`grep -v '^#' $HOME/.ssh/known_hosts | sed -e 's/ .*//' -e 's/,/ /g' | tr ' ' '\n' | sort -n | grep -v '^$'` >& /dev/null
+  endif
+  complete {ssh,ping,telnet,traceroute} p/1/\$hosts/
+unset noglob 
+set correct=all
+
+# options
+set autocorrect                      # fix typos
+set autolist                         # don't make me hit ctrl+d
+set autologout=0                     # maybe i'm just taking a nap
+set correct=none                     # don't assume anything
+set history=500                      # just in case
+set listjobs=long                    # shoe me pids
+set notify                           # curious george
+set noclobber                        # halp me
+set printexitvalue                   # i want to know if something went wrong
+set prompt='%n@%m:%~%# '             # yeah
+set rmstar                           # recycle bin?
+set watch=(0 any any)                # i see all
+set who="%B%n%b %a %l at %@"         # format a bit
+
+# etc
+limit coredumpsize 0                 # don't know why you'd want anything else
+umask 022                            # be nice
+
+# siginfo
+stty status '^T'
+
+# load any local aliases and machine-specific things
+if (-f ~/.tcshrc.local) then
+   source ~/.tcshrc.local
+endif
