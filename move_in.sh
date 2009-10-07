@@ -13,7 +13,7 @@ fi
 TD=`mktemp -d`
 
 ftp -o - http://github.com/jcs/dotfiles/tarball/master | tar -C $TD -xvzf -
-rm -f $TD/move_in.sh
-mv -f $TD/.???* ~/
+rm -f $TD/jcs-*/move_in.sh
+mv -f $TD/jcs-*/.???* ~/
 
 rm -rf $TD
