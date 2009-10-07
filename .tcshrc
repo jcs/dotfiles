@@ -49,7 +49,7 @@ if ("$OSTYPE" == "darwin") then
    alias sha1 'openssl dgst -sha1'
 else
    # probably openbsd
-   setenv PKG_PATH ftp://rt.fm/pub/OpenBSD/snapshots/packages/`arch -s`/
+   setenv PKG_PATH ftp://ftp.usa.openbsd.org/pub/OpenBSD/snapshots/packages/`arch -s`/
    alias pkg_replace 'sudo pkg_add -r -F installed'
    alias watchbw 'netstat -w1 -b -I'
 endif
