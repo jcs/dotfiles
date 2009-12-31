@@ -2,16 +2,36 @@
 # ratpoison config
 # by joshua stein <jcs@jcs.org>
 #
+# some of these settings require changes from my ratpoison tree:
+# http://github.com/jcs/ratpoison
+#
 
 # call them as i sees them
 set winname title
 
-# look pretty
-set font Sans:size=8
-set barborder 2
-set fgcolor black
+# reserve space for dzen
+set padding 0 20 0 0
+
+# keep the bar in the upper left displaying the active frame title
+set barborder 0
+set bargravity nw
+set barpadding 2 2
+set barsticky on
+set bgcolor black
+set fgcolor white
+set font Inconsolata:size=10
+set winliststyle row
+set winfmt %t
+# this prevents it from taking dzen's padding into account
+set barinpadding 1
+
+# add space around this now that the padding is small
+set framefmt  current frame 
+
+# window borders
 set border 2
 set fwcolor orange
+set bwcolor gray
 
 # be like screen
 escape C-a
@@ -30,22 +50,12 @@ warp off
 bind Tab focuslast
 bind grave focus
 
-# openbsd-specific settings
-#
-# ## reserve space for dzen2
-# #set padding 0 0 0 0
-# 
-# ## swap workspaces
-# #bind 1 vselect 1
-# #bind 2 vselect 2
-# #bind 3 vselect 3
-# #bind 4 vselect 4
-# #bind 5 vselect 5
-# 
-# ## refresh monitor changes
-# #bind 0 exec ruby ~/bin/mon.rb
-# # lock the screen
-# #bind L exec pkill -USR1 xidle
+# swap workspaces
+bind F1 vselect 1
+bind F2 vselect 2
+bind F3 vselect 3
+bind F4 vselect 4
+bind F5 vselect 5
 
 # initialize the pointer
 exec xsetroot -solid black -cursor_name left_ptr
@@ -53,5 +63,7 @@ exec xsetroot -solid black -cursor_name left_ptr
 # initialize workspaces
 vinit
 
-# wider left panel for mutt
-frestore (frame :number 0 :x 0 :y 0 :width 730 :height 778 :screenw 1280 :screenh 778 :window 12582925 :last-access 165 :dedicated 0),(frame :number 1 :x 730 :y 0 :width 550 :height 778 :screenw 1280 :screenh 778 :window 10485773 :last-access 164 :dedicated 0),
+# split workspace 1 and start an xterm there
+frestore (frame :number 0 :x 0 :y 20 :width 720 :height 880 :screenw 1440 :screenh 900 :window 14680077 :last-access 1 :dedicated 0),(frame :number 1 :x 720 :y 20 :width 720 :height 880 :screenw 1440 :screenh 900 :window 0 :last-access 0 :dedicated 0),
+select 0
+exec xterm
