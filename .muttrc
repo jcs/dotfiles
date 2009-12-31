@@ -112,7 +112,7 @@ unignore from: resent-from: sender: reply-to: to: resent-to: cc: bcc: x-mailing-
 unhdr_order *
 hdr_order from: resent-from: sender: reply-to: to: resent-to: cc: bcc: x-mailing-list: date: resent-date: organization: organisation: x-mailer: x-newsreader: x-agent: x-editor: user-agent: priority: importance: message-id: resent-message-id: old-return-receipt-to: old-disposition-notification-to: subject:
 
-# new stah
+# bold/underline-only styling, for old non-color xterm (now xterm-r6 $TERM)
 mono attachment bold                                      # evil!
 mono body underline "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
 mono body underline "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"      # email addresses
@@ -170,5 +170,6 @@ auto_view text/html application/msword                    # html with lynx,
 alternative_order text/plain text/html
 
 # things to load in
-source $alias_file
 source ~/.muttrc.personal                                 # mailboxes, etc.
+
+source $alias_file
