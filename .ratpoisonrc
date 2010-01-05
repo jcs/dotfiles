@@ -13,6 +13,7 @@ set winname title
 set padding 0 20 0 0
 
 # keep the bar in the upper left displaying the active frame title
+msgwait 3
 set barborder 0
 set bargravity nw
 set barpadding 2 2
@@ -49,6 +50,10 @@ warp off
 # i like tab just going between the same two windows
 bind Tab focuslast
 bind grave focus
+
+# act normal but prevent firefox raising itself when links are opened from
+# other apps
+rudeness 12
 
 # swap workspaces
 bind F1 vselect 1
