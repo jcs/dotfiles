@@ -27,11 +27,9 @@ set spellfile=~/.vimspell.add			" my goodwords
 set tabstop=4					" default tabs at 4 spaces
 set viminfo=					" annoying!
 
-syntax on					" enable syntax highlighting
-set t_Co=0					" but turn colors off
-
-"match ErrorMsg '\%>80v.\+'			" highlight anything over 80
-
+set t_Co=256					" use all 256 colors
+syntax on					" and enable syntax highlighting
+colorscheme jcs					" and load my colors
 
 " file type-specific settings
 
