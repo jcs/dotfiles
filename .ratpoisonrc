@@ -10,7 +10,7 @@
 set winname title
 
 # reserve space for dzen
-set padding 0 20 0 0
+set padding 0 17 0 0
 
 # keep the bar in the upper left displaying the active frame title
 msgwait 3
@@ -20,7 +20,7 @@ set barpadding 2 2
 set barsticky on
 set bgcolor black
 set fgcolor white
-set font Inconsolata:size=10
+set font *-proggytinysz-medium-
 set winliststyle row
 set winfmt %t
 # this prevents it from taking dzen's padding into account
@@ -44,6 +44,12 @@ bind C-S split
 bind c exec xterm
 bind C-c exec xterm
 
+bind L exec xautolock -locknow
+
+# pidgin's window is hard to get to, so control-a,A pops up a dialog to ask me
+# what to set the away status to
+bind A exec sh ~/bin/pidgin_away_status.sh 
+
 # don't do that
 warp off
 
@@ -54,6 +60,10 @@ bind grave focus
 # act normal but prevent firefox raising itself when links are opened from
 # other apps
 rudeness 12
+
+# let popups stay centered
+unmanage xmessage
+unmanage xprompt
 
 # swap workspaces
 bind F1 vselect 1
@@ -68,7 +78,10 @@ exec xsetroot -solid black -cursor_name left_ptr
 # initialize workspaces
 vinit
 
-# split workspace 1 and start an xterm there
-frestore (frame :number 0 :x 0 :y 20 :width 720 :height 880 :screenw 1440 :screenh 900 :window 14680077 :last-access 1 :dedicated 0),(frame :number 1 :x 720 :y 20 :width 720 :height 880 :screenw 1440 :screenh 900 :window 0 :last-access 0 :dedicated 0),
-select 0
+# split workspace 1 into 3 and start an xterm in the big part
+hsplit
+focus
+split
+focus
+focus
 exec xterm
