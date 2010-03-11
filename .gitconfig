@@ -1,0 +1,4 @@
+[user]
+	email = jcs@jcs.org
+[alias]
+	diff-remote = diff origin..master
