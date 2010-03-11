@@ -101,8 +101,8 @@ macro pager A "|/usr/local/lib/majordomo/bin/approve\nd"
 folder-hook . set sort=threads                  # everything else
 folder-hook . set strict_threads=no             # compensate for stupid clients
 folder-hook inbox set sort=mailbox-order        # threads hide new replies
-folder-hook sent set sort=date-sent             # when did i send that?
 folder-hook sent set strict_threads=yes         # don't group incorrectly
+folder-hook sent set sort=date-sent             # when did i send that?
 folder-hook ^allmail.*$ set sort=mailbox-order  # don't sort, for fast loading
 folder-hook ^allmail.*$ push <toggle-write>     # don't save changes, read-only
 
@@ -114,7 +114,7 @@ hdr_order from: resent-from: sender: reply-to: to: resent-to: cc: bcc: x-mailing
 
 # bold/underline-only styling, for old non-color xterm (now xterm-r6 $TERM)
 mono attachment bold                                      # evil!
-mono body underline "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
+mono body underline "(https?|t?ftp|mailto|gopher|ssh|telnet|finger)://[^ ]+"
 mono body underline "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"      # email addresses
 mono body bold "-----Original Message-----"               # outlook is lame
 mono body bold "[;:]-[)/(|]"                              # smiley faces suck
@@ -153,14 +153,16 @@ color header brightcolor16 default "^Priority: Urgent"
 color header brightcolor16 default "^Importance: high"
 color header brightcolor16 default '~U'
 color header brightcolor16 default '~F'
-color index brightcolor16 default '~U'
-color index brightcolor16 default '~F'
-#color indicator brightcolor7 black
 color signature brightcolor16 default
 color sidebar_new brightcolor16 default
 color tilde brightcolor16 default
 color tree brightcolor16 default
 color quoted brightcolor16 default
+
+# bold new email in the index
+color index brightcolor16 default '~U'
+# color flagged a dark red
+color index color160 default '~F'
 
 # things i can see in mutt (with external programs through ~/.mailcap)
 auto_view text/html application/msword                    # html with lynx,
