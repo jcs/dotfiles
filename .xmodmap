@@ -1,0 +1,16 @@
+! turn caps lock into a control key
+remove Lock = Caps_Lock
+remove Control = Control_L
+keysym Caps_Lock = Control_L
+add Lock = Caps_Lock
+add Control = Control_L
+
+! map previous and next buttons on the thinkpad to pagedown/up
+keycode 233 = Page_Down
+keycode 234 = Page_Up
+
+! map audio keys on fn+up/down/left/right into things
+keycode 164 = XF86AudioStop
+keycode 144 = XF86AudioPrev
+keycode 162 = XF86AudioPlay
+keycode 153 = XF86AudioNext
