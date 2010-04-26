@@ -37,6 +37,7 @@ set pager_format=" -- %s "                      # yeah
 set pipe_decode=yes                             # fix piping to patch and such
 set postpone=ask-no                             # stop bothering me
 set postponed="=postponed"                      # get out of my home
+set print=ask-no                                # i probably accidently printed
 set quit=ask-yes                                # i keep hitting q by accident
 set record=~/Mail/sent                          # overridden by imap
 set smart_wrap=yes                              # smart like a fox
@@ -59,7 +60,8 @@ bind pager <up> previous-line                   # as does this
 bind pager <left> exit                          # and how about this
 bind pager <right> next-entry                   # this too
 bind pager \CF next-page                        # make control+f and b scroll
-bind pager \CB previous-page                    #  like everything else
+bind pager \CB previous-page                    #   like everything else
+bind pager \CP print-message                    # yeah
 bind index <delete> delete-message              # when i get super lazy
 bind index <space> display-message              # sure
 bind index <right> display-message              # tin
