@@ -11,6 +11,7 @@ setenv IRCNAME "*Unknown*"
 
 # ow my security
 setenv MYSQL_HISTFILE /dev/null
+
 # pass through to bash in case it somehow gets invoked
 setenv HISTFILE
 
@@ -34,7 +35,7 @@ alias manfile 'groff -man -Tascii \!* | less'
 alias mv 'mv -i'
 alias offline_mutt 'mutt -R -F ~/.muttrc.offline'
 alias ph 'ps auwwx | head'
-alias pg 'ps auwwx | grep'
+alias pg 'ps auwwx | grep -e ^USER -e'
 alias refetch 'cvs -q up -PACd'
 alias telnet 'telnet -K'
 alias tin 'tin -arQ'
@@ -49,7 +50,7 @@ if ("$OSTYPE" == "darwin") then
    alias sha1 'openssl dgst -sha1'
 else
    # probably openbsd
-   setenv PKG_PATH ftp://ftp.usa.openbsd.org/pub/OpenBSD/snapshots/packages/`arch -s`/
+   setenv PKG_PATH ftp://mirror.planetunix.net/pub/OpenBSD/snapshots/packages/`arch -s`/
    alias pkg_replace 'sudo pkg_add -r -F installed'
    alias watchbw 'netstat -w1 -b -I'
 endif
@@ -105,6 +106,7 @@ set autolist                         # don't make me hit ctrl+d
 set autologout=0                     # maybe i'm just taking a nap
 set correct=none                     # don't assume anything
 set history=500                      # just in case
+unset ignoreeof                      # when i control+d, i want to logout
 set listjobs=long                    # shoe me pids
 set notify                           # curious george
 set noclobber                        # halp me
@@ -118,10 +120,10 @@ set who="%B%n%b %a %l at %@"         # format a bit
 limit coredumpsize 0                 # don't know why you'd want anything else
 umask 022                            # be nice
 
-# siginfo
-stty status '^T'
-
 # load any local aliases and machine-specific things
 if (-f ~/.tcshrc.local) then
    source ~/.tcshrc.local
 endif
+
+# siginfo
+stty status '^T'
