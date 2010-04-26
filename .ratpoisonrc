@@ -60,9 +60,9 @@ definekey top F4 vselect 4
 definekey top F5 vselect 5
 
 # control pianobar
-definekey top XF86AudioStop exec pgrep pianobar && echo -n p > /var/home/jcs/.config/pianobar/ctl
-definekey top XF86AudioPlay exec pgrep pianobar && echo -n p > /var/home/jcs/.config/pianobar/ctl
-definekey top XF86AudioNext exec pgrep pianobar && echo -n n > /var/home/jcs/.config/pianobar/ctl
+definekey top XF86AudioStop exec pgrep pianobar >/dev/null && echo -n p > /var/home/jcs/.config/pianobar/ctl
+definekey top XF86AudioPlay exec pgrep pianobar >/dev/null && echo -n p > /var/home/jcs/.config/pianobar/ctl
+definekey top XF86AudioNext exec pgrep pianobar >/dev/null && echo -n n > /var/home/jcs/.config/pianobar/ctl
 
 # don't do that
 warp off
