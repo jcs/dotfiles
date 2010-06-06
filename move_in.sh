@@ -15,5 +15,7 @@ TD=`mktemp -d XXXXXX`
 ftp -o - http://github.com/jcs/dotfiles/tarball/master | tar -C $TD -xvzf -
 rm -f $TD/jcs-*/move_in.sh
 mv -f $TD/jcs-*/.???* ~/
-
 rm -rf $TD
+
+rm -f ~/.bash_history
+ln -s /dev/null ~/.bash_history
