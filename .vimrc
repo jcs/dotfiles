@@ -46,7 +46,7 @@ au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 smartindent
 au FileType yaml set ts=2 sw=2 et
 
 " source code gets wrapped at <80
-au FileType javascript,php,html,perl,c,cpp set tw=79 autoindent
+au FileType asm,javascript,php,html,perl,c,cpp set tw=79 autoindent
 
 " makefiles and c have tabstops at 8 for portability
 au FileType make,c,cpp set ts=8 sw=8
