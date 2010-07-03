@@ -47,4 +47,4 @@ hi Ignore		cterm=bold		ctermfg=NONE
 hi ErrorMsg		cterm=reverse		ctermfg=9	ctermbg=15
 hi Error		cterm=reverse		ctermfg=9	ctermbg=15
 hi Todo			cterm=bold,standout	ctermfg=11	ctermbg=0
-hi MatchParen		cterm=reverse		ctermfg=yellow	ctermbg=0
+hi MatchParen		cterm=bold		ctermfg=yellow	ctermbg=0
