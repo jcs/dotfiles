@@ -52,6 +52,9 @@ bind A exec sh ~/bin/pidgin_away_status.sh
 # and B comes back
 bind B exec ruby ~/code/pidgin_status/pidgin_status.rb available
 
+# reload firefox through mozrepl without having to focus it
+bind C-r exec echo "BrowserReload()" | nc localhost 4242 >/dev/null
+
 # swap workspaces, but define it in 'top' to avoid having to prefix with C-a
 definekey top F1 vselect 1
 definekey top F2 vselect 2
@@ -59,10 +62,15 @@ definekey top F3 vselect 3
 definekey top F4 vselect 4
 definekey top F5 vselect 5
 
-# control pianobar
-definekey top XF86AudioStop exec pgrep pianobar >/dev/null && echo -n p > /var/home/jcs/.config/pianobar/ctl
-definekey top XF86AudioPlay exec pgrep pianobar >/dev/null && echo -n p > /var/home/jcs/.config/pianobar/ctl
-definekey top XF86AudioNext exec pgrep pianobar >/dev/null && echo -n n > /var/home/jcs/.config/pianobar/ctl
+## control pianobar
+#definekey top XF86AudioStop exec pgrep pianobar >/dev/null && echo -n p > /var/home/jcs/.config/pianobar/ctl
+#definekey top XF86AudioPlay exec pgrep pianobar >/dev/null && echo -n p > /var/home/jcs/.config/pianobar/ctl
+#definekey top XF86AudioNext exec pgrep pianobar >/dev/null && echo -n n > /var/home/jcs/.config/pianobar/ctl
+
+# control itunes on tv
+definekey top XF86AudioStop exec ssh tv bin/itunes_control.sh pause
+definekey top XF86AudioPlay exec ssh tv bin/itunes_control.sh play
+definekey top XF86AudioNext exec ssh tv bin/itunes_control.sh next
 
 # don't do that
 warp off
@@ -88,9 +96,5 @@ exec xsetroot -solid black -cursor_name left_ptr
 vinit
 
 # split workspace 1 into 3 and start an xterm in the big part
-hsplit
-focus
-split
-focus
-focus
+frestore (frame :number 0 :x 0 :y 17 :width 720 :height 883 :screenw 1440 :screenh 900 :window 27262984 :last-access 32 :dedicated 0),(frame :number 1 :x 720 :y 17 :width 600 :height 431 :screenw 1440 :screenh 900 :window 20971732 :last-access 30 :dedicated 0),(frame :number 2 :x 1320 :y 17 :width 120 :height 431 :screenw 1440 :screenh 900 :window 20971612 :last-access 6 :dedicated 0),(frame :number 5 :x 720 :y 448 :width 720 :height 461 :screenw 1440 :screenh 900 :window 23068680 :last-access 31 :dedicated 0),
 exec xterm
