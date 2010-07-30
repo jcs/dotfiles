@@ -229,10 +229,14 @@ on ^314 "*" {
 	xecho -c [$Z] *W* $1 was \($2@$3\);
 	xecho -c [$Z] *W* n: $5-
 }
-on ^315 "*" {}
 on ^317 "*" { xecho -c [$Z] *W* i: $tdiff2($2) }
-on ^318 "*" {}
 on ^319 "*" { xecho -c [$Z] *W* c: $2- }
+on ^378 "*" { xecho -c [$Z] *W* h: $2- }
+# redundant whois junk, silence
+on ^315 "*" {}
+on ^318 "*" {}
+
+# channel info
 on ^329 "*" {
 	showchan
 	xecho -c [$Z] $banner channel $1 created at $strftime($2 %A %B %d %T %Z %Y).
