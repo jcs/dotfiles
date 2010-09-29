@@ -102,7 +102,7 @@ macro pager A "|/usr/local/lib/majordomo/bin/approve\nd"
 # things to happen
 folder-hook . set sort=threads                  # everything else
 folder-hook . set strict_threads=no             # compensate for stupid clients
-folder-hook inbox set sort=mailbox-order        # threads hide new replies
+folder-hook . set sort_aux=last-date-received   # bumped threads appear new
 folder-hook sent set strict_threads=yes         # don't group incorrectly
 folder-hook sent set sort=date-sent             # when did i send that?
 folder-hook ^allmail.*$ set sort=mailbox-order  # don't sort, for fast loading
@@ -169,11 +169,9 @@ color index color160 default '~F'
 # things i can see in mutt (with external programs through ~/.mailcap)
 auto_view text/html application/msword                    # html with lynx,
                                                           # .doc with antiword
-
 # but that doesn't mean i don't like text/plain
 alternative_order text/plain text/html
 
 # things to load in
 source ~/.muttrc.personal                                 # mailboxes, etc.
-
-source $alias_file
+source $alias_file                                        # people i know
