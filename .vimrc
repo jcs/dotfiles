@@ -31,6 +31,11 @@ set t_Co=256					" use all 256 colors
 syntax on					" and enable syntax highlighting
 colorscheme jcs					" and load my colors
 
+" don't pollute directories with swap files, keep them in one place
+silent !mkdir -p ~/.vim/{backup,swp}/
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swp//
+
 " file type-specific settings
 
 " .phtml are php files
@@ -39,6 +44,8 @@ au BufNewFile,BufRead *.phtml set ft=php
 " these are rubyish files
 au BufNewFile,BufRead *.rake,*.mab set ft=ruby
 au BufNewFile,BufRead *.erb set ft=eruby
+
+au BufNewFile,BufRead *.pjs set ft=javascript
 
 " ruby - what tabs?
 au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 smartindent
