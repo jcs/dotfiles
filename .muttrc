@@ -49,6 +49,11 @@ set timeout=15                                  # update the current box quickly
 set use_envelope_from=yes                       # sooper sekrit
 unset user_agent                                # i don't use mutt, i swear
 
+# this enables transliteration which replaces bogus characters with similar
+# ones, which has the effect of showing spaces instead of question marks in
+# certain quoted-printable messages (like on =A0 characters)
+set charset="us-ascii//TRANSLIT"
+
 # these only work with the sidebar patch
 set sidebar_delim="] "                          # separate
 set sidebar_visible=yes                         # yep
