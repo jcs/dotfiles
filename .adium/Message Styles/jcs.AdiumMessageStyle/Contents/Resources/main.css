@@ -1,0 +1,74 @@
+body {
+	color: #333333;
+	margin: 0;
+	line-height: 1.4em;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+#Chat {
+	overflow: hidden;
+}
+
+a {
+	border-bottom: 1px dashed;
+	text-decoration: none;
+}
+
+a:hover {
+	border-bottom: 1px solid;
+}
+
+.x-container {
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-bottom: 4px;
+}
+
+.x-time {
+	color: gray;
+	float: left;
+	font-size: .9em;
+	text-align: right;
+	padding-right: 6px;
+	margin-top: 1px;
+	width: 42px;
+}
+
+.x-buddyicon {
+	display: none;
+}
+
+.x-sender {
+	float: left;
+	font-weight: bold;
+	font-size: 1.1em;
+	overflow: hidden;
+	margin-right: 6px;
+}
+.message .x-sender::after {
+    content: ":";
+}
+
+.online, .offline, .away, .away_message, .return_away, .idle, .return_idle, {
+	color: gray;
+	font-style: italic;
+}
+
+.date_separator .x-time {
+	display: none;
+}
+
+.date_separator .x-message {
+	color: gray;
+	font-style: italic;
+	margin-left: 48px;
+}
+
+.incoming .x-sender {
+	color: #1f3a6f !important;
+}
+
+.outgoing .x-sender {
+	color: #a91d1f !important;
+}
