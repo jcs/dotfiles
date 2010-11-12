@@ -50,7 +50,7 @@ a:hover {
     content: ":";
 }
 
-.online, .offline, .away, .away_message, .return_away, .idle, .return_idle, {
+.status .x-message {
 	color: gray;
 	font-style: italic;
 }
