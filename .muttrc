@@ -76,6 +76,9 @@ bind index \CF next-page                        # make control+f and b scroll
 bind index \CB previous-page                    #  like everything else
 bind compose F edit-from                        # i am not me
 
+# always run $query_command when completing addresses instead of requiring C-t
+bind query <tab> complete-query
+
 # act like normal vi keys but browse sidebar folders
 macro index K  ':push <sidebar-prev><sidebar-open><enter>'
 macro index J  ':push <sidebar-next><sidebar-open><enter>'
