@@ -1,0 +1,4 @@
+METHODS="m_muttalias m_osx_addressbook"
+MAIL_DOMAIN_NAME=
+MUTTALIAS_FILES="$HOME/.muttrc.aliases"
+SORT_OUTPUT=name
