@@ -112,6 +112,7 @@ set notify                           # curious george
 set noclobber                        # halp me
 set printexitvalue                   # i want to know if something went wrong
 set prompt='%n@%m:%~%# '             # yeah
+set promptchars='>#'                 # mac os uses % instead of >, suk
 set rmstar                           # recycle bin?
 set watch=(0 any any)                # i see all
 set who="%B%n%b %a %l at %@"         # format a bit
