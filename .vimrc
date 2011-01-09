@@ -48,15 +48,15 @@ au BufNewFile,BufRead *.erb set ft=eruby
 au BufNewFile,BufRead *.pjs set ft=javascript
 
 " ruby - what tabs?
-au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 smartindent
+au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 autoindent
 " and your yaml
 au FileType yaml set ts=2 sw=2 et
 
-" source code gets wrapped at <80
+" source code gets wrapped at <80 and auto-indented
 au FileType asm,javascript,php,html,perl,c,cpp set tw=79 autoindent
 
 " makefiles and c have tabstops at 8 for portability
-au FileType make,c,cpp set ts=8 sw=8
+au FileType make,c,cpp,objc set ts=8 sw=8
 
 " email - expand tabs, wrap at 68 for future quoting, enable spelling
 au FileType mail set tw=68 et spell spelllang=en_us
