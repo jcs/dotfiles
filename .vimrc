@@ -98,7 +98,10 @@ abbr definetly definitely
 abbr shold should
 abbr appologize apologize
 abbr propogate propagate
+abbr eachother each other
 
 " i hold shift a lot, make :W work like :w and :Q like :q
 cabbr W w
 cabbr Q q
+
+" :w !sudo tee % 
