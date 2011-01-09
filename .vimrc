@@ -31,6 +31,12 @@ set t_Co=256					" use all 256 colors
 syntax on					" and enable syntax highlighting
 colorscheme jcs					" and load my colors
 
+" mac os terminal is retarded
+let s:uname = system("uname")
+if s:uname == "Darwin\n"
+	set t_Co=0
+endif
+
 " don't pollute directories with swap files, keep them in one place
 silent !mkdir -p ~/.vim/{backup,swp}/
 set backupdir=~/.vim/backup//
@@ -48,15 +54,15 @@ au BufNewFile,BufRead *.erb set ft=eruby
 au BufNewFile,BufRead *.pjs set ft=javascript
 
 " ruby - what tabs?
-au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 autoindent
+au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 smartindent
 " and your yaml
 au FileType yaml set ts=2 sw=2 et
 
-" source code gets wrapped at <80 and auto-indented
+" source code gets wrapped at <80
 au FileType asm,javascript,php,html,perl,c,cpp set tw=79 autoindent
 
 " makefiles and c have tabstops at 8 for portability
-au FileType make,c,cpp,objc set ts=8 sw=8
+au FileType make,c,cpp set ts=8 sw=8
 
 " email - expand tabs, wrap at 68 for future quoting, enable spelling
 au FileType mail set tw=68 et spell spelllang=en_us
@@ -98,10 +104,7 @@ abbr definetly definitely
 abbr shold should
 abbr appologize apologize
 abbr propogate propagate
-abbr eachother each other
 
 " i hold shift a lot, make :W work like :w and :Q like :q
 cabbr W w
 cabbr Q q
-
-" :w !sudo tee % 
