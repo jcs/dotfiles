@@ -31,12 +31,6 @@ set t_Co=256					" use all 256 colors
 syntax on					" and enable syntax highlighting
 colorscheme jcs					" and load my colors
 
-" mac os terminal is retarded
-let s:uname = system("uname")
-if s:uname == "Darwin\n"
-	set t_Co=0
-endif
-
 " don't pollute directories with swap files, keep them in one place
 silent !mkdir -p ~/.vim/{backup,swp}/
 set backupdir=~/.vim/backup//
