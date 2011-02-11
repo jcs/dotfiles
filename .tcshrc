@@ -93,8 +93,14 @@ set noglob
   complete {man,which,where,whereis}  'C/*/c/'
 
   # let me tab complete ssh hosts 
+  set hosts=""
   if ( -r $HOME/.ssh/known_hosts ) then
     set hosts=`grep -v '^#' $HOME/.ssh/known_hosts | sed -e 's/ .*//' -e 's/,/ /g' | tr ' ' '\n' | sort -n | grep -v '^$'` >& /dev/null
+  endif
+  if ( -d $HOME/.telnet ) then
+    unset noglob
+    set hosts="$hosts `basename -a $HOME/.telnet/*`"
+    set noglob
   endif
   complete {ssh,ping,telnet,traceroute} p/1/\$hosts/
 unset noglob 
