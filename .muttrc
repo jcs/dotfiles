@@ -116,6 +116,10 @@ folder-hook sent set sort=date-sent             # when did i send that?
 folder-hook ^allmail.*$ set sort=mailbox-order  # don't sort, for fast loading
 folder-hook ^allmail.*$ push <toggle-write>     # don't save changes, read-only
 
+# create message-ids that don't leak private info (like the number of messages
+# sent in the current mutt session, or the local hostname)
+send-hook . 'my_hdr Message-ID:<`date +"%Y%m%d%H%M%S"`.`sh -c "dd if=/dev/urandom bs=500 count=1 2>/dev/null | md5 | dd if=/dev/stdin bs=10 count=1 2>/dev/null"`@`sh -c "dd if=/dev/urandom bs=500 count=1 2>/dev/null | md5 | dd if=/dev/stdin bs=15 count=1 2>/dev/null"`>'
+
 # things to display (or not)
 ignore *
 unignore from: resent-from: sender: reply-to: to: resent-to: cc: bcc: x-mailing-list: date: resent-date: organization: organisation: x-mailer: x-newsreader: x-agent: x-editor: user-agent: priority: importance: message-id: resent-message-id: subject: old-return-receipt-to: old-disposition-notification-to:
