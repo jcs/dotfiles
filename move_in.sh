@@ -21,8 +21,7 @@ rm -f ~/.bash_history
 ln -s /dev/null ~/.bash_history
 
 # remove cruft installed by default in openbsd
-rm -f ~/.Xdefaults \
-	~/.cshrc \
+rm -f ~/.cshrc \
 	~/.login \
 	~/.mailrc \
 	~/.profile
