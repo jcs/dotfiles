@@ -1,7 +1,6 @@
 " vim:ts=8
 "
-" vim 7 config
-" joshua stein <jcs@jcs.org>
+" vim 7 config " joshua stein <jcs@jcs.org>
 "
 
 " defaults for everything
@@ -61,8 +60,8 @@ au FileType make,c,cpp,objc set ts=8 sw=8
 " email - expand tabs, wrap at 68 for future quoting, enable spelling
 au FileType mail set tw=68 et spell spelllang=en_us
 
-" cvs - commit messages are like email
-au FileType cvs set tw=68 et
+" commit messages are like email
+au FileType cvs,gitcommit set tw=68 et
 
 " and make sure there's a blank line for me to start typing (openbsd's cvs does
 " this by default)
@@ -84,11 +83,20 @@ function KillToSig ()
     normal! dGo
   endif
 endfunction
-map  <Esc>:let curline=line("."):exec KillToSig():exec curline
+map  <Esc>:let curline=line(".")<CR>:exec KillToSig()<CR>:exec curline<CR>
 
 " control+t - refresh
-map  :syn sync ccomment cComment minlines=500
+map  :syn sync ccomment cComment minlines=500<CR>
 
+" make buffer windows easier to navigate
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+map <C-n> :bn<CR>
+map <C-p> :bp<CR>
+map <C-x> :bd<CR>
 
 " me fail english?  that's unpossible!
 abbr seperate separate
