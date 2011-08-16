@@ -1,4 +1,7 @@
 [user]
 	email = jcs@jcs.org
+	name = joshua stein
+
 [alias]
 	diff-remote = diff origin..master
+	ff = pull --ff-only
