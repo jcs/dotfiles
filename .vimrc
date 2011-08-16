@@ -44,7 +44,7 @@ au BufNewFile,BufRead *.phtml set ft=php
 au BufNewFile,BufRead *.rake,*.mab set ft=ruby
 au BufNewFile,BufRead *.erb set ft=eruby
 
-au BufNewFile,BufRead *.pjs set ft=javascript
+au BufNewFile,BufRead *.pjs set ft=php.javascript
 
 " ruby - what tabs?
 au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 autoindent
