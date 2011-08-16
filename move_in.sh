@@ -17,8 +17,10 @@ rm -f $TD/jcs-*/move_in.sh
 mv -f $TD/jcs-*/.???* ~/
 rm -rf $TD
 
-rm -f ~/.bash_history
-ln -s /dev/null ~/.bash_history
+for f in .bash_history .sqlite_history .mysql_history; do
+	rm -f ~/$f
+	ln -s /dev/null ~/$f
+done
 
 # remove cruft installed by default in openbsd
 rm -f ~/.cshrc \
