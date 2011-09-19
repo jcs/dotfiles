@@ -55,6 +55,9 @@ else
    alias watchbw 'netstat -w1 -b -I'
 endif
 
+# where am i
+alias publicip 'curl http://ifconfig.me'
+
 # when i say vi i mean vim (if it's installed)
 if (-x "`which vim`") then
    alias vi 'vim'
@@ -94,15 +97,19 @@ set noglob
 
   # let me tab complete ssh hosts 
   set hosts=""
+  foreach f ($HOME/.hosts /usr/local/etc/csh.hosts $HOME/.rhosts /etc/hosts.equiv)
+    if ( -r $f ) then
+      set hosts = ($hosts `grep -v "+" $f | grep -E -v "^#" | tr -s " " " " | cut -f 1`)
+    endif
+  end
   if ( -r $HOME/.ssh/known_hosts ) then
-    set hosts=`grep -v '^#' $HOME/.ssh/known_hosts | sed -e 's/ .*//' -e 's/,/ /g' | tr ' ' '\n' | sort -n | grep -v '^$'` >& /dev/null
+    set f=`cat $HOME/.ssh/known_hosts | cut -f 1 -d \ ` >& /dev/null
+    set f=`cat $HOME/.ssh/known_hosts | cut -f 1 -d \ | sed -e 's/,/ /g'` >& /dev/null
+    set hosts=($hosts $f)
   endif
-  if ( -d $HOME/.telnet ) then
-    unset noglob
-    set hosts="$hosts `basename -a $HOME/.telnet/*`"
-    set noglob
-  endif
-  complete {ssh,ping,telnet,traceroute} p/1/\$hosts/
+  unset f
+  complete ssh p/1/\$hosts/ c/-/"(l n)"/   n/-l/u/ N/-l/c/ n/-/c/ p/2/c/ p/*/f/
+  complete {ping,telnet,traceroute} n/*/\$hosts/
 unset noglob 
 set correct=all
 
