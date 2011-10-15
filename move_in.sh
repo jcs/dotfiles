@@ -6,13 +6,19 @@
 # usage: sh -c `ftp -o - http://github.com/jcs/dotfiles/raw/master/move_in.sh`
 #
 
-if [ ! -d ~/.ssh/ ]; then
-	mkdir ~/.ssh/
+if [ `uname` = "Linux" ]; then
+	FETCH="curl -L"
+else
+	FETCH="ftp -o -"
 fi
 
 TD=`mktemp -d XXXXXX`
 
-ftp -o - http://github.com/jcs/dotfiles/tarball/master | tar -C $TD -xvzf -
+if [ ! -d ~/.ssh/ ]; then
+	mkdir ~/.ssh/
+fi
+
+$FETCH https://github.com/jcs/dotfiles/tarball/master | tar -C $TD -xvzf -
 rm -f $TD/jcs-*/move_in.sh
 mv -f $TD/jcs-*/.???* ~/
 rm -rf $TD
