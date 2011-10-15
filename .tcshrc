@@ -48,8 +48,7 @@ if ("$OSTYPE" == "darwin") then
    # mac os'isms
    alias ldd 'otool -L'
    alias sha1 'openssl dgst -sha1'
-else
-   # probably openbsd
+else if ("$OSTYPE" == "OpenBSD") then
    setenv PKG_PATH ftp://mirror.planetunix.net/pub/OpenBSD/snapshots/packages/`arch -s`/
    alias pkg_replace 'sudo pkg_add -r -F installed'
    alias watchbw 'netstat -w1 -b -I'
@@ -139,5 +138,7 @@ if (-f ~/.tcshrc.local) then
    source ~/.tcshrc.local
 endif
 
-# siginfo
-stty status '^T'
+if ("$OSTYPE" != "linux") then
+	# siginfo
+	stty status '^T'
+endif
