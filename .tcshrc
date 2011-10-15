@@ -31,6 +31,9 @@ alias hg 'history | grep '
 alias ll 'ls -alF'
 alias lo 'logout'
 alias ls 'ls -aF'
+if ("$OSTYPE" == "linux") then
+	alias ls 'ls -aFv'
+endif
 alias manfile 'groff -man -Tascii \!* | less'
 alias mv 'mv -i'
 alias offline_mutt 'mutt -R -F ~/.muttrc.offline'
