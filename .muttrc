@@ -25,6 +25,7 @@ set mail_check=60                               # freq
 set mark_old=no                                 # keep unread mail new
 set markers=no                                  # this isn't ircII
 set mbox=~/Mail/inbox                           # overridden by imap anyway
+set menu_context=1                              # so i know when the end is near
 set message_cache_clean=yes                     # keep a tidy house
 set message_cachedir=~/.mutt-cache/             # yaz
 set metoo=no                                    # i know what i'm saying
@@ -176,7 +177,7 @@ color quoted brightcolor16 default
 # bold new email in the index
 color index brightcolor16 default '~U'
 # color flagged a dark red
-color index color160 default '~F'
+color index brightcolor160 default '~F'
 
 # things i can see in mutt (with external programs through ~/.mailcap)
 auto_view text/html application/msword                    # html with lynx,
