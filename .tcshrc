@@ -55,10 +55,15 @@ if ("$OSTYPE" == "darwin") then
    # pre-lion uses dscacheutil
    alias dnsflush 'dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
+   # update dotfiles
+   alias update_dotfiles 'curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -'
+
 else if ("$OSTYPE" == "OpenBSD") then
    setenv PKG_PATH ftp://mirror.planetunix.net/pub/OpenBSD/snapshots/packages/`arch -s`/
    alias pkg_replace 'sudo pkg_add -r -F installed'
    alias watchbw 'netstat -w1 -b -I'
+
+   alias update_dotfiles 'ftp -Vo - https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -'
 endif
 
 # where am i

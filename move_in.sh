@@ -3,10 +3,8 @@
 # download dot files from github, install them to ~
 # joshua stein <jcs@jcs.org>
 #
-# usage: sh -c `ftp -o - http://github.com/jcs/dotfiles/raw/master/move_in.sh`
-#
 
-if [ `uname` = "Linux" ]; then
+if [ `uname` = "Linux" -o `uname` = "Darwin" ]; then
 	FETCH="curl -L"
 else
 	FETCH="ftp -o -"
