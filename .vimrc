@@ -4,23 +4,24 @@
 "
 
 " defaults for everything
-let c_minlines=500				" confoozled
-set backspace=indent,eol,start			" yeah.
-set hidden					" hidden buffers?
+let c_minlines=500
+set backspace=indent,eol,start
+set colorcolumn=80
+set hidden
 set ignorecase					" make searching fun
-set incsearch                                   " but highlight as i type
-set laststatus=2				" always
+set incsearch					" but highlight as i type
+set laststatus=2
 set modelines=5                                 " explicitly enable on mac os
 set nofoldenable				" this shit is annoying
-set nohlsearch                                  " don't highlight matches
-set nostartofline				" yeah, sure
+set nohlsearch					" don't highlight matches
+set nostartofline
 set pastetoggle=<C-p>				" control+p to toggle pasting
-set ruler					" always show ruler
+set ruler
 set scrolloff=10				" context is good
 set shiftwidth=4				" match default tab spacing
-set showcmd					" tell me what i'm doing
+set showcmd
 set showmatch					" where'd the opening ')' go?
-set showmode					" where am i?
+set showmode
 set smartcase					" be smart about searching
 set spellfile=~/.vimspell.add			" my goodwords
 set tabstop=4					" default tabs at 4 spaces
@@ -45,6 +46,8 @@ au BufNewFile,BufRead *.rake,*.mab set ft=ruby
 au BufNewFile,BufRead *.erb set ft=eruby
 
 au BufNewFile,BufRead *.pjs set ft=php.javascript
+
+au BufNewFile,BufRead notaweblog* set ft=html
 
 " ruby - what tabs?
 au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 autoindent
