@@ -51,6 +51,10 @@ if ("$OSTYPE" == "darwin") then
    # mac os'isms
    alias ldd 'otool -L'
    alias sha1 'openssl dgst -sha1'
+
+   # pre-lion uses dscacheutil
+   alias dnsflush 'dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
 else if ("$OSTYPE" == "OpenBSD") then
    setenv PKG_PATH ftp://mirror.planetunix.net/pub/OpenBSD/snapshots/packages/`arch -s`/
    alias pkg_replace 'sudo pkg_add -r -F installed'
@@ -112,6 +116,11 @@ set noglob
   unset f
   complete ssh p/1/\$hosts/ c/-/"(l n)"/   n/-l/u/ N/-l/c/ n/-/c/ p/2/c/ p/*/f/
   complete {ping,telnet,traceroute} n/*/\$hosts/
+
+  # some commit git sub-commands
+  set gitc="checkout commit diff log merge pull push remote stash"
+  complete git "p/1/($gitc)/"
+  unset gitc
 unset noglob 
 set correct=all
 
