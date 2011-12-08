@@ -6,7 +6,6 @@
 " defaults for everything
 let c_minlines=500
 set backspace=indent,eol,start
-set colorcolumn=80
 set hidden
 set ignorecase					" make searching fun
 set incsearch					" but highlight as i type
@@ -38,6 +37,8 @@ set directory=~/.vim/swp//
 
 " file type-specific settings
 
+autocmd FileType * setlocal colorcolumn=0
+
 " .phtml are php files
 au BufNewFile,BufRead *.phtml set ft=php
 
@@ -47,28 +48,26 @@ au BufNewFile,BufRead *.erb set ft=eruby
 
 au BufNewFile,BufRead *.pjs set ft=php.javascript
 
-au BufNewFile,BufRead notaweblog* set ft=html
-
 " ruby - what tabs?
-au FileType ruby,eruby set ts=2 sw=2 tw=79 et sts=2 autoindent
+au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=80
 " and your yaml
-au FileType yaml set ts=2 sw=2 et
+au FileType yaml setlocal ts=2 sw=2 et colorcolumn=80
 
 " source code gets wrapped at <80 and auto-indented
-au FileType asm,javascript,php,html,perl,c,cpp set tw=79 autoindent
+au FileType asm,c,cpp,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
 
 " makefiles and c have tabstops at 8 for portability
 au FileType make,c,cpp,objc set ts=8 sw=8
 
 " email - expand tabs, wrap at 68 for future quoting, enable spelling
-au FileType mail set tw=68 et spell spelllang=en_us
+au FileType mail setlocal tw=68 et spell spelllang=en_us colorcolumn=69
 
 " commit messages are like email
-au FileType cvs,gitcommit set tw=68 et
+au FileType cvs,gitcommit setlocal tw=68 et colorcolumn=69
 
 " and make sure there's a blank line for me to start typing (openbsd's cvs does
 " this by default)
-autocmd FileType cvs s/^CVS:/CVS:/|1
+au FileType cvs s/^CVS:/CVS:/|1
 
 
 " macros
@@ -76,7 +75,7 @@ autocmd FileType cvs s/^CVS:/CVS:/|1
 " control+d - delete the current line and all remaining text of an email up to
 " the line of my signature (or the rest of the file) - useful for deleting lots
 " of useless quoted text
-function KillToSig ()
+function KillToSig()
   let curline = line(".")
   if search("^-- ") > 0
     exec curline
@@ -86,7 +85,22 @@ function KillToSig ()
     normal! dGo
   endif
 endfunction
-map  <Esc>:let curline=line(".")<CR>:exec KillToSig()<CR>:exec curline<CR>
+map  <C-o>:let curline=line(".")<C-o>:exec KillToSig()<C-o>:exec curline<CR>
+
+" control+] toggles colorcolumn
+let s:cc = ""
+function ToggleColorColumn()
+  let curline=line(".")
+  if &colorcolumn
+    let s:cc=&colorcolumn
+    set colorcolumn=0
+    echo s:cc
+  else
+    exec "set colorcolumn=" . s:cc
+  end
+  exec curline
+endfunction
+map  <Esc>:let curline=line(".")<CR>:exec ToggleColorColumn()<CR>:exec curline<CR>
 
 " control+t - refresh
 map  :syn sync ccomment cComment minlines=500<CR>
