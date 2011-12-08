@@ -56,7 +56,7 @@ if ("$OSTYPE" == "darwin") then
    alias dnsflush 'dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
 
    # update dotfiles
-   alias update_dotfiles 'curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -'
+   alias update_dotfiles 'curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
 else if ("$OSTYPE" == "OpenBSD") then
    setenv PKG_PATH ftp://mirror.planetunix.net/pub/OpenBSD/snapshots/packages/`arch -s`/
