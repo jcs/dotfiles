@@ -25,7 +25,7 @@ hi StatusLine		cterm=bold,reverse	ctermfg=NONE
 hi StatusLineNC		cterm=reverse		ctermfg=NONE
 hi VertSplit		cterm=reverse		ctermfg=NONE
 hi Title		cterm=bold		ctermfg=NONE
-hi Visual		cterm=reverse		ctermfg=NONE
+hi Visual		cterm=reverse		ctermfg=229	ctermbg=0
 hi VisualNOS		cterm=bold,underline	ctermfg=NONE
 hi WarningMsg		cterm=standout		ctermfg=NONE
 hi WildMenu		cterm=standout		ctermfg=NONE
@@ -47,6 +47,9 @@ hi Ignore		cterm=bold		ctermfg=NONE
 hi ErrorMsg		cterm=reverse		ctermfg=9	ctermbg=15
 hi Error		cterm=reverse		ctermfg=9	ctermbg=15
 hi Todo			cterm=bold,standout	ctermfg=11	ctermbg=0
-hi MatchParen		cterm=bold		ctermfg=yellow	ctermbg=0
+hi MatchParen		cterm=bold		ctermfg=none	ctermbg=yellow
 
 hi ColorColumn							ctermbg=255
+
+" mostly for nerdtree
+hi VertSplit		cterm=bold		ctermfg=240	ctermbg=NONE

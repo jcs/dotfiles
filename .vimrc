@@ -27,7 +27,7 @@ set tabstop=4					" default tabs at 4 spaces
 set viminfo=					" annoying!
 
 set t_Co=256					" use all 256 colors
-syntax on					" and enable syntax highlighting
+syntax on					" enable syntax highlighting
 colorscheme jcs					" and load my colors
 
 " don't pollute directories with swap files, keep them in one place
@@ -35,18 +35,30 @@ silent !mkdir -p ~/.vim/{backup,swp}/
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swp//
 
+
+" nerdtree customizations
+
+let NERDTreeDirArrows=0				 " use normal ascii
+let NERDTreeMinimalUI=1				 " and save space
+let NERDTreeWinSize=30				 " my terminals are 111 chars
+						 " wide, so open to leave 80
+						 " for editing
+
+let NERDTreeMapOpenRecursively="+"		 " easier for me to remember
+
+
 " file type-specific settings
 
 autocmd FileType * setlocal colorcolumn=0
 
 " .phtml are php files
-au BufNewFile,BufRead *.phtml set ft=php
+au BufNewFile,BufRead *.phtml setlocal ft=php
 
 " these are rubyish files
-au BufNewFile,BufRead *.rake,*.mab set ft=ruby
-au BufNewFile,BufRead *.erb set ft=eruby
+au BufNewFile,BufRead *.rake,*.mab setlocal ft=ruby
+au BufNewFile,BufRead *.erb setlocal ft=eruby
 
-au BufNewFile,BufRead *.pjs set ft=php.javascript
+au BufNewFile,BufRead *.pjs setlocal ft=php.javascript
 
 " ruby - what tabs?
 au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=80
@@ -54,10 +66,10 @@ au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=
 au FileType yaml setlocal ts=2 sw=2 et colorcolumn=80
 
 " source code gets wrapped at <80 and auto-indented
-au FileType asm,c,cpp,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
+au FileType asm,c,cpp,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
 
 " makefiles and c have tabstops at 8 for portability
-au FileType make,c,cpp,objc set ts=8 sw=8
+au FileType make,c,cpp,objc setlocal ts=8 sw=8
 
 " email - expand tabs, wrap at 68 for future quoting, enable spelling
 au FileType mail setlocal tw=68 et spell spelllang=en_us colorcolumn=69
@@ -85,9 +97,10 @@ function KillToSig()
     normal! dGo
   endif
 endfunction
-map  <C-o>:let curline=line(".")<C-o>:exec KillToSig()<C-o>:exec curline<CR>
+map  <Esc>:let curline=line(".")<CR>:exec KillToSig()<CR>:exec curline<CR>
 
 " control+] toggles colorcolumn
+" XXX: this is kind of buggy, no idea why
 let s:cc = ""
 function ToggleColorColumn()
   let curline=line(".")
@@ -100,10 +113,7 @@ function ToggleColorColumn()
   end
   exec curline
 endfunction
-map  <Esc>:let curline=line(".")<CR>:exec ToggleColorColumn()<CR>:exec curline<CR>
-
-" control+t - refresh
-map  :syn sync ccomment cComment minlines=500<CR>
+map  <Esc>:let curline=line(".")<CR><C-o>:exec ToggleColorColumn()<CR><C-o>:exec curline<CR>
 
 " make buffer windows easier to navigate
 map <C-h> <C-w>h
@@ -130,3 +140,6 @@ cabbr W w
 cabbr Q q
 
 " :w !sudo tee % 
+
+" load pathogen for nerdtree and things
+call pathogen#infect()
