@@ -25,7 +25,7 @@ hi StatusLine		cterm=bold,reverse	ctermfg=NONE
 hi StatusLineNC		cterm=reverse		ctermfg=NONE
 hi VertSplit		cterm=reverse		ctermfg=NONE
 hi Title		cterm=bold		ctermfg=NONE
-hi Visual		cterm=reverse		ctermfg=229	ctermbg=0
+hi Visual		cterm=reverse		ctermfg=NONE
 hi VisualNOS		cterm=bold,underline	ctermfg=NONE
 hi WarningMsg		cterm=standout		ctermfg=NONE
 hi WildMenu		cterm=standout		ctermfg=NONE
