@@ -15,8 +15,11 @@ setenv MYSQL_HISTFILE /dev/null
 # pass through to bash in case it somehow gets invoked
 setenv HISTFILE
 
-# let my ~/bins override, find other bins quickly
-setenv PATH ~/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/X11R6/bin
+# if it looks like we're under RVM, use the $PATH we already set (and that rvm
+# already modified)
+if (! $?RUBY_VERSION) then
+   setenv PATH ~/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/X11R6/bin
+endif
 
 # on non-interactive shells, just exit here to speed things up
 if ($?USER == 0 || $?prompt == 0 || $tty == "") then
@@ -40,6 +43,7 @@ alias offline_mutt 'mutt -R -F ~/.muttrc.offline'
 alias ph 'ps auwwx | head'
 alias pg 'ps auwwx | grep -i -e ^USER -e '
 alias refetch 'cvs -q up -PACd'
+alias rvm ~/bin/rvm.tcsh
 alias telnet 'telnet -K'
 alias tin 'tin -arQ'
 alias u 'cvs -q up -PAd'
