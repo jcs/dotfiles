@@ -69,7 +69,7 @@ au FileType yaml setlocal ts=2 sw=2 et colorcolumn=80
 au FileType asm,c,cpp,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
 
 " makefiles and c have tabstops at 8 for portability
-au FileType make,c,cpp,objc setlocal ts=8 sw=8
+au FileType make,c,cpp setlocal ts=8 sw=8
 
 " email - expand tabs, wrap at 68 for future quoting, enable spelling
 au FileType mail setlocal tw=68 et spell spelllang=en_us colorcolumn=69
@@ -123,7 +123,8 @@ map <C-l> <C-w>l
 
 map <C-n> :bn<CR>
 map <C-p> :bp<CR>
-map <C-x> :bd<CR>
+" sbd plugin
+map <C-x> :Sbd<CR>
 
 " me fail english?  that's unpossible!
 abbr seperate separate
