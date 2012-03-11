@@ -20,7 +20,6 @@ export PATH=~/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/
 # on non-interactive shells, just exit here to speed things up
 if [[ ! -o interactive ]]; then
 	return
-	exit
 fi
 
 # i'm too lazy to type these out
@@ -59,7 +58,7 @@ if [[ $OSTYPE = darwin* ]]; then
    # update dotfiles
    alias update_dotfiles='curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
-elif [[ $OSTYPE = OpenBSD* ]]; then
+elif [[ $OSTYPE = openbsd* ]]; then
    export PKG_PATH=http://mirror.planetunix.net/pub/OpenBSD/snapshots/packages/`arch -s`/
    alias watchbw='netstat -w1 -b -I'
 
