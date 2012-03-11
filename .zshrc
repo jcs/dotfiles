@@ -78,6 +78,10 @@ else
    export EDITOR=/usr/bin/vi
 fi
 
+# zsh will try to use vi key bindings because of the vi $EDITOR, but i want
+# emacs style for control+a/e, etc.
+bindkey -e
+
 # options
 setopt NOCLOBBER                     # halp me
 setopt PRINT_EXIT_VALUE              # i want to know if something went wrong
