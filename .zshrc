@@ -81,6 +81,9 @@ fi
 # emacs style for control+a/e, etc.
 bindkey -e
 
+# let control+w only delete one directory of a path, not the whole word
+export WORDCHARS='*?_[]~=&;!#$%^(){}'
+
 # options
 setopt NOCLOBBER                     # halp me
 setopt PRINT_EXIT_VALUE              # i want to know if something went wrong
