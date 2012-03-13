@@ -35,6 +35,21 @@ silent !mkdir -p ~/.vim/{backup,swp}/
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swp//
 
+if &term =~ "xterm.*"
+    let &t_ti = &t_ti . "\e[?2004h"
+    let &t_te = "\e[?2004l" . &t_te
+
+    function XTermPasteBegin(ret)
+        set pastetoggle=<Esc>[201~
+        set paste
+        return a:ret
+    endfunction
+
+    map <expr> <Esc>[200~ XTermPasteBegin("i")
+    imap <expr> <Esc>[200~ XTermPasteBegin("")
+    cmap <Esc>[200~ <nop>
+    cmap <Esc>[201~ <nop>
+endif
 
 " nerdtree customizations
 
@@ -81,6 +96,10 @@ au FileType cvs,gitcommit setlocal tw=68 et colorcolumn=69
 " this by default)
 au FileType cvs s/^CVS:/CVS:/|1
 
+augroup BWCCreateDir
+    au!
+    autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
+augroup END
 
 " macros
 
