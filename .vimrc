@@ -59,7 +59,8 @@ let NERDTreeWinSize=30				 " my terminals are 111 chars
 						 " wide, so open to leave 80
 						 " for editing
 
-let NERDTreeMapOpenRecursively="+"		 " easier for me to remember
+let NERDTreeMapOpenRecursively="+"
+let NERDTreeMapCloseChildren="-"		 " easier for me to remember
 
 
 " file type-specific settings
