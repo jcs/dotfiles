@@ -91,6 +91,8 @@ HISTSIZE=500
 PS1='%n@%m:%~%(!.#.>) '              # prompt
 TMOUT=0                              # don't auto logout
 
+setopt nohup                         # don't kill things when i logout
+
 # show all logins and such
 watch=all
 WATCHFMT="%B%n%b %a %l at %@"
