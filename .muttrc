@@ -8,7 +8,6 @@
 set ascii_chars=yes                             # looks better
 set alias_file=~/.muttrc.aliases                # good place, yeah?
 set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
-unset attribution                               # you know what you wrote
 set confirmappend=no                            # append without asking
 set connect_timeout=3                           # die quickly when i move
 set delete=yes                                  # don't ask me dammit
@@ -81,8 +80,8 @@ bind compose F edit-from                        # i am not me
 bind editor <tab> complete-query
 
 # act like normal vi keys but browse sidebar folders
-macro index K  ':push <sidebar-prev><sidebar-open><enter>'
-macro index J  ':push <sidebar-next><sidebar-open><enter>'
+macro index K ":push <sidebar-prev><sidebar-open><enter>"
+macro index J ":push <sidebar-next><sidebar-open><enter>"
 
 # things to automate
 macro index S "s=Junk\n$"                       # spam
@@ -180,6 +179,9 @@ color index brightcolor16 default '~U'
 color index brightcolor160 default '~F'
 
 # things i can see in mutt (with external programs through ~/.mailcap)
+auto_view application/pgp-encrypted
+auto_view application/pgp-keys
+auto_view application/pgp-signature
 auto_view text/html application/msword                    # html with lynx,
                                                           # .doc with antiword
 # but that doesn't mean i don't like text/plain
