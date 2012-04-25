@@ -32,7 +32,7 @@ set framefmt  current frame
 # window borders
 set border 2
 set fwcolor orange
-set bwcolor gray
+set bwcolor gray20
 
 # be like screen
 escape C-a
@@ -45,6 +45,9 @@ bind c exec xterm
 bind C-c exec xterm
 
 bind L exec xautolock -locknow
+
+# prevent accidental closes
+unbind k
 
 # pidgin's window is hard to get to, so control-a,A pops up a dialog to ask me
 # what to set the away status to
@@ -95,6 +98,4 @@ exec xsetroot -solid black -cursor_name left_ptr
 # initialize workspaces
 vinit
 
-# split workspace 1 into 3 and start an xterm in the big part
-frestore (frame :number 0 :x 0 :y 17 :width 720 :height 883 :screenw 1440 :screenh 900 :window 27262984 :last-access 32 :dedicated 0),(frame :number 1 :x 720 :y 17 :width 600 :height 431 :screenw 1440 :screenh 900 :window 20971732 :last-access 30 :dedicated 0),(frame :number 2 :x 1320 :y 17 :width 120 :height 431 :screenw 1440 :screenh 900 :window 20971612 :last-access 6 :dedicated 0),(frame :number 5 :x 720 :y 448 :width 720 :height 461 :screenw 1440 :screenh 900 :window 23068680 :last-access 31 :dedicated 0),
 exec xterm
