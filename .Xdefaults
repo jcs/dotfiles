@@ -4,14 +4,14 @@
 .xterm*background:		white
 .xterm*cursorColor:		blue
 .xterm*foreground:		black
-.xterm*borderColor:		black
+.xterm*borderColor:		white
 !.xterm*highlightColor:		yellow
 .xterm*colorBD:			black
 .xterm*colorBDMode:		false
 
 .xterm*saveLines:		5000
 .xterm*scrollBar:		true
-.xterm*scrollbar*width:		10
+.xterm*scrollbar*width:		8
 
 .xterm*selectToClipboard:	true
 .xterm*utmpInhibit:		true
@@ -21,17 +21,17 @@
 ! ! needed by ratpoison
 .xterm*allowSendEvents:		true
 ! which disables these :(
-!.xterm*dynamicColors:		true
-!.xterm*allowColorOps:		true
+.xterm*dynamicColors:		true
+.xterm*allowColorOps:		true
 
 .xterm*title:			xterm
 .xterm*termName:		xterm-256color
 
 .xterm*visualBell:		false
 
-.xterm*Scrollbar.foreground: gray10
-.xterm*Scrollbar.background: gray90
-.xterm*Scrollbar.minimumThumb: 20
+.xterm*Scrollbar.foreground:	gray10
+.xterm*Scrollbar.background:	gray90
+.xterm*Scrollbar.minimumThumb:	20
 
 ! make command+v paste like a normal mac app
 .xterm*VT100.translations: #override\
