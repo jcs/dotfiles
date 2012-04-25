@@ -15,7 +15,7 @@ export MYSQL_HISTFILE=/dev/null
 # pass through to bash in case it somehow gets invoked
 export HISTFILE=
 
-export PATH=~/bin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/X11R6/bin
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin
 
 # on non-interactive shells, just exit here to speed things up
 if [[ ! -o interactive ]]; then
@@ -59,7 +59,7 @@ if [[ $OSTYPE = darwin* ]]; then
    alias update_dotfiles='curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
 elif [[ $OSTYPE = openbsd* ]]; then
-   export PKG_PATH=http://mirror.planetunix.net/pub/OpenBSD/snapshots/packages/`arch -s`/
+   export PKG_PATH=http://mirror.planetunix.net/pub/OpenBSD/5.1/packages/`arch -s`/
    alias watchbw='netstat -w1 -b -I'
 
    alias update_dotfiles='ftp -Vo - https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -'
@@ -103,6 +103,9 @@ WATCHFMT="%B%n%b %a %l at %@"
 # etc
 limit coredumpsize 0                 # don't know why you'd want anything else
 umask 022                            # be nice
+
+autoload -Uz compinit
+compinit
 
 # load any local aliases and machine-specific things
 if [ -f ~/.zshrc.local ]; then
