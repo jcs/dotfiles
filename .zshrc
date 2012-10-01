@@ -68,6 +68,9 @@ fi
 # where am i
 alias publicip='curl http://ifconfig.me'
 
+# serve up the current directory
+alias webserver="ifconfig | grep 'inet ' | grep -v 127.0.0.1; python -m SimpleHTTPServer"
+
 # when i say vi i mean vim (if it's installed)
 if [ -x "`which vim`" ]; then
    alias vi='vim'
