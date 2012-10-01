@@ -1,7 +1,7 @@
 ! vim:ts=8
 
 ! xterm
-.xterm*background:		white
+.xterm*background:		gray97
 .xterm*cursorColor:		blue
 .xterm*foreground:		black
 .xterm*borderColor:		white
