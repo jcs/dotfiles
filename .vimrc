@@ -58,7 +58,6 @@ let NERDTreeMinimalUI=1				 " and save space
 let NERDTreeWinSize=30				 " my terminals are 111 chars
 						 " wide, so open to leave 80
 						 " for editing
-
 let NERDTreeMapOpenRecursively="+"
 let NERDTreeMapCloseChildren="-"		 " easier for me to remember
 
@@ -82,7 +81,7 @@ au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=
 au FileType yaml setlocal ts=2 sw=2 et colorcolumn=80
 
 " source code gets wrapped at <80 and auto-indented
-au FileType asm,c,cpp,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
+au FileType asm,c,cpp,go,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
 
 " makefiles and c have tabstops at 8 for portability
 au FileType make,c,cpp setlocal ts=8 sw=8
@@ -97,6 +96,7 @@ au FileType cvs,gitcommit setlocal tw=68 et colorcolumn=69
 " this by default)
 au FileType cvs s/^CVS:/CVS:/|1
 
+" when writing new files, mkdir -p their paths
 augroup BWCCreateDir
     au!
     autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
@@ -145,6 +145,14 @@ map <C-n> :bn<CR>
 map <C-p> :bp<CR>
 " sbd plugin
 map <C-x> :Sbd<CR>
+
+" prevent those from running the nerdtree
+autocmd FileType nerdtree noremap <buffer> <C-h> <nop>
+autocmd FileType nerdtree noremap <buffer> <C-j> <nop>
+autocmd FileType nerdtree noremap <buffer> <C-k> <nop>
+autocmd FileType nerdtree noremap <buffer> <C-l> <nop>
+autocmd FileType nerdtree noremap <buffer> <C-n> <nop>
+autocmd FileType nerdtree noremap <buffer> <C-p> <nop>
 
 " me fail english?  that's unpossible!
 abbr seperate separate
