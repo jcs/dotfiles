@@ -10,6 +10,7 @@ set alias_file=~/.muttrc.aliases                # good place, yeah?
 set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
 set confirmappend=no                            # append without asking
 set connect_timeout=3                           # die quickly when i move
+set date_format="!%a, %d %b %Y at %H:%M:%S %Z"  # 24-hour time
 set delete=yes                                  # don't ask me dammit
 set editor="vim"                                # yay vim
 set fast_reply=yes                              # quick like a ninja
@@ -84,7 +85,6 @@ macro index K ":push <sidebar-prev><sidebar-open><enter>"
 macro index J ":push <sidebar-next><sidebar-open><enter>"
 
 # things to automate
-macro index S "s=Junk\n$"                       # spam
 macro index i "c!\n"                            # go home
 macro index n "c\n"                             # go to box with new mail
 macro index p "c<up><up>\n"                     # go back to the previous box
