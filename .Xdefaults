@@ -1,10 +1,10 @@
 ! vim:ts=8
 
 ! xterm
-.xterm*background:		gray97
+.xterm*background:		gray87
+.xterm*borderColor:		gray75
 .xterm*cursorColor:		blue
-.xterm*foreground:		black
-.xterm*borderColor:		white
+.xterm*foreground:		gray20
 !.xterm*highlightColor:		yellow
 .xterm*colorBD:			black
 .xterm*colorBDMode:		false
@@ -29,7 +29,7 @@
 
 .xterm*visualBell:		false
 
-.xterm*Scrollbar.foreground:	gray10
+.xterm*Scrollbar.foreground:	gray50
 .xterm*Scrollbar.background:	gray90
 .xterm*Scrollbar.minimumThumb:	20
 

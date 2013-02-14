@@ -75,6 +75,8 @@ au BufNewFile,BufRead *.erb setlocal ft=eruby
 
 au BufNewFile,BufRead *.pjs setlocal ft=php.javascript
 
+au BufRead,BufNewFile *.go setlocal ft=go
+
 " ruby - what tabs?
 au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=80
 " and your yaml
@@ -101,6 +103,18 @@ augroup BWCCreateDir
     au!
     autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 augroup END
+
+
+" highlight stray spaces and tabs when out of insert mode
+" match ExtraWhitespace /\s\+$/
+au BufWinEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+" performance hack
+if version >= 702
+  au BufWinLeave * call clearmatches()
+endif
+
 
 " macros
 
