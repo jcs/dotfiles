@@ -59,7 +59,7 @@ if [[ $OSTYPE = darwin* ]]; then
    alias update_dotfiles='curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
 elif [[ $OSTYPE = openbsd* ]]; then
-   export PKG_PATH=http://mirror.planetunix.net/pub/OpenBSD/5.1/packages/`arch -s`/
+   export PKG_PATH=http://mirror.planetunix.net/pub/OpenBSD/`uname -r`/packages/`arch -s`/
    alias watchbw='netstat -w1 -b -I'
 
    alias update_dotfiles='ftp -Vo - https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -'
