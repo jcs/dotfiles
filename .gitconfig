@@ -5,3 +5,7 @@
 [alias]
 	diff-remote = diff origin..master
 	ff = pull --ff-only
+[push]
+	default = simple
+[color]
+	ui = never
