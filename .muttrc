@@ -35,12 +35,30 @@ set narrow_tree=yes                             # huzzah
 set pager_context=2                             # i'm paranoid
 set pager_stop=yes                              # whoa horsey
 set pager_format=" -- %s "                      # yeah
+set pgp_autosign=no
+set pgp_clearsign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
+set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
+set pgp_decrypt_command="gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
+set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust -- -r %r -- %f"
+set pgp_encrypt_sign_command="pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust -- -r %r -- %f"
+set pgp_export_command="gpg --no-verbose --export --armor %r"
+set pgp_good_sign="^gpg: Good signature from"
+set pgp_import_command="gpg --no-verbose --import -v %f"
+set pgp_list_pubring_command="gpg --no-verbose --batch --with-colons --list-keys %r"
+set pgp_list_secring_command="gpg --no-verbose --batch --with-colons --list-secret-keys %r"
+set pgp_replyencrypt=yes
+set pgp_sign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --detach-sign --textmode %?a?-u %a? %f"
+set pgp_timeout=1800
+set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
+set pgp_verify_key_command="gpg --no-verbose --batch --fingerprint --check-sigs %r"
 set pipe_decode=yes                             # fix piping to patch and such
 set postpone=ask-no                             # stop bothering me
 set postponed="=postponed"                      # get out of my home
 set print=ask-no                                # i probably accidently printed
+set query_command="/usr/local/bin/lbdbq '%s'"   # query address book for aliases
 set quit=ask-yes                                # i keep hitting q by accident
-set record=~/Mail/sent                          # overridden by imap
+set record="=sent"                              # store sent mail on imap
+set sendmail="msmtp"                            # not really using sendmail
 set smart_wrap=yes                              # smart like a fox
 set sort=threads                                # neat
 set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
@@ -48,6 +66,7 @@ set status_on_top=yes                           # looks better with sidebar
 set tilde=yes                                   # don't you hide from me
 set timeout=15                                  # update the current box quickly
 set use_envelope_from=yes                       # sooper sekrit
+set use_from                                    # add a from header
 unset user_agent                                # i don't use mutt, i swear
 
 # this enables transliteration which replaces bogus characters with similar
@@ -193,6 +212,10 @@ auto_view text/html application/msword                    # html with lynx,
 # but that doesn't mean i don't like text/plain
 alternative_order text/plain text/html
 
+# in case anything honors it
+my_hdr X-No-Archive: Yes
+
 # things to load in
-source ~/.muttrc.personal                                 # mailboxes, etc.
+source ~/.muttrc.lists                                    # mailboxes, folders
 source $alias_file                                        # people i know
+source ~/.muttrc.personal                                 # my personal stuff

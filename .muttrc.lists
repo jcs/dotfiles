@@ -1,0 +1,121 @@
+# vim:tw=0
+
+# whois me
+alternates (jcs@(rt\.fm|((noc|backup)\.)?superblock.net|jcs\.org|lowerca\.se|(cvs\.)?openbsd\.org|1\.8T\.org|lobste\.rs)|admin@1\.8T\.org|(billing|corduroy)@superblock\.net|sale-.*@craigslist\.org)
+
+# default address, no signature
+folder-hook . set from="jcs@jcs.org"
+folder-hook . unset signature
+
+# put superblock hat on when in that folder
+folder-hook ^superblock$ set \
+	from="jcs@superblock.net" \
+	signature=~/.signature
+
+macro index U "c=superblock\n"
+macro pager U "c=superblock\n"
+
+# or the openbsd one
+macro index H "c=openbsd-hackers\n"
+macro pager H "c=openbsd-hackers\n"
+
+reply-hook '~t .@openbsd\.org' 'set from="jcs@openbsd.org"'
+send-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
+
+folder-hook ^openbsd-.*$ set \
+	from="jcs@openbsd.org" \
+	signature= \
+	sort=threads
+
+# imap mailboxes
+
+unmailboxes *
+
+mailboxes =inbox
+
+mailboxes =superblock
+mailboxes =pushover
+
+mailboxes =cvs
+
+mailboxes =daily
+
+mailboxes =lobsters
+# subscribe line in .muttrc.personal
+
+# mailing lists, alpha
+
+mailboxes =android-gcm
+subscribe android-gcm
+
+mailboxes =bugtraq
+subscribe bugtraq
+
+mailboxes =cryptography
+subscribe cryptography
+
+mailboxes =dailydave
+subscribe dailydave
+
+mailboxes =dns-operations
+subscribe dns-operations
+
+mailboxes =dragonflybsd-users
+subscribe users
+
+mailboxes =fitbit-api
+subscribe fitbit-api
+
+mailboxes =illlist
+subscribe illlist
+
+mailboxes =liberationtech
+subscribe liberationtech
+
+mailboxes =openbsd-bugs
+subscribe bugs
+
+mailboxes =openbsd-hackers
+subscribe hackers
+
+mailboxes =openbsd-mirrors
+subscribe mirrors-discuss
+
+mailboxes =openbsd-misc
+subscribe misc
+
+mailboxes =openbsd-ports
+subscribe ports
+
+mailboxes =openbsd-ports-changes
+subscribe ports-changes
+
+mailboxes =openbsd-source-changes
+subscribe source-changes
+
+mailboxes =openbsd-tech
+subscribe tech
+
+mailboxes =openssh-unix-dev
+subscribe openssh-unix-dev
+
+mailboxes =oss-security
+subscribe oss-security
+
+mailboxes =pf
+subscribe pf
+
+mailboxes =ratpoison-devel
+subscribe ratpoison-devel
+
+mailboxes =tor-bsd
+subscribe tor-bsd
+
+mailboxes =tor-relays
+subscribe tor-relays
+
+mailboxes =tor-talk
+subscribe or-talk
+
+mailboxes =websecurity
+subscribe websecurity
