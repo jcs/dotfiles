@@ -1,22 +1,26 @@
 ! vim:ts=8
 
 ! xterm
-.xterm*background:		gray87
-.xterm*borderColor:		gray75
+.xterm*background:		gray84
+.xterm*borderColor:		gray80
 .xterm*cursorColor:		blue
 .xterm*foreground:		gray20
 !.xterm*highlightColor:		yellow
 .xterm*colorBD:			black
 .xterm*colorBDMode:		false
 
-.xterm*saveLines:		5000
+.xterm*Scrollbar.foreground:	gray60
+.xterm*Scrollbar.background:	gray80
+.xterm*Scrollbar.minimumThumb:	50
+
+.xterm*saveLines:		10000
 .xterm*scrollBar:		true
-.xterm*scrollbar*width:		8
+.xterm*scrollbar*width:		10
 
 .xterm*selectToClipboard:	true
 .xterm*utmpInhibit:		true
 ! hide when i type
-.xterm*pointerMode:		1
+.xterm*pointerMode:		2
 
 ! ! needed by ratpoison
 .xterm*allowSendEvents:		true
@@ -29,10 +33,6 @@
 
 .xterm*visualBell:		false
 
-.xterm*Scrollbar.foreground:	gray50
-.xterm*Scrollbar.background:	gray90
-.xterm*Scrollbar.minimumThumb:	20
-
 ! make command+v paste like a normal mac app
 .xterm*VT100.translations: #override\
     Meta <KeyPress> V: insert-selection(PRIMARY, CUT_BUFFER0)
@@ -41,7 +41,7 @@
 *viewport.horizontal.height:	10
 *viewport.vertical.width:	10
 
-! make xaw scrollbars act like normal ones 
+! make xaw scrollbars act like normal ones
 .xterm*Scrollbar.translations: #override\
     <Btn1Down>: StartScroll(Continuous) MoveThumb() NotifyThumb() \n\
     <Btn2Down>: StartScroll(Forward) \n\
