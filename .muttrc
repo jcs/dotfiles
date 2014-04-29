@@ -68,6 +68,10 @@ bind pager <right> next-entry                   # this too
 bind pager \CF next-page                        # make control+f and b scroll
 bind pager \CB previous-page                    #   like everything else
 bind pager \CP print-message                    # yeah
+bind index <down> next-entry                    # move through deleted messages
+bind index j next-entry                         # move through deleted messages
+bind index <up> previous-entry                  # move through deleted messages
+bind index k previous-entry                     # move through deleted messages
 bind index <delete> delete-message              # when i get super lazy
 bind index <space> display-message              # sure
 bind index <right> display-message              # tin
@@ -177,6 +181,8 @@ color quoted brightcolor16 default
 color index brightcolor16 default '~U'
 # color flagged a dark red
 color index brightcolor160 default '~F'
+# color to-be-deleted as grayed out
+color index brightcolor8 default '~D'
 
 # things i can see in mutt (with external programs through ~/.mailcap)
 auto_view application/pgp-encrypted
