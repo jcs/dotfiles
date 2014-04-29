@@ -8,19 +8,27 @@
 export BLOCKSIZE=1k
 export CVS_RSH=/usr/bin/ssh
 export IRCNAME="*Unknown*"
-
-# ow my security
-export MYSQL_HISTFILE=/dev/null
+export GOPATH=~/code/go
 
 # pass through to bash in case it somehow gets invoked
 export HISTFILE=
 
+# ow my security
+export MYSQL_HISTFILE=/dev/null
+
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin
+
+# let control+w only delete one directory of a path, not the whole word
+export WORDCHARS='*?_[]~=&;!#$%^(){}'
 
 # on non-interactive shells, just exit here to speed things up
 if [[ ! -o interactive ]]; then
-	return
+   return
 fi
+
+# zsh will try to use vi key bindings because of the vi $EDITOR, but i want
+# emacs style for control+a/e, etc.
+bindkey -e
 
 # i'm too lazy to type these out
 alias ccom='cvs -q diff -upRN \!* || (echo; echo enter to commit; sh -c read && cvs com \!*)'
@@ -31,43 +39,16 @@ alias jobs='jobs -p'
 alias ll='ls -alF'
 alias lo='logout'
 alias ls='ls -aF'
-if [[ $OSTYPE = linux* ]]; then
-	alias ls='ls -aFv'
-fi
 alias manfile='groff -man -Tascii \!* | less'
 alias mv='mv -i'
 alias offline_mutt='mutt -R -F ~/.muttrc.offline'
 alias ph='ps auwwx | head'
 alias pg='ps auwwx | grep -i -e ^USER -e '
+alias publicip='curl http://ifconfig.me'
 alias refetch='cvs -q up -PACd'
 alias telnet='telnet -K'
 alias tin='tin -arQ'
 alias u='cvs -q up -PAd'
-
-# for openbsd ports
-alias remake='cd ../../; rm w-*/.build*; make; cd -'
-
-if [[ $OSTYPE = darwin* ]]; then
-   # mac os'isms
-   alias ldd='otool -L'
-   alias sha1='openssl dgst -sha1'
-
-   # pre-lion uses dscacheutil
-   alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-
-   # update dotfiles
-   alias update_dotfiles='curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -x -'
-
-elif [[ $OSTYPE = openbsd* ]]; then
-   export PKG_PATH=http://mirror.planetunix.net/pub/OpenBSD/`uname -r`/packages/`arch -s`/
-   alias watchbw='netstat -w1 -b -I'
-
-   alias update_dotfiles='ftp -Vo - https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -'
-fi
-
-# where am i
-alias publicip='curl http://ifconfig.me'
-
 # serve up the current directory
 alias webserver="ifconfig | grep 'inet ' | grep -v 127.0.0.1; python -m SimpleHTTPServer"
 
@@ -79,13 +60,6 @@ if [ -x "`which vim`" ]; then
 else
    export EDITOR=/usr/bin/vi
 fi
-
-# zsh will try to use vi key bindings because of the vi $EDITOR, but i want
-# emacs style for control+a/e, etc.
-bindkey -e
-
-# let control+w only delete one directory of a path, not the whole word
-export WORDCHARS='*?_[]~=&;!#$%^(){}'
 
 # options
 setopt NOCLOBBER                     # halp me
@@ -100,9 +74,6 @@ setopt nohup                         # don't kill things when i logout
 watch=all
 WATCHFMT="%B%n%b %a %l at %@"
 
-# old tcsh options needing counterparts
-#set autocorrect                      # fix typos
-
 # etc
 limit coredumpsize 0                 # don't know why you'd want anything else
 umask 022                            # be nice
@@ -110,12 +81,64 @@ umask 022                            # be nice
 autoload -Uz compinit
 compinit
 
+# os-specific tweaks
+
+# mac os
+if [[ $OSTYPE = darwin* ]]; then
+   alias ldd='otool -L'
+   alias sha1='openssl dgst -sha1'
+
+   # pre-lion uses dscacheutil
+   alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
+   # update dotfiles
+   alias update_dotfiles='curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -x -'
+
+   # bring in rbenv
+   export PATH="${HOME}/.rbenv/shims:${PATH}"
+   source "/usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh";
+
+# openbsd
+elif [[ $OSTYPE = openbsd* ]]; then
+   export PKG_PATH=http://mirror.planetunix.net/pub/OpenBSD/`uname -r`/packages/`arch -s`/
+   alias watchbw='netstat -w1 -b -I'
+
+   alias update_dotfiles='ftp -Vo - https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -'
+
+   # for ports
+   alias remake='cd ../../; rm w-*/.build*; make; cd -'
+
+# loonix
+elif [[ $OSTYPE = linux* ]]; then
+   alias ls='ls -aFv'
+fi
+
+# and the reverse
+if [[ $OSTYPE != linux* ]]; then
+   # siginfo
+   stty status '^T'
+fi
+
+if [[ $OSTYPE != darwin* ]]; then
+   watch=
+fi
+
 # load any local aliases and machine-specific things
 if [ -f ~/.zshrc.local ]; then
    source ~/.zshrc.local
 fi
 
-if [[ $OSTYPE != linux* ]]; then
-	# siginfo
-	stty status '^T'
+if [ "$STORE_LASTDIR" = "1" ]; then
+   # now go to the last dir that was there
+   chpwd() {
+      pwd >! ~/.zsh.lastdir
+   }
+
+   if [ -f ~/.zsh.lastdir ]; then
+      if [ -d "`cat ~/.zsh.lastdir`" ]; then
+         cd "`cat ~/.zsh.lastdir`"
+      else
+         rm -f ~/.zsh.lastdir
+      fi
+   fi
 fi
