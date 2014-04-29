@@ -5,6 +5,7 @@
 [alias]
 	diff-remote = diff origin..master
 	ff = pull --ff-only
+	fixup = rebase -i HEAD~5
 [push]
 	default = simple
 [color]
