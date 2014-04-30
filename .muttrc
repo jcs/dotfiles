@@ -216,6 +216,6 @@ alternative_order text/plain text/html
 my_hdr X-No-Archive: Yes
 
 # things to load in
-source ~/.muttrc.lists                                    # mailboxes, folders
 source $alias_file                                        # people i know
 source ~/.muttrc.personal                                 # my personal stuff
+source ~/.muttrc.lists                                    # mailboxes, folders
