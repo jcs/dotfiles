@@ -16,6 +16,9 @@ export HISTFILE=
 # ow my security
 export MYSQL_HISTFILE=/dev/null
 
+# get off my lawn
+export NO_COLOR=1
+
 export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin
 
 # let control+w only delete one directory of a path, not the whole word
