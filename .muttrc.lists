@@ -7,8 +7,8 @@ alternates (jcs@(rt\.fm|((noc|backup)\.)?superblock.net|jcs\.org|lowerca\.se|(cv
 folder-hook . set from="jcs@jcs.org"
 folder-hook . unset signature
 
-# put superblock hat on when in that folder
-folder-hook ^superblock$ set \
+# put superblock hat on when in those folders
+folder-hook ^(superblock|pushover)$ set \
 	from="jcs@superblock.net" \
 	signature=~/.signature
 
@@ -50,9 +50,6 @@ subscribe android-gcm
 
 mailboxes =bugtraq
 subscribe bugtraq
-
-mailboxes =cryptography
-subscribe cryptography
 
 mailboxes =dailydave
 subscribe dailydave
@@ -116,6 +113,3 @@ subscribe tor-relays
 
 mailboxes =tor-talk
 subscribe or-talk
-
-mailboxes =websecurity
-subscribe websecurity
