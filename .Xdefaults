@@ -22,11 +22,11 @@
 ! hide when i type
 .xterm*pointerMode:		2
 
-! ! needed by ratpoison
+! needed by ratpoison
 .xterm*allowSendEvents:		true
-! which disables these :(
-.xterm*dynamicColors:		true
-.xterm*allowColorOps:		true
+! which disables allowColorOps, but empty the list of actual disabled ops
+! which effectively re-enables color ops
+.xterm*disallowedColorOps:
 
 .xterm*title:			xterm
 .xterm*termName:		xterm-256color
