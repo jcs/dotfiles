@@ -34,6 +34,7 @@ fi
 bindkey -e
 
 # i'm too lazy to type these out
+alias calc='perl -pe "print eval(\$_) . chr(10);"'
 alias ccom='cvs -q diff -upRN \!* || (echo; echo enter to commit; sh -c read && cvs com \!*)'
 alias cdu='cvs -q diff -upRN'
 alias cp='cp -i'
@@ -91,9 +92,6 @@ if [[ $OSTYPE = darwin* ]]; then
    alias ldd='otool -L'
    alias sha1='openssl dgst -sha1'
 
-   # pre-lion uses dscacheutil
-   alias dnsflush='dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-
    # update dotfiles
    alias update_dotfiles='curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
@@ -127,6 +125,11 @@ if [[ $OSTYPE != darwin* ]]; then
 fi
 
 # load any local aliases and machine-specific things
+if [[ $OSTYPE = darwin* ]]; then
+   if [ -f ~/.zshrc.mac ]; then
+      source ~/.zshrc.mac
+   fi
+fi
 if [ -f ~/.zshrc.local ]; then
    source ~/.zshrc.local
 fi

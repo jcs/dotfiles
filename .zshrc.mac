@@ -1,0 +1,23 @@
+export PATH=$PATH:/opt/X11/bin
+
+alias dnsflush="sudo discoveryutil udnsflushcaches"
+
+export STORE_LASTDIR=1
+
+export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+
+if [ -f ~/.remind_forecast ]; then
+	_mtime=`stat -f %m ~/.remind_forecast`
+	_now=`date +%s`
+	_diff=$((_now - _mtime))
+	if [ $_diff -gt 3600 ]; then
+		# old
+		rm ~/.remind_forecast
+	fi
+fi
+
+if [ -f ~/.remind_forecast ]; then
+	cat ~/.remind_forecast
+else
+	ruby ~/code/remind_forecast/remind_forecast.rb | tee ~/.remind_forecast
+fi
