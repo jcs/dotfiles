@@ -69,11 +69,6 @@ set use_envelope_from=yes                       # sooper sekrit
 set use_from                                    # add a from header
 unset user_agent                                # i don't use mutt, i swear
 
-# this enables transliteration which replaces bogus characters with similar
-# ones, which has the effect of showing spaces instead of question marks in
-# certain quoted-printable messages (like on =A0 characters)
-set charset="us-ascii//TRANSLIT"
-
 # these only work with the sidebar patch
 set sidebar_delim="] "                          # separate
 set sidebar_visible=yes                         # yep
