@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# kill any active tokens
+sudo -K
+
+# remove ssh passphrase key
+ssh-add -D
+
+if [ `uname -s` = "OpenBSD" ]; then
+
+	# power the laptop screen down
+	(sleep 1; xset dpms force off) &
+
+	# lock
+	xlock -mode blank +description -mousemotion -timeelapsed \
+		-username "user: " -password "password: " -info " "
+
+elif [ `uname -s` = "Darwin" ]; then
+	# clear clipboard
+	echo "" | pbcopy
+
+	~/bin/mac/sleepdisplay
+fi
