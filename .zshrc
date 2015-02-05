@@ -93,7 +93,7 @@ if [[ $OSTYPE = darwin* ]]; then
    alias sha1='openssl dgst -sha1'
 
    # update dotfiles
-   alias update_dotfiles='curl https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -x -'
+   alias update_dotfiles='curl https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
    # bring in rbenv
    export PATH="${HOME}/.rbenv/shims:${PATH}"
@@ -101,10 +101,10 @@ if [[ $OSTYPE = darwin* ]]; then
 
 # openbsd
 elif [[ $OSTYPE = openbsd* ]]; then
-   export PKG_PATH=http://mirror.planetunix.net/pub/OpenBSD/`uname -r`/packages/`arch -s`/
+   export PKG_PATH=http://ftp.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`arch -s`/
    alias watchbw='netstat -w1 -b -I'
 
-   alias update_dotfiles='ftp -Vo - https://raw.github.com/jcs/dotfiles/master/move_in.sh | sh -'
+   alias update_dotfiles='ftp -Vo - https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -'
 
    # for ports
    alias remake='cd ../../; rm w-*/.build*; make; cd -'
