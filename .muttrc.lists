@@ -60,9 +60,6 @@ subscribe dns-operations
 mailboxes =dragonflybsd-users
 subscribe users
 
-mailboxes =fitbit-api
-subscribe fitbit-api
-
 mailboxes =illlist
 subscribe illlist
 

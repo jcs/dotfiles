@@ -136,7 +136,7 @@ folder-hook ^allmail.*$ push <toggle-write>     # don't save changes, read-only
 
 # create message-ids that don't leak private info (like the number of messages
 # sent in the current mutt session, or the local hostname)
-send-hook . 'my_hdr Message-ID:<`date +"%Y%m%d%H%M%S"`.`sh -c "dd if=/dev/urandom bs=500 count=1 2>/dev/null | md5 | dd if=/dev/stdin bs=10 count=1 2>/dev/null"`@`sh -c "dd if=/dev/urandom bs=500 count=1 2>/dev/null | md5 | dd if=/dev/stdin bs=15 count=1 2>/dev/null"`>'
+send-hook . 'my_hdr Message-ID: <`date +"%Y%m%d%H%M%S"`.`sh -c "dd if=/dev/urandom bs=500 count=1 2>/dev/null | md5 | dd if=/dev/stdin bs=10 count=1 2>/dev/null"`@`sh -c "dd if=/dev/urandom bs=500 count=1 2>/dev/null | md5 | dd if=/dev/stdin bs=15 count=1 2>/dev/null"`>'
 
 # things to display (or not)
 ignore *
@@ -145,27 +145,27 @@ unhdr_order *
 hdr_order from: resent-from: sender: reply-to: to: resent-to: cc: bcc: x-mailing-list: date: resent-date: organization: organisation: x-mailer: x-newsreader: x-agent: x-editor: user-agent: priority: importance: message-id: resent-message-id: old-return-receipt-to: old-disposition-notification-to: subject:
 
 # bold/underline-only styling, for old non-color xterm (now xterm-r6 $TERM)
-mono attachment bold                                      # evil!
+mono attachment bold
 mono body underline "(https?|t?ftp|mailto|gopher|ssh|telnet|finger)://[^ ]+"
 mono body underline "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"      # email addresses
-mono body bold "-----Original Message-----"               # outlook is lame
-mono body bold "[;:]-[)/(|]"                              # smiley faces suck
-mono header none .                                        # default headers
-mono header bold "^From: "                                # who are you?
-mono header bold "^Resent-From: "                         # sneakily!
-mono header bold "^To: "                                  # me, probably
-mono header bold "^Subject: "                             # oh yeah
-mono header bold "^Organi[zs]ation: "                     # where ya from
-mono header bold "^Priority: Urgent"                      # like i care
-mono header bold "^Importance: high"                      # right...
-mono index bold '~U'                                      # {S gotmail.wav
-mono index bold '~F'                                      # highlight flagged
-mono indicator reverse                                    # stick out
-mono signature bold                                       # ok
-mono sidebar_new bold                                     # same
-mono tilde bold                                           # yeah.
-mono tree bold                                            # threads
-mono quoted bold                                          # quoting
+mono body bold "-----Original Message-----"
+mono body bold "[;:]-[)/(|]"
+mono header none .
+mono header bold "^From: "
+mono header bold "^Resent-From: "
+mono header bold "^To: "
+mono header bold "^Subject: "
+mono header bold "^Organi[zs]ation: "
+mono header bold "^Priority: Urgent"
+mono header bold "^Importance: high"
+mono index bold '~U'
+mono index bold '~F'
+mono indicator reverse
+mono signature bold
+mono sidebar_new bold
+mono tilde bold
+mono tree bold
+mono quoted bold
 
 # since i now have to use an xterm-color $TERM, init color versions of the
 # same using brightcolor16 as a bright black
@@ -191,12 +191,12 @@ color tilde brightcolor16 default
 color tree brightcolor16 default
 color quoted brightcolor16 default
 
-# bold new email in the index
-color index brightcolor16 default '~U'
 # color flagged a dark red
 color index brightcolor160 default '~F'
 # color to-be-deleted as grayed out
 color index brightcolor8 default '~D'
+# bold new email in the index
+color index brightcolor16 default '~U'
 
 # things i can see in mutt (with external programs through ~/.mailcap)
 auto_view application/pgp-encrypted
