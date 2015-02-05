@@ -25,6 +25,7 @@ set smartcase					" be smart about searching
 set spellfile=~/.vimspell.add			" my goodwords
 set tabstop=4					" default tabs at 4 spaces
 set viminfo=					" annoying!
+set wildmode=longest,list,full			" better filename tab completion
 
 set t_Co=256					" use all 256 colors
 syntax on					" enable syntax highlighting
@@ -181,6 +182,10 @@ abbr eachother each other
 " i hold shift a lot, make :W work like :w and :Q like :q
 cabbr W w
 cabbr Q q
+
+" disable annoying behavior where starting an auto-indented line with a hash
+" makes it unindent and refuse to >>
+:inoremap # X#
 
 " :w !sudo tee % 
 
