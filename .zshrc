@@ -124,12 +124,6 @@ if [[ $OSTYPE != darwin* ]]; then
    watch=
 fi
 
-# if this host has a custom xterm background color, save the current one now
-if [ -f ~/.xtermbg ]; then
-   export XTERMBG=`xtermcontrol --get-bg 2>/dev/null`
-   xtermcontrol --bg=`cat ~/.xtermbg`
-fi
-
 # load any local aliases and machine-specific things
 if [[ $OSTYPE = darwin* ]] && [ -f ~/.zshrc.mac ]; then
   source ~/.zshrc.mac
