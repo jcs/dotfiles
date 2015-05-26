@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+# vim:ft=ruby
+#
+# forks and executes the requested program with the temporary file given,
+# allowing mutt to return to its message view while you view the attachment in
+# the program
+#
+# usage in ~/.mailcap:
+# application/pdf; ~/bin/mutt_bgrun xpdf %s
+#
+
+require "fileutils"
+require "open3"
+
+viewer = ARGV[0]
+orig_file = ARGV[1]
+
+if !orig_file
+  STDERR.puts "usage: #{$0} <viewing application> <filename>"
+  exit 1
+end
+
+tmp_dir = `mktemp -d -t`.chomp
+tmp_file = tmp_dir + "/" + File.basename(orig_file).gsub(/[^A-Za-z_\.-]/, "")
+
+system("cp", orig_file, tmp_file)
+
+Kernel.fork do
+  launch_file = tmp_file.dup
+  if viewer == "firefox"
+    launch_file = "file:///#{launch_file}"
+  end
+
+  i, _, _, w = Open3.popen3(viewer, launch_file)
+  i.close
+
+  begin
+    Process.waitpid(w[:pid])
+  rescue Errno::ECHILD
+    # process ended really quickly, most likely just handed it off to another
+    # process, so wait a bit for it to process the tmp file before removing it
+    sleep 3
+  end
+
+  File.unlink tmp_file
+  Dir.unlink tmp_dir
+end

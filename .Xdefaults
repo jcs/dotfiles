@@ -1,16 +1,22 @@
 ! vim:ts=8
 
+! force things like firefox to a standard size
+Xft.dpi: 96
+
+#define BG			#021b21
+#define FG			#bfb7b0
+
 ! xterm
-.xterm*background:		gray84
-.xterm*borderColor:		gray80
-.xterm*cursorColor:		blue
-.xterm*foreground:		gray20
-!.xterm*highlightColor:		yellow
+.xterm*background:		BG
+.xterm*borderColor:		BG
+.xterm*internalBorder:		4
+.xterm*foreground:		FG
+.xterm*cursorColor:		orange
 .xterm*colorBD:			black
 .xterm*colorBDMode:		false
 
 .xterm*Scrollbar.foreground:	gray60
-.xterm*Scrollbar.background:	gray80
+.xterm*Scrollbar.background:	BG
 .xterm*Scrollbar.minimumThumb:	50
 
 .xterm*saveLines:		10000
@@ -33,9 +39,39 @@
 
 .xterm*visualBell:		false
 
-! make command+v paste like a normal mac app
+! a muted palette
+
+! black
+.xterm*color0:			#032c36
+.xterm*color8:			#065f73
+! red
+.xterm*color1:			#c2454e
+.xterm*color9:			#ef5847
+! green
+.xterm*color2:			#7cbf9e
+.xterm*color10:			#a2d9b1
+! yellow
+.xterm*color3:			#8a7a63
+.xterm*color11:			#beb090
+! blue
+.xterm*color4:			#555d71
+.xterm*color12:			#61778d
+! magenta
+.xterm*color5:			#ff5879
+.xterm*color13:			#ff99a1
+! cyan
+.xterm*color6:			#44b5b1
+.xterm*color14:			#9ed9d8
+! white
+.xterm*color7:			#f2f1b9
+.xterm*color15:			#f6f6c9
+! underline when default
+.xterm*colorUL:			#f2f1b9
+
+
+! make command+v/alt+v paste clipboard
 .xterm*VT100.translations: #override\
-    Meta <KeyPress> V: insert-selection(PRIMARY, CUT_BUFFER0)
+    Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
 
 ! vncviewer scroll bars
 *viewport.horizontal.height:	10

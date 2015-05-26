@@ -57,6 +57,7 @@ set postponed="=postponed"                      # get out of my home
 set print=ask-no                                # i probably accidently printed
 set query_command="/usr/local/bin/lbdbq '%s'"   # query address book for aliases
 set quit=ask-yes                                # i keep hitting q by accident
+set quote_regexp="^([ \t]*[>])+"
 set record="=sent"                              # store sent mail on imap
 set sendmail="msmtp"                            # not really using sendmail
 set smart_wrap=yes                              # smart like a fox
@@ -170,33 +171,33 @@ mono quoted bold
 # since i now have to use an xterm-color $TERM, init color versions of the
 # same using brightcolor16 as a bright black
 color normal default default                              # init to black-on-white
-color attachment brightcolor16 default
-color body blue default "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
-color body brightcolor16 default "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"
-color body brightcolor16 default "-----Original Message-----"
-color body brightcolor16 default "[;:]-[)/(|]"
+color attachment brightdefault default
+color body brightblue default "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
+color body brightblue default "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"
+color body brightdefault default "-----Original Message-----"
+color body brightdefault default "[;:]-[)/(|]"
 color header default default .
-color header brightcolor16 default "^From: "
-color header brightcolor16 default "^Resent-From: "
-color header brightcolor16 default "^To: "
-color header brightcolor16 default "^Subject: "
-color header brightcolor16 default "^Organi[zs]ation: "
-color header brightcolor16 default "^Priority: Urgent"
-color header brightcolor16 default "^Importance: high"
-color header brightcolor16 default '~U'
-color header brightcolor16 default '~F'
-color signature brightcolor16 default
-color sidebar_new brightcolor16 default
-color tilde brightcolor16 default
-color tree brightcolor16 default
-color quoted brightcolor16 default
+color header brightdefault default "^From: "
+color header brightdefault default "^Resent-From: "
+color header brightdefault default "^To: "
+color header brightdefault default "^Subject: "
+color header brightdefault default "^Organi[zs]ation: "
+color header brightdefault default "^Priority: Urgent"
+color header brightdefault default "^Importance: high"
+color header brightdefault default '~U'
+color header brightdefault default '~F'
+color signature brightdefault default
+color sidebar_new brightdefault default
+color tilde brightblack default
+color tree brightblack default
+color quoted brightblack default
 
 # color flagged a dark red
 color index brightcolor160 default '~F'
 # color to-be-deleted as grayed out
 color index brightcolor8 default '~D'
 # bold new email in the index
-color index brightcolor16 default '~U'
+color index brightdefault default '~U'
 
 # things i can see in mutt (with external programs through ~/.mailcap)
 auto_view application/pgp-encrypted
