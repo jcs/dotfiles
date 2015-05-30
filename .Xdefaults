@@ -4,20 +4,22 @@
 Xft.dpi: 96
 
 #define BG			#021b21
-#define FG			#bfb7b0
+#define FG			gray55
 
 ! xterm
 .xterm*background:		BG
 .xterm*borderColor:		BG
 .xterm*internalBorder:		4
 .xterm*foreground:		FG
-.xterm*cursorColor:		orange
+.xterm*cursorColor:		orange3
 .xterm*colorBD:			black
 .xterm*colorBDMode:		false
 
 .xterm*Scrollbar.foreground:	gray60
 .xterm*Scrollbar.background:	BG
 .xterm*Scrollbar.minimumThumb:	50
+
+.xterm*font:			dinamedium9
 
 .xterm*saveLines:		10000
 .xterm*scrollBar:		true
@@ -42,8 +44,8 @@ Xft.dpi: 96
 ! a muted palette
 
 ! black
-.xterm*color0:			#032c36
-.xterm*color8:			#065f73
+.xterm*color0:			gray10
+.xterm*color8:			gray30
 ! red
 .xterm*color1:			#c2454e
 .xterm*color9:			#ef5847
@@ -63,8 +65,8 @@ Xft.dpi: 96
 .xterm*color6:			#44b5b1
 .xterm*color14:			#9ed9d8
 ! white
-.xterm*color7:			#f2f1b9
-.xterm*color15:			#f6f6c9
+.xterm*color7:			gray70
+.xterm*color15:			gray80
 ! underline when default
 .xterm*colorUL:			#f2f1b9
 
@@ -73,9 +75,9 @@ Xft.dpi: 96
 .xterm*VT100.translations: #override\
     Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
 
-! vncviewer scroll bars
-*viewport.horizontal.height:	10
-*viewport.vertical.width:	10
+
+SshAskpass*inputTimeout:	15
+
 
 ! make xaw scrollbars act like normal ones
 .xterm*Scrollbar.translations: #override\

@@ -16,11 +16,11 @@ set padding 10 20 10 10
 msgwait 3
 set barborder 0
 set bargravity nw
-set barpadding 2 2
+set barpadding 7 3
 set barsticky on
 set bgcolor gray20
 set fgcolor #bfb7b0
-set font fixed
+set font dinamedium9
 set winliststyle row
 set winfmt %t
 # this prevents it from taking dzen's padding into account
@@ -30,10 +30,10 @@ set barinpadding 1
 set framefmt  current frame 
 
 # window borders
-set border 2
+set border 3
 set gap 10
-set fwcolor orange
-set bwcolor gray20
+set fwcolor orange3
+set bwcolor gray40
 
 # be like screen
 escape C-a
@@ -82,6 +82,7 @@ rudeness 12
 # let popups stay centered
 unmanage xmessage
 unmanage xprompt
+unmanage OpenSSH Authentication Passphrase Request
 
 # startup configuration
 

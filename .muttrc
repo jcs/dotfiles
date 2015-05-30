@@ -186,8 +186,10 @@ color header brightdefault default "^Priority: Urgent"
 color header brightdefault default "^Importance: high"
 color header brightdefault default '~U'
 color header brightdefault default '~F'
+color indicator default color237
 color signature brightdefault default
 color sidebar_new brightdefault default
+color status brightdefault color237
 color tilde brightblack default
 color tree brightblack default
 color quoted brightblack default
