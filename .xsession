@@ -4,14 +4,13 @@ export LANG=en_US.UTF-8
 
 xrdb < ~/.Xdefaults
 
-/usr/local/bin/xbanish &
-
 if [ `uname -s` == "OpenBSD" ]; then
 	xmodmap ~/.xmodmap
-	xset r rate 350 25
-	xset +fp /usr/local/lib/X11/fonts/jcs fp rehash
+	xset r rate 350 35
+	xset +fp /usr/local/lib/X11/fonts/jcs +fp /usr/local/share/fonts/dina fp rehash
+	xset m 3/1 4
 
-	xidle -ne -program ~/bin/lock &
+	xidle -timeout 240 -ne -program ~/bin/lock &
 
 	/usr/local/bin/ruby ~/code/dzen-jcs/dzen-jcs.rb &
 
@@ -26,6 +25,11 @@ if [ `uname -s` == "OpenBSD" ]; then
 	synclient ClickFinger2=3
 	# and 3-fingers do a middle-click
 	synclient ClickFinger3=2
+
+	# ignore lazy thumb on the bottom of the trackpad used to click
+	synclient LazyThumbWidth=30 LazyThumbTopEdge=1600
+
+	/usr/local/bin/xbanish &
 fi
 
 exec /usr/local/bin/ratpoison

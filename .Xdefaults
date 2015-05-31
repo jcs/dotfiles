@@ -3,23 +3,22 @@
 ! force things like firefox to a standard size
 Xft.dpi: 96
 
-#define BG			#021b21
-#define FG			gray55
+#define BG			#cfcfc7
+#define FG			#404040
 
 ! xterm
 .xterm*background:		BG
 .xterm*borderColor:		BG
 .xterm*internalBorder:		4
 .xterm*foreground:		FG
-.xterm*cursorColor:		orange3
-.xterm*colorBD:			black
-.xterm*colorBDMode:		false
+.xterm*cursorColor:		#3670ab
 
-.xterm*Scrollbar.foreground:	gray60
+.xterm*Scrollbar.foreground:	gray50
 .xterm*Scrollbar.background:	BG
 .xterm*Scrollbar.minimumThumb:	50
 
-.xterm*font:			dinamedium9
+!.xterm*font:			dinamedium9
+.xterm*faceName:		CosmicSansNeueMono:size=10
 
 .xterm*saveLines:		10000
 .xterm*scrollBar:		true
@@ -45,7 +44,7 @@ Xft.dpi: 96
 
 ! black
 .xterm*color0:			gray10
-.xterm*color8:			gray30
+.xterm*color8:			gray20
 ! red
 .xterm*color1:			#c2454e
 .xterm*color9:			#ef5847
