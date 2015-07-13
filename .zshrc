@@ -66,13 +66,29 @@ else
 fi
 
 # options
-setopt NOCLOBBER                     # halp me
-setopt PRINT_EXIT_VALUE              # i want to know if something went wrong
+setopt noclobber                     # halp me
+setopt nohup                         # don't kill things when i logout
+setopt print_exit_value              # i want to know if something went wrong
 HISTSIZE=500
 PS1='%n@%m:%~%(!.#.>) '              # prompt
 TMOUT=0                              # don't auto logout
 
-setopt nohup                         # don't kill things when i logout
+# i am frequently too quick to logout with control+d twice (one to exit ssh,
+# another to close the terminal) and will miss the 'you have suspended jobs'
+# message, so hitting it twice still logs me out.  prevent that by not sending
+# eof on control+d but manually bind to it and run a function that exits.
+setopt ignore_eof
+_block_quick_bail() {
+   _sj=`jobs -sp`
+   if [[ $_sj == "" ]]; then
+      exit
+   else
+      _sj=$'\n'${_sj}
+      zle -M "zsh: you have suspended jobs:${_sj}"
+   fi
+}
+zle -N _block_quick_bail
+bindkey '^d' _block_quick_bail
 
 # show all logins and such
 watch=all
