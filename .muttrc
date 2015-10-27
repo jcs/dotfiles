@@ -172,8 +172,8 @@ mono quoted bold
 # same using brightcolor16 as a bright black
 color normal default default                              # init to black-on-white
 color attachment brightdefault default
-color body brightblue default "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
-color body brightblue default "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"
+color body brightdefault default "(http|https|ftp|mailto|gopher|telnet|finger)://[^ ]+"
+color body brightdefault default "[-a-z_0-9.]+@[-a-z_0-9.]+[a-z]"
 color body brightdefault default "-----Original Message-----"
 color body brightdefault default "[;:]-[)/(|]"
 color header default default .
