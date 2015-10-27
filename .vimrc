@@ -191,3 +191,11 @@ cabbr Q q
 
 " load pathogen for nerdtree and things
 call pathogen#infect()
+
+" " use camel case word motions
+" map w <Plug>CamelCaseMotion_w
+" map b <Plug>CamelCaseMotion_b
+" map e <Plug>CamelCaseMotion_e
+" sunmap w
+" sunmap b
+" sunmap e
