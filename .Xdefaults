@@ -70,9 +70,10 @@ Xft.dpi: 96
 .xterm*colorUL:			#f2f1b9
 
 
-! make command+v/alt+v paste clipboard
+! make alt+v/command+v paste clipboard
 .xterm*VT100.translations: #override\
-    Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
+    Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)\n\
+    Super <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
 
 
 SshAskpass*inputTimeout:	15
