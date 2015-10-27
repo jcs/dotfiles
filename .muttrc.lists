@@ -7,11 +7,6 @@ alternates (jcs@(rt\.fm|((noc|backup)\.)?superblock.net|jcs\.org|lowerca\.se|(cv
 folder-hook . set from="jcs@jcs.org"
 folder-hook . unset signature
 
-# put superblock hat on when in those folders
-folder-hook ^(superblock|pushover)$ set \
-	from="jcs@superblock.net" \
-	signature=~/.signature
-
 macro index U "c=superblock\n"
 macro pager U "c=superblock\n"
 
@@ -26,6 +21,17 @@ folder-hook ^openbsd-.*$ set \
 	from="jcs@openbsd.org" \
 	signature= \
 	sort=threads
+
+folder-hook ^(superblock|pushover)$ set \
+	from="jcs@superblock.net" \
+	signature=~/.signature \
+	sort=threads \
+	sort_aux=date
+
+folder-hook pushover set \
+	signature=~/.signature.pushover
+reply-hook '~s .*pushover' set \
+	signature=~/.signature.pushover
 
 # imap mailboxes
 
