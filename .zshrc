@@ -140,6 +140,13 @@ if [[ $OSTYPE != darwin* ]]; then
    watch=
 fi
 
+case $TERM in
+   xterm*)
+      precmd() {print -Pn "\e]0;%m:%~>\a"}
+      preexec() {print -Pn "\e]0;%m:%~> $1\a"}
+   ;;
+esac
+
 # load any local aliases and machine-specific things
 if [[ $OSTYPE = darwin* ]] && [ -f ~/.zshrc.mac ]; then
   source ~/.zshrc.mac
