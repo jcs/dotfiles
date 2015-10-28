@@ -1,10 +1,10 @@
 ! vim:ts=8
 
 ! force things like firefox to a standard size
-Xft.dpi: 96
+!Xft.dpi: 96
 
 #define BG			#cfcfc7
-#define FG			#404040
+#define FG			#303030
 
 ! xterm
 .xterm*background:		BG
@@ -13,16 +13,16 @@ Xft.dpi: 96
 .xterm*foreground:		FG
 .xterm*cursorColor:		#3670ab
 
-.xterm*Scrollbar.foreground:	gray50
-.xterm*Scrollbar.background:	BG
-.xterm*Scrollbar.minimumThumb:	50
+.xterm*scrollbar:		true
+.xterm*scrollbar.foreground:	gray50
+.xterm*scrollbar.background:	BG
+.xterm*scrollbar.minimumThumb:	50
+.xterm*scrollbar*width:		20
+.xterm*saveLines:		10000
 
 !.xterm*font:			dinamedium9
-.xterm*faceName:		CosmicSansNeueMono:size=10
-
-.xterm*saveLines:		10000
-.xterm*scrollBar:		true
-.xterm*scrollbar*width:		10
+.xterm*faceName:		dejavu sans mono:size=5.5
+.xterm*scaleHeight:		1.01
 
 .xterm*selectToClipboard:	true
 .xterm*utmpInhibit:		true
@@ -34,6 +34,8 @@ Xft.dpi: 96
 ! which disables allowColorOps, but empty the list of actual disabled ops
 ! which effectively re-enables color ops
 .xterm*disallowedColorOps:
+! this requires an xterm hack in ptyx.h
+.xterm*allowTitleOps:		true
 
 .xterm*title:			xterm
 .xterm*termName:		xterm-256color
@@ -69,15 +71,15 @@ Xft.dpi: 96
 ! underline when default
 .xterm*colorUL:			#f2f1b9
 
-
 ! make alt+v/command+v paste clipboard
 .xterm*VT100.translations: #override\
     Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)\n\
     Super <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
 
-
 SshAskpass*inputTimeout:	15
-
+! enlarge fonts
+SshAskpass*Dialog.font:		-adobe-helvetica-bold-r-normal-*-*-200-*-*-*-*-iso8859-1
+SshAskpass*Button.font:		-adobe-helvetica-bold-r-normal-*-*-200-*-*-*-*-iso8859-1
 
 ! make xaw scrollbars act like normal ones
 .xterm*Scrollbar.translations: #override\

@@ -10,27 +10,27 @@
 set winname title
 
 # reserve space for dzen
-set padding 12 14 12 12
+set padding 10 30 10 10
 
 # keep the bar in the upper left displaying the active frame title
 msgwait 3
 set barborder 0
 set bargravity nw
-set barpadding 7 3
-set barsticky on
-set bgcolor gray20
-set fgcolor #bfb7b0
-set font CosmicSansNeueMono:size=10
-set winliststyle row
-set winfmt %t
+set barpadding 14 8
 # this prevents it from taking dzen's padding into account
 set barinpadding 1
+set barsticky on
+set bgcolor #6C7C87
+set fgcolor gray85
+set font "dejavu sans mono:size=5.5"
+set winliststyle row
+set winfmt %t
 
 # add leading and trailing space around this now that the padding is small
 set framefmt  current frame 
 
 # window borders
-set border 3
+set border 5
 set gap 10
 set fwcolor orange3
 set bwcolor gray40
@@ -60,13 +60,13 @@ bind B exec ruby ~/code/pidgin_status/pidgin_status.rb available
 bind C-r exec echo "BrowserReload()" | nc localhost 4242 >/dev/null
 
 # swap workspaces, but define it in 'top' to avoid having to prefix with C-a
-definekey top F1 vselect 1
-definekey top F2 vselect 2
-definekey top F3 vselect 3
-definekey top F4 vselect 4
+definekey top M-1 vselect 1
+definekey top M-2 vselect 2
+definekey top M-3 vselect 3
+definekey top M-4 vselect 4
 
-definekey top F5 exec intel_backlight decr
-definekey top F6 exec intel_backlight incr
+definekey top F2 exec xbacklight -dec 5
+definekey top F3 exec xbacklight -inc 5
 
 # don't do that
 warp off
@@ -86,13 +86,8 @@ unmanage OpenSSH Authentication Passphrase Request
 
 # startup configuration
 
-# initialize the pointer
-exec xsetroot -solid gray20 -cursor_name left_ptr
-
 # initialize workspaces
 vinit
-
-#hsplit
-frestore (frame :number 0 :x 10 :y 20 :width 810 :height 645 :screenw 1920 :screenh 1080 :window 16777229 :last-access 3 :dedicated 0),(frame :number 2 :x 10 :y 665 :width 810 :height 405 :screenw 1920 :screenh 1080 :window 10485773 :last-access 2 :dedicated 0),(frame :number 1 :x 820 :y 20 :width 1090 :height 1050 :screenw 1920 :screenh 1080 :window 14680077 :last-access 1 :dedicated 0),
+hsplit
 
 exec xterm

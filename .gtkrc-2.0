@@ -1,13 +1,7 @@
 # based on clearlooks-next by Carles Amigó (fr3nd) http://www.fr3nd.net
 
 # default font
-gtk-font-name = "Verdana 8"
-
-# shrink font size for pidgin
-style "imhtml-fix"
-{
-    font_name = "Verdana 7.5"
-}
+gtk-font-name = "Verdana 5.5"
 
 style "clearlooks-default"
 {
@@ -22,9 +16,10 @@ style "clearlooks-default"
   GtkRange       ::slider_width      = 15
   GtkRange       ::stepper_size      = 15
   GtkScrollbar   ::min_slider_length = 30
+  GtkScrollbar   ::slider_width      = 26
   GtkScrollbar   ::has_backward_stepper = 1
   GtkScrollbar   ::has_secondary_backward_stepper = 1
-  GtkCheckButton ::indicator_size    = 12
+  GtkCheckButton ::indicator_size    = 20
   GtkMenuBar     ::internal-padding  = 0
   GtkTreeView    ::expander_size     = 14
   GtkExpander    ::expander_size     = 16
@@ -43,13 +38,13 @@ style "clearlooks-default"
   bg[ACTIVE]        = "#d0d0d0" # mid beige / grey
   bg[SELECTED]      = "#519cde" # blueish
   bg[INSENSITIVE]   = "#e0e0e0" # light beige / grey
-	
+
   base[NORMAL]      = "#ffffff" # white
   base[PRELIGHT]    = "#628cb2" # blueish
   base[ACTIVE]      = "#a29e8e" # dark beige / grey
   base[SELECTED]    = "#519cde" # blueish
   base[INSENSITIVE] = "#e0e0e0" #light beige / grey
-	
+
   text[NORMAL]      = "#000000" # black
   text[PRELIGHT]    = "#000000" # black
   text[ACTIVE]      = "#ffffff" # white
@@ -179,7 +174,3 @@ widget_class "*.GtkFrame.GtkLabel" style "clearlooks-frame-title"
 # notebook stuff
 widget_class "*.GtkNotebook.*.GtkEventBox" style "clearlooks-notebook"
 widget_class "*.GtkNotebook.*.GtkViewport" style "clearlooks-notebook"
-
-# shrink pidgin
-widget "*pidgin_conv_entry" style "imhtml-fix"
-widget "*pidgin_conv_imhtml" style "imhtml-fix"
