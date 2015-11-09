@@ -2,6 +2,7 @@
 
 ! force things like firefox to a standard size
 !Xft.dpi: 96
+Xft.dpi: 192
 
 #define BG			#cfcfc7
 #define FG			#303030
@@ -21,7 +22,8 @@
 .xterm*saveLines:		10000
 
 !.xterm*font:			dinamedium9
-.xterm*faceName:		dejavu sans mono:size=5.5
+.xterm*faceName:		dejavu sans mono:size=7
+! work around problem of underscores disappearing
 .xterm*scaleHeight:		1.01
 
 .xterm*selectToClipboard:	true

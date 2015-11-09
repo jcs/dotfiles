@@ -1,7 +1,9 @@
 #!/bin/sh
 
 export LANG=en_US.UTF-8
-export XCURSOR_SIZE=64
+
+# this should be in /etc/X11/xdm/Xsetup_0, but just in case
+xrandr --dpi 192
 
 xrdb < ~/.Xdefaults
 
