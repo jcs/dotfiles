@@ -16,13 +16,15 @@ set padding 10 30 10 10
 msgwait 3
 set barborder 0
 set bargravity nw
-set barpadding 14 8
+set barpadding 25 8
 # this prevents it from taking dzen's padding into account
 set barinpadding 1
 set barsticky on
 set bgcolor #6C7C87
 set fgcolor gray85
-set font "dejavu sans mono:size=5.5"
+set font "dejavu sans mono:size=7"
+# cover any possible window title from barsticky
+set inputwidth 1500
 set winliststyle row
 set winfmt %t
 
@@ -65,8 +67,13 @@ definekey top M-2 vselect 2
 definekey top M-3 vselect 3
 definekey top M-4 vselect 4
 
-definekey top F2 exec xbacklight -dec 5
-definekey top F3 exec xbacklight -inc 5
+# match symbols on the keys of my current laptop as if Fn Lock were on, without
+# having to actually enable Fn Lock
+definekey top F2 exec xbacklight -dec 10
+definekey top F3 exec xbacklight -inc 10
+definekey top F6 exec mixerctl outputs.master.mute=toggle
+definekey top F7 exec mixerctl outputs.master=-10
+definekey top F8 exec mixerctl outputs.master=+10
 
 # don't do that
 warp off
