@@ -5,7 +5,7 @@
 #
 
 # things to set
-set ascii_chars=yes                             # looks better
+set ascii_chars=no                              # make trees look cleaner
 set alias_file=~/.muttrc.aliases                # good place, yeah?
 set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
 set confirmappend=no                            # append without asking
@@ -62,7 +62,7 @@ set record="=sent"                              # store sent mail on imap
 set sendmail="msmtp"                            # not really using sendmail
 set smart_wrap=yes                              # smart like a fox
 set sort=threads                                # neat
-set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
+set status_format=" mutt: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
 set status_on_top=yes                           # looks better with sidebar
 set tilde=yes                                   # don't you hide from me
 set timeout=15                                  # update the current box quickly
@@ -189,7 +189,7 @@ color header brightdefault default '~F'
 color signature brightdefault default
 color sidebar_new brightdefault default
 color tilde brightblack default
-color tree brightblack default
+color tree color242 default
 color quoted brightblack default
 
 # color flagged a dark red

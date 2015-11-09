@@ -102,9 +102,6 @@ subscribe openssh-unix-dev
 mailboxes =oss-security
 subscribe oss-security
 
-mailboxes =pf
-subscribe pf
-
 mailboxes =ratpoison-devel
 subscribe ratpoison-devel
 
