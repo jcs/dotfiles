@@ -1,105 +1,107 @@
 ! vim:ts=8
 
-! force things like firefox to a standard size
-!Xft.dpi: 96
-Xft.dpi: 192
+#define BG			#e3e0d5
+#define FG			#494949
 
-#define BG			#cfcfc7
-#define FG			#303030
+! a muted palette for athena things like xterm, xfontsel, etc.
+! created with http://ciembor.github.com/4bit
+*.background:			BG
+*.scrollbar.background:		BG
+*.scrollbar.foreground:		#bbb
 
-! xterm
-.xterm*background:		BG
-.xterm*borderColor:		BG
-.xterm*internalBorder:		4
-.xterm*foreground:		FG
-.xterm*cursorColor:		#3670ab
+*.borderColor:			BG
 
-.xterm*scrollbar:		true
-.xterm*scrollbar.foreground:	gray50
-.xterm*scrollbar.background:	BG
-.xterm*scrollbar.minimumThumb:	50
-.xterm*scrollbar*width:		20
-.xterm*saveLines:		10000
-
-!.xterm*font:			dinamedium9
-.xterm*faceName:		dejavu sans mono:size=7
-! work around problem of underscores disappearing
-.xterm*scaleHeight:		1.01
-
-.xterm*selectToClipboard:	true
-.xterm*utmpInhibit:		true
-! hide when i type
-.xterm*pointerMode:		2
-
-! needed by ratpoison
-.xterm*allowSendEvents:		true
-! which disables allowColorOps, but empty the list of actual disabled ops
-! which effectively re-enables color ops
-.xterm*disallowedColorOps:
-! this requires an xterm hack in ptyx.h
-.xterm*allowTitleOps:		true
-
-.xterm*title:			xterm
-.xterm*termName:		xterm-256color
-
-.xterm*visualBell:		false
-
-! a muted palette
+*.foreground:			FG
 
 ! black
-.xterm*color0:			gray10
-.xterm*color8:			gray20
+*.color0:			#393939
+*.color8:			#525252
+
 ! red
-.xterm*color1:			#c2454e
-.xterm*color9:			#ef5847
+*.color1:			#825b69
+*.color9:			#bda0aa
+
 ! green
-.xterm*color2:			#7cbf9e
-.xterm*color10:			#a2d9b1
+*.color2:			#69825b
+*.color10:			#aabda0
+
 ! yellow
-.xterm*color3:			#8a7a63
-.xterm*color11:			#beb090
+*.color3:			#82755b
+*.color11:			#bdb3a0
+
 ! blue
-.xterm*color4:			#555d71
-.xterm*color12:			#61778d
+*.color4:			#5b6982
+*.color12:			#a0aabd
+
 ! magenta
-.xterm*color5:			#ff5879
-.xterm*color13:			#ff99a1
+*.color5:			#755b82
+*.color13:			#b3a0bd
+
 ! cyan
-.xterm*color6:			#44b5b1
-.xterm*color14:			#9ed9d8
+*.color6:			#5b8275
+*.color14:			#a0bdb3
+
 ! white
-.xterm*color7:			gray70
-.xterm*color15:			gray80
-! underline when default
-.xterm*colorUL:			#f2f1b9
+*.color7:			#cacaca
+*.color15:			#ffffff
+
+*.font:				-*-lucida-medium-r-*-*-22-*-*-*-*-*-*-*
+
+*.scrollbar:			true
+*.scrollbar.minimumThumb:	50
+*.scrollbar*width:		20
+*.saveLines:			20000
+
+
+! xterm-specific settings
+
+*.XTerm.*.faceName:		dejavu sans mono:size=11
+*.XTerm.*.scaleHeight:		1.01
+*.XTerm.*.internalBorder:	8
+
+*.XTerm.*.selectToClipboard:	true
+*.XTerm.*.utmpInhibit:		true
+! hide when i type
+*.XTerm.*.pointerMode:		2
+
+! needed by ratpoison
+*.XTerm.*.allowSendEvents:	true
+! which disables allowColorOps, but empty the list of actual disabled ops
+! which effectively re-enables color ops
+*.XTerm.*.disallowedColorOps:
+! this requires an xterm hack in ptyx.h
+*.XTerm.*.allowTitleOps:	true
+
+*.XTerm.*.title:		xterm
+*.XTerm.*.termName:		xterm-256color
+
+*.XTerm.*.visualBell:		false
 
 ! make alt+v/command+v paste clipboard
-.xterm*VT100.translations: #override\
+*.XTerm.*.VT100.translations:	#override\
     Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)\n\
     Super <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
+
+! make xaw scrollbars act like normal ones
+.XTerm.*.Scrollbar.translations: #override\
+    <Btn1Down>: StartScroll(Continuous) MoveThumb() NotifyThumb() \n\
+    <Btn2Down>: StartScroll(Forward) \n\
+    <Btn3Down>: StartScroll(Backward) \n\
+    <Btn1Motion>: MoveThumb() NotifyThumb() \n\
+    <BtnUp>: NotifyScroll(Proportional) EndScroll()
+
+
+! qconsole overrides, inheriting defaults from xterm settings
+qconsole.*.background:		FG
+qconsole.*.borderColor:		FG
+qconsole.*.foreground:		BG
+qconsole.*.scrollbar.background:FG
+qconsole.*.scrollbar.foreground:black
+qconsole.*.rightScrollBar:	true
+qconsole.*.internalBorder:	12
+
 
 SshAskpass*inputTimeout:	15
 ! enlarge fonts
 SshAskpass*Dialog.font:		-adobe-helvetica-bold-r-normal-*-*-200-*-*-*-*-iso8859-1
 SshAskpass*Button.font:		-adobe-helvetica-bold-r-normal-*-*-200-*-*-*-*-iso8859-1
-
-! make xaw scrollbars act like normal ones
-.xterm*Scrollbar.translations: #override\
-    <Btn1Down>: StartScroll(Continuous) MoveThumb() NotifyThumb() \n\
-    <Btn2Down>: StartScroll(Forward) \n\
-    <Btn3Down>: StartScroll(Backward) \n\
-    <Btn1Motion>: MoveThumb() NotifyThumb() \n\
-    <BtnUp>: NotifyScroll(Proportional) EndScroll()
-! vncviewer
-*viewport.horizontal.translations: #override\
-    <Btn1Down>: StartScroll(Continuous) MoveThumb() NotifyThumb() \n\
-    <Btn2Down>: StartScroll(Forward) \n\
-    <Btn3Down>: StartScroll(Backward) \n\
-    <Btn1Motion>: MoveThumb() NotifyThumb() \n\
-    <BtnUp>: NotifyScroll(Proportional) EndScroll()
-*viewport.vertical.translations: #override\
-    <Btn1Down>: StartScroll(Continuous) MoveThumb() NotifyThumb() \n\
-    <Btn2Down>: StartScroll(Forward) \n\
-    <Btn3Down>: StartScroll(Backward) \n\
-    <Btn1Motion>: MoveThumb() NotifyThumb() \n\
-    <BtnUp>: NotifyScroll(Proportional) EndScroll()
