@@ -1,1 +1,4 @@
 diff -uNp
+update -P
+checkout -P
+rdiff -u
