@@ -1,7 +1,7 @@
 # based on clearlooks-next by Carles Amigó (fr3nd) http://www.fr3nd.net
 
 # default font
-gtk-font-name = "Verdana 8"
+gtk-font-name = "Verdana 12"
 
 style "clearlooks-default"
 {
