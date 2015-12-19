@@ -9,22 +9,18 @@
 # call them as i sees them
 set winname title
 
-# reserve space for dzen
-set padding 10 30 10 10
-
 # keep the bar in the upper left displaying the active frame title
 msgwait 3
 set barborder 0
 set bargravity nw
-set barpadding 25 8
-# this prevents it from taking dzen's padding into account
+set barpadding 25 14
 set barinpadding 1
 set barsticky on
 set bgcolor #6C7C87
 set fgcolor gray85
-set font "dejavu sans mono:size=7"
-# cover any possible window title from barsticky
-set inputwidth 1500
+set font "dejavu sans mono:size=10"
+set inputwidth 0
+set padding 10 40 10 10
 set winliststyle row
 set winfmt %t
 
@@ -35,7 +31,7 @@ set framefmt  current frame
 set border 5
 set gap 10
 set fwcolor orange3
-set bwcolor gray40
+set bwcolor #6C7C87
 
 # be like screen
 escape C-a

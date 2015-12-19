@@ -5,3 +5,4 @@ application/x-gunzip; gzcat %s; copiousoutput
 # things that need to spawn (after forking)
 application/pdf; ~/bin/mutt_bgrun firefox %s
 image/png; ~/bin/mutt_bgrun firefox %s
+image/jpeg; ~/bin/mutt_bgrun firefox %s

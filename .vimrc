@@ -23,6 +23,7 @@ set showmatch					" where'd the opening ')' go?
 set showmode
 set smartcase					" be smart about searching
 set spellfile=~/.vimspell.add			" my goodwords
+set spelllang=en_us
 set tabstop=4					" default tabs at 4 spaces
 set viminfo=					" annoying!
 set wildmode=longest,list,full			" better filename tab completion
@@ -56,11 +57,10 @@ endif
 
 let NERDTreeDirArrows=0				 " use normal ascii
 let NERDTreeMinimalUI=1				 " and save space
-let NERDTreeWinSize=30				 " my terminals are 111 chars
-						 " wide, so open to leave 80
-						 " for editing
+let NERDTreeWinSize=29				 " leave 80 chars for editing
 let NERDTreeMapOpenRecursively="+"
 let NERDTreeMapCloseChildren="-"		 " easier for me to remember
+let NERDTreeIgnore = ['\.(o|pyc)$']
 
 
 " file type-specific settings
@@ -90,10 +90,10 @@ au FileType asm,c,cpp,go,java,javascript,php,html,make,objc,perl setlocal tw=79 
 au FileType make,c,cpp setlocal ts=8 sw=8
 
 " email - expand tabs, wrap at 68 for future quoting, enable spelling
-au FileType mail setlocal tw=68 et spell spelllang=en_us colorcolumn=69
+au FileType mail setlocal tw=68 et spell colorcolumn=69
 
 " commit messages are like email
-au FileType cvs,gitcommit setlocal tw=68 et colorcolumn=69
+au FileType cvs,gitcommit setlocal tw=68 et colorcolumn=69 spell
 
 " and make sure there's a blank line for me to start typing (openbsd's cvs does
 " this by default)

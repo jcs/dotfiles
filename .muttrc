@@ -71,7 +71,7 @@ set use_from                                    # add a from header
 unset user_agent                                # i don't use mutt, i swear
 
 # these only work with the sidebar patch
-set sidebar_delim="] "                          # separate
+set sidebar_delim="| "                          # separate
 set sidebar_visible=yes                         # yep
 set sidebar_width=21                            # enough for me
 
@@ -212,6 +212,6 @@ alternative_order text/plain text/html
 my_hdr X-No-Archive: Yes
 
 # things to load in
-source $alias_file                                        # people i know
 source ~/.muttrc.personal                                 # my personal stuff
 source ~/.muttrc.lists                                    # mailboxes, folders
+source $alias_file                                        # for tab completion

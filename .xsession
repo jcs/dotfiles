@@ -3,26 +3,33 @@
 export LANG=en_US.UTF-8
 
 # this should be in /etc/X11/xdm/Xsetup_0, but just in case
-xrandr --dpi 192
+xrandr --dpi 120
 
 xrdb < ~/.Xdefaults
 
 if [ `uname -s` == "OpenBSD" ]; then
+	eval `dbus-launch --sh-syntax`
+	ruby ~/code/dzen-jcs/dzen-jcs.rb &
+
 	xmodmap ~/.xmodmap
 	xset r rate 350 35
 	xset +fp /usr/local/lib/X11/fonts/jcs fp rehash
 	xset m 3/1 4
 
-	xidle -timeout 240 -ne -program ~/bin/lock &
-
-	ruby ~/code/dzen-jcs/dzen-jcs.rb &
+	xidle -timeout 600 -ne -program ~/bin/lock &
 
 	redshift -l 41.90:-87.66 -t 5500:3700 &
 
 	xbanish &
 	xdimmer &
+	qconsole -h 320 &
 
 	xsetroot -solid '#6C7C87' -cursor_name left_ptr
+
+	ruby ~/code/imapbiff/imapbiff.rb &
 fi
 
-exec /usr/local/bin/ratpoison
+/usr/local/bin/ratpoison
+
+# cleanup
+pkill -9 dzen2 i3status dbus-daemon

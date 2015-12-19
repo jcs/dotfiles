@@ -28,11 +28,6 @@ folder-hook ^(superblock|pushover)$ set \
 	sort=threads \
 	sort_aux=date
 
-folder-hook pushover set \
-	signature=~/.signature.pushover
-reply-hook '~s .*pushover' set \
-	signature=~/.signature.pushover
-
 # imap mailboxes
 
 unmailboxes *
