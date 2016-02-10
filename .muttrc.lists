@@ -61,9 +61,6 @@ subscribe dns-operations
 mailboxes =dragonflybsd-users
 subscribe users
 
-mailboxes =illlist
-subscribe illlist
-
 mailboxes =liberationtech
 subscribe liberationtech
 
