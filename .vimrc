@@ -25,7 +25,6 @@ set smartcase					" be smart about searching
 set spellfile=~/.vimspell.add			" my goodwords
 set spelllang=en_us
 set tabstop=4					" default tabs at 4 spaces
-set viminfo=					" annoying!
 set wildmode=longest,list,full			" better filename tab completion
 
 set t_Co=256					" use all 256 colors
@@ -62,6 +61,11 @@ let NERDTreeMapOpenRecursively="+"
 let NERDTreeMapCloseChildren="-"		 " easier for me to remember
 let NERDTreeIgnore = ['\.(o|pyc)$']
 
+" restore cursor position from viminfo
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
 
 " file type-specific settings
 
