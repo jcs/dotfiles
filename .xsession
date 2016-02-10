@@ -22,9 +22,10 @@ if [ `uname -s` == "OpenBSD" ]; then
 
 	xbanish &
 	xdimmer &
-	qconsole -h 320 &
 
 	xsetroot -solid '#6C7C87' -cursor_name left_ptr
+
+	synclient ClickPad=1 HorizTwoFingerScroll=1 RightButtonAreaLeft=800 HorizHysteresis=10 VertHysteresis=10
 
 	ruby ~/code/imapbiff/imapbiff.rb &
 fi
