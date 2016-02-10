@@ -17,7 +17,7 @@ set barpadding 25 14
 set barinpadding 1
 set barsticky on
 set bgcolor #6C7C87
-set fgcolor gray85
+set fgcolor #e3e0d5
 set font "dejavu sans mono:size=10"
 set inputwidth 0
 set padding 10 40 10 10
