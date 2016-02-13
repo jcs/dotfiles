@@ -3,6 +3,9 @@
 #define BG			#e3e0d5
 #define FG			#494949
 
+Xcursor.theme:			dmz
+Xcursor.size:			48
+
 ! a muted palette for athena things like xterm, xfontsel, etc.
 ! created with http://ciembor.github.com/4bit
 *.background:			BG
