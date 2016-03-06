@@ -5,7 +5,7 @@
 #
 
 # things to set
-set ascii_chars=no                              # make trees look cleaner
+set ascii_chars=no                              # looks better
 set alias_file=~/.muttrc.aliases                # good place, yeah?
 set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
 set confirmappend=no                            # append without asking
@@ -62,7 +62,7 @@ set record="=sent"                              # store sent mail on imap
 set sendmail="msmtp"                            # not really using sendmail
 set smart_wrap=yes                              # smart like a fox
 set sort=threads                                # neat
-set status_format=" mutt: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
+set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
 set status_on_top=yes                           # looks better with sidebar
 set tilde=yes                                   # don't you hide from me
 set timeout=15                                  # update the current box quickly
@@ -91,7 +91,6 @@ bind index <delete> delete-message              # when i get super lazy
 bind index <space> display-message              # sure
 bind index <right> display-message              # tin
 bind index <tab> next-unread                    # ok
-bind index G last-entry                         # makes more sense
 bind index \CF next-page                        # make control+f and b scroll
 bind index \CB previous-page                    #  like everything else
 bind compose F edit-from                        # i am not me
@@ -100,31 +99,32 @@ bind compose F edit-from                        # i am not me
 bind editor <tab> complete-query
 
 # act like normal vi keys but browse sidebar folders
-macro index K ":push <sidebar-prev><sidebar-open><enter>"
-macro index J ":push <sidebar-next><sidebar-open><enter>"
+macro index K "<enter-command>push <sidebar-prev><sidebar-open><enter>"
+macro index J "<enter-command>push <sidebar-next><sidebar-open><enter>"
 
 # things to automate
-macro index i "c!\n"                            # go home
-macro index n "c\n"                             # go to box with new mail
-macro index p "c<up><up>\n"                     # go back to the previous box
+macro index,pager i "c!<enter>"                      # go home
+macro index,pager n "c<enter>"                       # go to box with new mail
+macro index,pager p "c<up><up><enter>"               # go back to the previous box
 # broken: if no messages are tagged, it deletes the current message :(
 #macro index P "T~d >1m\n;d$"                   # tag and delete old mail, sync
-macro index P "T~d >60d\n"                      # prune: tag+delete old mail
-macro index R "Wn"                              # mark as read
-macro pager i "c!\n"                            # go to the inbox
-macro pager n "c\n"                             # go to box with new mail
-macro pager p "c<up><up>\n"                     # go back to the previous box
+macro index P "T~d >60d<enter>"                      # prune: tag+delete old mail
+
+# do a one-time reply with sig on top, for e-mail chains where everyone else
+# is doing annoying top-replying
+macro index,pager R "<enter-command>set sig_on_top=yes<enter><reply><enter-command>set sig_on_top=no<enter>"
+macro index,pager G "<enter-command>set sig_on_top=yes<enter><group-reply><enter-command>set sig_on_top=no<enter>"
 
 # imitate the old search-body function, but expensive for imap
 macro index <Esc>b '/~B ' 'search in message bodies'
 
 # sidebar shenanigans
-macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
-macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+macro index B '<enter-command>toggle sidebar_visible<enter><refresh><enter>'
+macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen><enter>'
 
 # automation for majordomo approvals
-macro index A "|/usr/local/lib/majordomo/bin/approve\nd"
-macro pager A "|/usr/local/lib/majordomo/bin/approve\nd"
+macro index A "|/usr/local/lib/majordomo/bin/approve<enter>d"
+macro pager A "|/usr/local/lib/majordomo/bin/approve<enter>d"
 
 # things to happen
 folder-hook . set sort=threads                  # everything else
