@@ -24,6 +24,8 @@ export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/
 # let control+w only delete one directory of a path, not the whole word
 export WORDCHARS='*?_[]~=&;!#$%^(){}'
 
+export LESS="-i"
+
 # on non-interactive shells, just exit here to speed things up
 if [[ ! -o interactive ]]; then
    return
@@ -128,6 +130,7 @@ elif [[ $OSTYPE = openbsd* ]]; then
 # loonix
 elif [[ $OSTYPE = linux* ]]; then
    alias ls='ls -aFv'
+   alias ph='ps auwwx | sort -rk 3,3 | head'
 fi
 
 # and the reverse
