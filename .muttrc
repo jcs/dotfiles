@@ -57,7 +57,6 @@ set postponed="=postponed"                      # get out of my home
 set print=ask-no                                # i probably accidently printed
 set query_command="/usr/local/bin/lbdbq '%s'"   # query address book for aliases
 set quit=ask-yes                                # i keep hitting q by accident
-set quote_regexp="^([ \t]*[>])+"
 set record="=sent"                              # store sent mail on imap
 set sendmail="msmtp"                            # not really using sendmail
 set smart_wrap=yes                              # smart like a fox
@@ -135,6 +134,9 @@ folder-hook sent set sort=date-sent             # when did i send that?
 folder-hook ^allmail.*$ set sort=mailbox-order  # don't sort, for fast loading
 folder-hook ^allmail.*$ push <toggle-write>     # don't save changes, read-only
 
+# for old pgp messages with no helpful metadata, process them as pgp
+message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
+
 # create message-ids that don't leak private info (like the number of messages
 # sent in the current mutt session, or the local hostname)
 send-hook . 'my_hdr Message-ID: <`date +"%Y%m%d%H%M%S"`.`sh -c "dd if=/dev/urandom bs=500 count=1 2>/dev/null | md5 | dd if=/dev/stdin bs=10 count=1 2>/dev/null"`@`sh -c "dd if=/dev/urandom bs=500 count=1 2>/dev/null | md5 | dd if=/dev/stdin bs=15 count=1 2>/dev/null"`>'
@@ -207,9 +209,6 @@ auto_view text/html application/msword                    # html with lynx,
                                                           # .doc with antiword
 # but that doesn't mean i don't like text/plain
 alternative_order text/plain text/html
-
-# in case anything honors it
-my_hdr X-No-Archive: Yes
 
 # things to load in
 source ~/.muttrc.personal                                 # my personal stuff
