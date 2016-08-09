@@ -1,7 +1,7 @@
 # vim:tw=0
 
 # whois me
-alternates (jcs@(rt\.fm|((noc|backup)\.)?superblock.net|jcs\.org|lowerca\.se|(cvs\.)?openbsd\.org|1\.8T\.org|lobste\.rs)|admin@1\.8T\.org|(billing|corduroy)@superblock\.net|sale-.*@craigslist\.org)
+alternates (jcs@(rt\.fm|((noc|backup)\.)?superblock.net|jcs\.org|lowerca\.se|(cvs\.)?openbsd\.org|1\.8T\.org|lobste\.rs)|admin@1\.8T\.org|(billing|corduroy)@superblock\.net|support@pushover\.net|sale-.*@craigslist\.org)
 
 # default address, no signature
 folder-hook . set from="jcs@jcs.org"
@@ -26,7 +26,8 @@ folder-hook ^(superblock|pushover)$ set \
 	from="jcs@superblock.net" \
 	signature=~/.signature \
 	sort=threads \
-	sort_aux=date
+	strict_threads=yes \
+	sort_aux=last-date-received
 
 # imap mailboxes
 
@@ -52,8 +53,8 @@ subscribe android-gcm
 mailboxes =bugtraq
 subscribe bugtraq
 
-mailboxes =dailydave
-subscribe dailydave
+mailboxes =chibug
+subscribe talk
 
 mailboxes =dns-operations
 subscribe dns-operations
@@ -96,12 +97,3 @@ subscribe oss-security
 
 mailboxes =ratpoison-devel
 subscribe ratpoison-devel
-
-mailboxes =tor-bsd
-subscribe tor-bsd
-
-mailboxes =tor-relays
-subscribe tor-relays
-
-mailboxes =tor-talk
-subscribe or-talk
