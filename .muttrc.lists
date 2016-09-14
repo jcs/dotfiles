@@ -56,14 +56,14 @@ subscribe bugtraq
 mailboxes =chibug
 subscribe talk
 
+mailboxes =coreboot
+subscribe coreboot
+
 mailboxes =dns-operations
 subscribe dns-operations
 
 mailboxes =dragonflybsd-users
 subscribe users
-
-mailboxes =liberationtech
-subscribe liberationtech
 
 mailboxes =openbsd-bugs
 subscribe bugs
