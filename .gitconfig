@@ -6,6 +6,7 @@
 	diff-remote = diff origin..master
 	ff = pull --ff-only
 	fixup = rebase -i HEAD~5
+	graph = log --oneline --all --graph --decorate
 [push]
 	default = simple
 [color]
