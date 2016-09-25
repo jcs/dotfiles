@@ -1,16 +1,15 @@
-! turn caps lock into a control key
-remove Lock = Caps_Lock
-remove Control = Control_L
-keysym Caps_Lock = Control_L
-add Lock = Caps_Lock
-add Control = Control_L
+! turn search key into control
+remove mod4 = Super_L
+add Control = Super_L
 
-! map previous and next buttons on the thinkpad to pagedown/up
-keycode 233 = Page_Down
-keycode 234 = Page_Up
+! turn right alt to mode switch
+keycode 113 = Mode_switch
 
-! map audio keys on fn+up/down/left/right into things
-keycode 164 = XF86AudioStop
-keycode 144 = XF86AudioPrev
-keycode 162 = XF86AudioPlay
-keycode 153 = XF86AudioNext
+! and now mode switch plus arrow keys are page up/down/home/end
+keycode 98 = Up Up Prior
+keycode 102 = Right Right End
+keycode 104 = Down Down Next
+keycode 110 = Left Left Home
+
+! mode switch plus backspace is delete
+keycode 22 = BackSpace BackSpace Delete
