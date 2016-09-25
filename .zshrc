@@ -37,7 +37,6 @@ bindkey -e
 
 # i'm too lazy to type these out
 alias calc='perl -pe "print eval(\$_) . chr(10);"'
-alias ccom='cvs -q diff -upRN \!* || (echo; echo enter to commit; sh -c read && cvs com \!*)'
 alias cdu='cvs -q diff -upRN'
 alias cp='cp -i'
 alias hg='history | grep '
@@ -119,7 +118,6 @@ if [[ $OSTYPE = darwin* ]]; then
 
 # openbsd
 elif [[ $OSTYPE = openbsd* ]]; then
-   export PKG_PATH=http://ftp.usa.openbsd.org/pub/OpenBSD/`uname -r`/packages/`arch -s`/
    alias watchbw='netstat -w1 -b -I'
 
    alias update_dotfiles='ftp -Vo - https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -'
