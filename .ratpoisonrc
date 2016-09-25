@@ -18,7 +18,7 @@ set barinpadding 1
 set barsticky on
 set bgcolor #6C7C87
 set fgcolor #e3e0d5
-set font "dejavu sans mono:size=10"
+set font "cousine:size=10.5:embolden=true"
 set inputwidth 0
 set padding 10 40 10 10
 set winliststyle row
@@ -65,11 +65,13 @@ definekey top M-4 vselect 4
 
 # match symbols on the keys of my current laptop as if Fn Lock were on, without
 # having to actually enable Fn Lock
-definekey top F2 exec xbacklight -dec 10
-definekey top F3 exec xbacklight -inc 10
-definekey top F6 exec mixerctl outputs.master.mute=toggle
-definekey top F7 exec mixerctl outputs.master=-10
-definekey top F8 exec mixerctl outputs.master=+10
+definekey top F6 exec wsconsctl display.brightness-=5
+definekey top F7 exec wsconsctl display.brightness+=5
+definekey top M-F6 exec wsconsctl keyboard.backlight-=5
+definekey top M-F7 exec wsconsctl keyboard.backlight+=5
+#definekey top F6 exec mixerctl outputs.master.mute=toggle
+#definekey top F7 exec mixerctl outputs.master=-10
+#definekey top F8 exec mixerctl outputs.master=+10
 
 # don't do that
 warp off
