@@ -102,12 +102,10 @@ macro index K "<enter-command>push <sidebar-prev><sidebar-open><enter>"
 macro index J "<enter-command>push <sidebar-next><sidebar-open><enter>"
 
 # things to automate
-macro index,pager i "c!<enter>"                      # go home
-macro index,pager n "c<enter>"                       # go to box with new mail
-macro index,pager p "c<up><up><enter>"               # go back to the previous box
-# broken: if no messages are tagged, it deletes the current message :(
-#macro index P "T~d >1m\n;d$"                   # tag and delete old mail, sync
-macro index P "T~d >60d<enter>"                      # prune: tag+delete old mail
+macro index,pager i "<change-folder>!<enter>" "go home"
+macro index,pager n "<change-folder><enter>" "go to box with new mail"
+macro index,pager p "<change-folder><up><up><enter>" "go back to the previous mailbox"
+macro index P "<tag-pattern>~d >1m<enter><tag-prefix-cond><delete-message><sync-mailbox>" "delete old mail, sync"
 
 # do a one-time reply with sig on top, for e-mail chains where everyone else
 # is doing annoying top-replying
@@ -115,15 +113,15 @@ macro index,pager R "<enter-command>set sig_on_top=yes<enter><reply><enter-comma
 macro index,pager G "<enter-command>set sig_on_top=yes<enter><group-reply><enter-command>set sig_on_top=no<enter>"
 
 # imitate the old search-body function, but expensive for imap
-macro index <Esc>b '/~B ' 'search in message bodies'
+macro index <Esc>b "<search>~B " "search in message bodies"
 
 # sidebar shenanigans
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh><enter>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen><enter>'
 
 # automation for majordomo approvals
-macro index A "|/usr/local/lib/majordomo/bin/approve<enter>d"
-macro pager A "|/usr/local/lib/majordomo/bin/approve<enter>d"
+macro index A "<pipe-message>/usr/local/lib/majordomo/bin/approve<enter><delete-message>"
+macro pager A "<pipe-message>/usr/local/lib/majordomo/bin/approve<enter><delete-message>"
 
 # things to happen
 folder-hook . set sort=threads                  # everything else
