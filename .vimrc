@@ -84,6 +84,7 @@ au BufRead,BufNewFile *.go setlocal ft=go
 
 " ruby - what tabs?
 au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=80
+
 " and your yaml
 au FileType yaml setlocal ts=2 sw=2 et colorcolumn=80
 
@@ -102,6 +103,13 @@ au FileType cvs,gitcommit setlocal tw=68 et colorcolumn=69 spell
 " and make sure there's a blank line for me to start typing (openbsd's cvs does
 " this by default)
 au FileType cvs s/^CVS:/CVS:/|1
+
+" git log messages are always the same file, but viminfo has stale data about
+" line pos
+au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+" fix for crontab erroring out because it can't see any changes
+au FileType crontab setlocal bkc=yes
 
 " when writing new files, mkdir -p their paths
 augroup BWCCreateDir
