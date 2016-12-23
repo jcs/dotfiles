@@ -112,9 +112,33 @@ if [[ $OSTYPE = darwin* ]]; then
    # update dotfiles
    alias update_dotfiles='curl https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
-   # bring in rbenv
-   export PATH="${HOME}/.rbenv/shims:${PATH}"
-   source "/usr/local/Cellar/rbenv/0.4.0/completions/rbenv.zsh";
+ # bring in rbenv
+   export PATH="${HOME}/.rbenv/shims:${PATH}:/opt/X11/bin"
+   source "/usr/local/Cellar/rbenv/1.0.0/completions/rbenv.zsh";
+
+   export STORE_LASTDIR=1
+   export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+
+   # show upcoming events with icalBuddy, but because it's slow, show the
+   # cached version and update the cache in the background
+   ICAL_BUDDY="icalBuddy -li 3 -eed -n -npn -nc -iep 'title,datetime' \
+      -ps '| - |' -po 'datetime,title' -b '' -tf '%H:%M' eventsToday+7"
+   _AGE=0
+   if [ -f ~/.icalcache ]; then
+      # but if the cache is more than 6 hours old, it's not helpful to show an
+      # old cache, so force it to be re-run
+      _CACHE_MTIME=`stat -f "%m" ~/.icalcache`
+      _AGE=$((`date "+%s"` - $_CACHE_MTIME))
+      if [ $_AGE -gt 28800 ]; then
+         rm -f ~/.icalcache
+      fi
+   fi
+   if [ -f ~/.icalcache ]; then
+      cat ~/.icalcache
+      sh -c "${ICAL_BUDDY} > ~/.icalcache &" > /dev/null
+   else
+      eval ${ICAL_BUDDY} | tee ~/.icalcache
+   fi
 
 # openbsd
 elif [[ $OSTYPE = openbsd* ]]; then
@@ -140,13 +164,6 @@ fi
 if [[ $OSTYPE != darwin* ]]; then
    watch=
 fi
-
-case $TERM in
-   xterm*)
-      precmd() {print -Pn "\e]0;%m:%~>\a"}
-      preexec() {print -Pn "\e]0;%m:%~> $1\a"}
-   ;;
-esac
 
 # load any local aliases and machine-specific things
 if [[ $OSTYPE = darwin* ]] && [ -f ~/.zshrc.mac ]; then
