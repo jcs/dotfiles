@@ -1,0 +1,64 @@
+#
+# ratpoison config
+# by joshua stein <jcs@jcs.org>
+#
+# some of these settings require changes from my ratpoison tree:
+# http://github.com/jcs/ratpoison
+#
+
+# call them as i sees them
+set winname title
+
+set padding 10 10 10 10
+set gap 4
+
+msgwait 3
+set barborder 0
+set bargravity nw
+set barpadding 7 3
+set barsticky off
+set bgcolor #a3a098
+set fgcolor #e3e0d5
+set font fixed
+set winliststyle row
+set winfmt %t
+
+# add leading and trailing space around this now that the padding is small
+set framefmt  current frame 
+
+# window borders
+set border 4
+set fwcolor orange3
+set bwcolor #e3e0d5
+
+set fakeroot on
+set fakerootcolor #e3e0d5
+
+# be like screen
+escape C-a
+bind s split
+bind C-s split
+bind S hsplit
+bind C-S hsplit
+
+bind c exec xterm
+bind C-c exec xterm
+
+bind L exec open -a /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
+
+# prevent accidental closes
+unbind k
+
+# don't save mouse position
+warp off
+
+# i like tab just going between the same two windows
+bind Tab focuslast
+bind grave focus
+
+# startup configuration
+
+vinit
+hsplit
+
+exec xterm
