@@ -11,3 +11,8 @@
 	default = simple
 [color]
 	ui = never
+[diff]
+	compaction-heuristic = true
+	noprefix = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/
