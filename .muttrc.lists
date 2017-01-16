@@ -17,12 +17,12 @@ macro pager H "c=openbsd-hackers\n"
 reply-hook '~t .@openbsd\.org' 'set from="jcs@openbsd.org"'
 send-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
 
-folder-hook ^openbsd-.*$ set \
+folder-hook openbsd-.* set \
 	from="jcs@openbsd.org" \
 	signature= \
 	sort=threads
 
-folder-hook ^(superblock|pushover)$ set \
+folder-hook (superblock|pushover) set \
 	from="jcs@superblock.net" \
 	signature=~/.signature \
 	sort=threads \

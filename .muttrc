@@ -59,6 +59,10 @@ set query_command="/usr/local/bin/lbdbq '%s'"   # query address book for aliases
 set quit=ask-yes                                # i keep hitting q by accident
 set record="=sent"                              # store sent mail on imap
 set sendmail="msmtp"                            # not really using sendmail
+set sidebar_divider_char="| "                   # give space on the right
+set sidebar_format="%B%*  %?N?(%N)?"            # highlight with new messages
+set sidebar_visible=yes                         # yep
+set sidebar_width=21                            # enough for me
 set smart_wrap=yes                              # smart like a fox
 set sort=threads                                # neat
 set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
@@ -68,11 +72,6 @@ set timeout=15                                  # update the current box quickly
 set use_envelope_from=yes                       # sooper sekrit
 set use_from                                    # add a from header
 unset user_agent                                # i don't use mutt, i swear
-
-# these only work with the sidebar patch
-set sidebar_delim="| "                          # separate
-set sidebar_visible=yes                         # yep
-set sidebar_width=21                            # enough for me
 
 # things to bind keys to
 bind pager <down> next-line                     # makes sense
@@ -129,8 +128,8 @@ folder-hook . set strict_threads=no             # compensate for stupid clients
 folder-hook . set sort_aux=last-date-received   # bumped threads appear new
 folder-hook sent set strict_threads=yes         # don't group incorrectly
 folder-hook sent set sort=date-sent             # when did i send that?
-folder-hook ^allmail.*$ set sort=mailbox-order  # don't sort, for fast loading
-folder-hook ^allmail.*$ push <toggle-write>     # don't save changes, read-only
+folder-hook allmail.* set sort=mailbox-order  # don't sort, for fast loading
+folder-hook allmail.* push <toggle-write>     # don't save changes, read-only
 
 # for old pgp messages with no helpful metadata, process them as pgp
 message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
