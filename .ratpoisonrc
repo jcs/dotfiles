@@ -16,9 +16,9 @@ set bargravity nw
 set barpadding 25 14
 set barinpadding 1
 set barsticky on
-set bgcolor #6C7C87
-set fgcolor #e3e0d5
-set font "cousine:size=10.5:embolden=true"
+set bgcolor #e3e0d5
+set fgcolor #494949
+set font "cousine:size=10:embolden=true"
 set inputwidth 0
 set padding 10 40 10 10
 set winliststyle row
@@ -28,10 +28,10 @@ set winfmt %t
 set framefmt  current frame 
 
 # window borders
-set border 5
+set border 6
 set gap 10
 set fwcolor orange3
-set bwcolor #6C7C87
+set bwcolor #e3e0d5
 
 # be like screen
 escape C-a
@@ -67,8 +67,8 @@ definekey top M-4 vselect 4
 # having to actually enable Fn Lock
 definekey top F6 exec wsconsctl display.brightness-=5
 definekey top F7 exec wsconsctl display.brightness+=5
-definekey top M-F6 exec wsconsctl keyboard.backlight-=5
-definekey top M-F7 exec wsconsctl keyboard.backlight+=5
+definekey top M-F6 exec wsconsctl keyboard.backlight-=10
+definekey top M-F7 exec wsconsctl keyboard.backlight+=10
 #definekey top F6 exec mixerctl outputs.master.mute=toggle
 #definekey top F7 exec mixerctl outputs.master=-10
 #definekey top F8 exec mixerctl outputs.master=+10

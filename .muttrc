@@ -55,7 +55,6 @@ set pipe_decode=yes                             # fix piping to patch and such
 set postpone=ask-no                             # stop bothering me
 set postponed="=postponed"                      # get out of my home
 set print=ask-no                                # i probably accidently printed
-set query_command="/usr/local/bin/lbdbq '%s'"   # query address book for aliases
 set quit=ask-yes                                # i keep hitting q by accident
 set record="=sent"                              # store sent mail on imap
 set sendmail="msmtp"                            # not really using sendmail
@@ -95,7 +94,7 @@ bind index \CB previous-page                    #  like everything else
 bind compose F edit-from                        # i am not me
 
 # always run $query_command when completing addresses instead of requiring C-t
-bind editor <tab> complete-query
+#bind editor <tab> complete-query
 
 # act like normal vi keys but browse sidebar folders
 macro index K "<enter-command>push <sidebar-prev><sidebar-open><enter>"

@@ -2,6 +2,11 @@
 
 export LANG=en_US.UTF-8
 
+# tell gtk+3 to scale up
+export GDK_SCALE=2
+# but not fonts
+export GDK_DPI_SCALE=0.75
+
 # this should be in /etc/X11/xdm/Xsetup_0, but just in case
 xrandr --dpi 120
 
@@ -18,19 +23,28 @@ if [ `uname -s` == "OpenBSD" ]; then
 
 	xidle -timeout 600 -ne -program ~/bin/lock &
 
+	# quickly set at startup, then run in background to slowly adjust
+	redshift -l 41.90:-87.66 -t 5500:3700 -o
 	redshift -l 41.90:-87.66 -t 5500:3700 &
 
 	xbanish &
-	xdimmer &
 
-	xsetroot -solid '#6C7C87' -cursor_name left_ptr
+	# 8 is as low as it will go without making an annoying sound
+	xdimmer -a -k -p 8 -t 120 &
 
-	synclient ClickPad=1 HorizTwoFingerScroll=1 RightButtonAreaLeft=800 HorizHysteresis=10 VertHysteresis=10
+	xsetroot -solid "#e3e0d5" -cursor_name left_ptr
 
-	ruby ~/code/imapbiff/imapbiff.rb &
+	# not sure why this dance is required for RightButtonAreaLeft to show up
+#	synclient ClickPad=1
+#	synclient ClickPad=0
+#	synclient ClickPad=1
+#	synclient HorizTwoFingerScroll=1 RightButtonAreaLeft=525
+
+	# slow down usb mouse
+	xinput set-prop /dev/wsmouse 254 1
 fi
 
 /usr/local/bin/ratpoison
 
 # cleanup
-pkill -9 dzen2 i3status dbus-daemon
+pkill -9 dzen2 i3status dbus-daemon redshift

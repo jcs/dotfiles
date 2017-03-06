@@ -110,7 +110,7 @@ if [[ $OSTYPE = darwin* ]]; then
    alias sha1='openssl dgst -sha1'
 
    # update dotfiles
-   alias update_dotfiles='curl https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -x -'
+   alias update_dotfiles="curl https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -x -"
 
  # bring in rbenv
    export PATH="${HOME}/.rbenv/shims:${PATH}:/opt/X11/bin"
@@ -147,7 +147,10 @@ elif [[ $OSTYPE = openbsd* ]]; then
    alias update_dotfiles='ftp -Vo - https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -'
 
    # for ports
-   alias remake='cd ../../; rm w-*/.build*; make; cd -'
+   alias remake="cd ../../; rm w-*/.build*; make; cd -"
+
+   # for kernel
+   alias rekern="cd /usr/src/sys/arch/`arch -s`/compile/GENERIC*/ && make && sudo make install"
 
 # loonix
 elif [[ $OSTYPE = linux* ]]; then
