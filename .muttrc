@@ -195,6 +195,8 @@ color index brightcolor160 default '~F'
 color index brightblack default '~D'
 # bold new email in the index
 color index brightdefault default '~U'
+# make huge messages stand out so i can avoid downloading them
+color index brightcolor19 default '~z 500000-'
 
 # things i can see in mutt (with external programs through ~/.mailcap)
 auto_view application/pgp-encrypted
