@@ -5,36 +5,34 @@
 #
 
 # things to set
-set ascii_chars=no                              # looks better
-set alias_file=~/.muttrc.aliases                # good place, yeah?
+set ascii_chars=no
+set alias_file=~/.muttrc.aliases
 set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
-set confirmappend=no                            # append without asking
-set connect_timeout=3                           # die quickly when i move
-set date_format="!%a, %d %b %Y at %H:%M:%S %Z"  # 24-hour time
-set delete=yes                                  # don't ask me dammit
-set editor="vim"                                # yay vim
-set fast_reply=yes                              # quick like a ninja
+set confirmappend=no
+set connect_timeout=3
+set date_format="!%a, %d %b %Y at %H:%M:%S %Z"
+set delete=yes
+set editor="vim"
+set fast_reply=yes
 set folder=~/Mail                               # overridden by imap
-set forward_format="fwd: %s"                    # simple enough
-set header_cache=~/.mutt-cache/                 # header caching
-set imap_passive=no                             # open all
-set include=yes                                 # what'd you say?
-set index_format="%[!%m%d] [%Z] [%4c] %-52.52s %F" # ok
+set forward_format="fwd: %s"
+set header_cache=~/.mutt-cache/
+set include=yes
+set index_format="%[!%m%d] [%Z] [%4c] %-52.52s %F"
 set ispell="aspell --mode=email --add-email-quote=%,#,:,} --check"
-set mail_check=60                               # freq
-set mark_old=no                                 # keep unread mail new
-set markers=no                                  # this isn't ircII
-set mbox=~/Mail/inbox                           # overridden by imap anyway
-set menu_context=1                              # so i know when the end is near
-set message_cache_clean=yes                     # keep a tidy house
-set message_cachedir=~/.mutt-cache/             # yaz
-set metoo=no                                    # i know what i'm saying
-set mime_forward=ask-no                         # to forward attachments
-set move=no                                     # just move them dammit
-set narrow_tree=yes                             # huzzah
-set pager_context=2                             # i'm paranoid
-set pager_stop=yes                              # whoa horsey
-set pager_format=" -- %s "                      # yeah
+set mail_check=60
+set mark_old=no
+set markers=no
+set menu_context=1
+set message_cache_clean=yes
+set message_cachedir=~/.mutt-cache/
+set metoo=no
+set mime_forward=ask-no
+set move=no
+set narrow_tree=yes
+set pager_context=2
+set pager_stop=yes
+set pager_format=" %f: %s"
 set pgp_autosign=no
 set pgp_clearsign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
 set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
@@ -51,47 +49,47 @@ set pgp_sign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --ar
 set pgp_timeout=1800
 set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
 set pgp_verify_key_command="gpg --no-verbose --batch --fingerprint --check-sigs %r"
-set pipe_decode=yes                             # fix piping to patch and such
-set postpone=ask-no                             # stop bothering me
-set postponed="=postponed"                      # get out of my home
-set print=ask-no                                # i probably accidently printed
-set query_command="/usr/local/bin/lbdbq '%s'"   # query address book for aliases
-set quit=ask-yes                                # i keep hitting q by accident
-set record="=sent"                              # store sent mail on imap
-set sendmail="msmtp"                            # not really using sendmail
-set sidebar_divider_char="| "                   # give space on the right
-set sidebar_format="%B%*  %?N?(%N)?"            # highlight with new messages
-set sidebar_visible=yes                         # yep
-set sidebar_width=21                            # enough for me
-set smart_wrap=yes                              # smart like a fox
-set sort=threads                                # neat
+set pipe_decode=yes
+set postpone=ask-no
+set postponed="=postponed"
+set print=ask-no
+set query_command="/usr/local/bin/lbdbq '%s'"
+set quit=ask-yes
+set record="=sent"
+set sendmail="msmtp"
+set sidebar_divider_char="| "
+set sidebar_format="%B%*  %?N?(%N)?"
+set sidebar_visible=yes
+set sidebar_width=21
+set smart_wrap=yes
+set sort=threads
 set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
-set status_on_top=yes                           # looks better with sidebar
-set tilde=yes                                   # don't you hide from me
-set timeout=15                                  # update the current box quickly
-set use_envelope_from=yes                       # sooper sekrit
-set use_from                                    # add a from header
-unset user_agent                                # i don't use mutt, i swear
+set status_on_top=yes
+set tilde=yes
+set timeout=15
+set use_envelope_from=yes
+set use_from
+unset user_agent
 
 # things to bind keys to
-bind pager <down> next-line                     # makes sense
-bind pager <up> previous-line                   # as does this
-bind pager <left> exit                          # and how about this
-bind pager <right> next-entry                   # this too
-bind pager \CF next-page                        # make control+f and b scroll
-bind pager \CB previous-page                    #   like everything else
-bind pager \CP print-message                    # yeah
-bind index <down> next-entry                    # move through deleted messages
-bind index j next-entry                         # move through deleted messages
-bind index <up> previous-entry                  # move through deleted messages
-bind index k previous-entry                     # move through deleted messages
-bind index <delete> delete-message              # when i get super lazy
-bind index <space> display-message              # sure
-bind index <right> display-message              # tin
-bind index <tab> next-unread                    # ok
-bind index \CF next-page                        # make control+f and b scroll
-bind index \CB previous-page                    #  like everything else
-bind compose F edit-from                        # i am not me
+bind pager <down> next-line
+bind pager <up> previous-line
+bind pager <left> exit
+bind pager <right> next-entry
+bind pager \CF next-page
+bind pager \CB previous-page
+bind pager \CP print-message
+bind index <down> next-entry
+bind index j next-entry
+bind index <up> previous-entry
+bind index k previous-entry
+bind index <delete> delete-message
+bind index <space> display-message
+bind index <right> display-message
+bind index <tab> next-unread
+bind index \CF next-page
+bind index \CB previous-page
+bind compose F edit-from
 
 # always run $query_command when completing addresses instead of requiring C-t
 bind editor <tab> complete-query
