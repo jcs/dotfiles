@@ -8,10 +8,12 @@
 export BLOCKSIZE=1k
 export CVS_RSH=/usr/bin/ssh
 export IRCNAME="*Unknown*"
-export GOPATH=~/code/go
 
 # pass through to bash in case it somehow gets invoked
 export HISTFILE=
+
+# always allow case insensitive searching when using less
+export LESS="-i"
 
 # ow my security
 export MYSQL_HISTFILE=/dev/null
@@ -23,8 +25,6 @@ export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/
 
 # let control+w only delete one directory of a path, not the whole word
 export WORDCHARS='*?_[]~=&;!#$%^(){}'
-
-export LESS="-i"
 
 # on non-interactive shells, just exit here to speed things up
 if [[ ! -o interactive ]]; then
