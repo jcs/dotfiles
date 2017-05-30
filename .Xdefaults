@@ -1,10 +1,12 @@
 ! vim:ts=8
 
 #define BG			#e3e0d5
-#define FG			#494949
+#define FG			#333333
 
+#ifdef HIDPI
 Xcursor.theme:			dmz
 Xcursor.size:			48
+#endif
 
 ! a muted palette for athena things like xterm, xfontsel, etc.
 ! created with http://ciembor.github.com/4bit
@@ -21,7 +23,7 @@ Xcursor.size:			48
 ! a muted palette
 
 ! black
-*.color0:			#393939
+*.color0:			FG
 *.color8:			#525252
 
 ! red
@@ -52,11 +54,20 @@ Xcursor.size:			48
 *.color7:			#cacaca
 *.color15:			#ffffff
 
+#ifdef HIDPI
 *.font:				-*-lucida-medium-r-*-*-22-*-*-*-*-*-*-*
+#else
+*.font:				-*-lucida-medium-r-*-*-12-*-*-*-*-*-*-*
+#endif
 
 ! xterm-specific settings
 
+#ifdef HIDPI
+.xterm*internalBorder:		12
+#else
 .xterm*internalBorder:		10
+#endif
+
 ! hide when i type
 .xterm*pointerMode:		2
 .xterm*saveLines:		20000
@@ -75,6 +86,11 @@ Xcursor.size:			48
 
 .xterm*visualBell:		false
 
+#ifdef HIDPI
+.xterm*faceName:		monospace:size=10.5
+.xterm*scaleHeight:		1.1
+#endif
+
 ! make alt+v/command+v paste clipboard
 *.XTerm.*.VT100.translations:	#override\
     Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)\n\
@@ -87,7 +103,6 @@ Xcursor.size:			48
     <Btn3Down>: StartScroll(Backward) \n\
     <Btn1Motion>: MoveThumb() NotifyThumb() \n\
     <BtnUp>: NotifyScroll(Proportional) EndScroll()
-
 
 SshAskpass*inputTimeout:	15
 ! enlarge fonts
