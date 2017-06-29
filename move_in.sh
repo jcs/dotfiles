@@ -1,36 +1,27 @@
 #!/bin/sh
-#
-# download dot files from github, install them to ~
-# joshua stein <jcs@jcs.org>
-#
 
-if [ `uname` = "Linux" -o `uname` = "Darwin" ]; then
-	FETCH="curl -L"
-else
-	FETCH="ftp -o -"
-fi
-
-TD=`mktemp -d XXXXXX`
-
-if [ ! -d ~/.ssh/ ]; then
-	mkdir ~/.ssh/
-fi
-
-$FETCH https://github.com/jcs/dotfiles/tarball/master | tar -C $TD -xzf -
-rm -f $TD/jcs-*/move_in.sh
-
-cd $TD/jcs-* && tar -cf - . | (cd; tar -xvf -)
-cd -
-
-rm -rf $TD
+# remove cruft installed by default in openbsd
+rm -f ~/.cshrc \
+	~/.login \
+	~/.mailrc \
+	~/.profile \
+	~/.Xdefaults \
+	~/.cvsrc
 
 for f in .bash_history .sqlite_history .mysql_history; do
 	rm -f ~/$f
 	ln -s /dev/null ~/$f
 done
 
-# remove cruft installed by default in openbsd
-rm -f ~/.cshrc \
-	~/.login \
-	~/.mailrc \
-	~/.profile
+if [ -d ~/.dotfiles ]; then
+	echo "~/.dotfiles already exists"
+	exit 1
+fi
+
+git clone https://github.com/jcs/dotfiles ~/.dotfiles
+
+cd ~/.dotfiles
+for f in .???*; do
+	rm -f ~/$f
+	(cd ~/; ln -s .dotfiles/$f $f)
+done
