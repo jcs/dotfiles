@@ -146,22 +146,6 @@ function KillToSig()
 endfunction
 map  <Esc>:let curline=line(".")<CR>:exec KillToSig()<CR>:exec curline<CR>
 
-" control+] toggles colorcolumn
-" XXX: this is kind of buggy, no idea why
-let s:cc = ""
-function ToggleColorColumn()
-  let curline=line(".")
-  if &colorcolumn
-    let s:cc=&colorcolumn
-    set colorcolumn=0
-    echo s:cc
-  else
-    exec "set colorcolumn=" . s:cc
-  end
-  exec curline
-endfunction
-map  <Esc>:let curline=line(".")<CR><C-o>:exec ToggleColorColumn()<CR><C-o>:exec curline<CR>
-
 " make buffer windows easier to navigate
 map <C-h> <C-w>h
 map <C-j> <C-w>j
