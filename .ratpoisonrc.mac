@@ -17,7 +17,7 @@ set barborder 0
 set bargravity nw
 set barpadding 7 3
 set barsticky off
-set bgcolor #a3a098
+set bgcolor #6c7c87
 set fgcolor #e3e0d5
 set font fixed
 set winliststyle row
@@ -29,10 +29,10 @@ set framefmt  current frame
 # window borders
 set border 4
 set fwcolor orange3
-set bwcolor #e3e0d5
+set bwcolor #6c7c87
 
 set fakeroot on
-set fakerootcolor #e3e0d5
+set fakerootcolor #6c7c87
 
 # be like screen
 escape C-a
