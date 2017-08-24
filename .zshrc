@@ -112,7 +112,7 @@ if [[ $OSTYPE = darwin* ]]; then
    # update dotfiles
    alias update_dotfiles='curl https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
- # bring in rbenv
+   # bring in rbenv
    export PATH="${HOME}/.rbenv/shims:${PATH}:/opt/X11/bin"
    source "/usr/local/Cellar/rbenv/1.0.0/completions/rbenv.zsh";
 
@@ -163,11 +163,6 @@ fi
 
 if [[ $OSTYPE != darwin* ]]; then
    watch=
-fi
-
-# load any local aliases and machine-specific things
-if [[ $OSTYPE = darwin* ]] && [ -f ~/.zshrc.mac ]; then
-  source ~/.zshrc.mac
 fi
 
 if [ -f ~/.zshrc.local ]; then
