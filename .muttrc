@@ -116,10 +116,6 @@ macro index <Esc>b "<search>~B " "search in message bodies"
 macro index B '<enter-command>toggle sidebar_visible<enter><refresh><enter>'
 macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen><enter>'
 
-# automation for majordomo approvals
-macro index A "<pipe-message>/usr/local/lib/majordomo/bin/approve<enter><delete-message>"
-macro pager A "<pipe-message>/usr/local/lib/majordomo/bin/approve<enter><delete-message>"
-
 # things to happen
 folder-hook . set sort=threads                  # everything else
 folder-hook . set strict_threads=no             # compensate for stupid clients

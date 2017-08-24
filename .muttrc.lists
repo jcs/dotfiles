@@ -10,6 +10,10 @@ folder-hook . set \
 	signature=
 folder-hook . my_hdr Bcc: jcs@jcs.org
 
+# default archiving
+folder-hook . macro index A s=allmail.`date +%Y`<enter>
+folder-hook . macro pager A s=allmail.`date +%Y`<enter>
+
 # common folders
 macro index U "c=superblock\n"
 macro pager U "c=superblock\n"
@@ -34,6 +38,8 @@ folder-hook =(superblock|crs).* set \
 	sort_aux=last-date-received
 folder-hook =(superblock|crs).* unmy_hdr Bcc
 folder-hook =(superblock|crs).* my_hdr Bcc: jcs@superblock.net
+folder-hook =superblock.* macro index A s=superblock-`date +%Y`<enter>
+folder-hook =superblock.* macro pager A s=superblock-`date +%Y`<enter>
 
 folder-hook =pushover.* set \
 	from="support@pushover.net" \
@@ -44,6 +50,8 @@ folder-hook =pushover.* set \
 	sort_aux=last-date-received
 folder-hook =pushover.* unmy_hdr Bcc
 folder-hook =pushover.* my_hdr Bcc: support@pushover.net
+folder-hook =pushover.* macro index A s=pushover-`date +%Y`<enter>
+folder-hook =pushover.* macro pager A s=pushover-`date +%Y`<enter>
 
 # imap mailboxes
 
