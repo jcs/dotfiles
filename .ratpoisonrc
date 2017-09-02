@@ -3,7 +3,7 @@
 # by joshua stein <jcs@jcs.org>
 #
 # some of these settings require changes from my ratpoison tree:
-# http://github.com/jcs/ratpoison
+# https://github.com/jcs/ratpoison
 #
 
 # call them as i sees them
@@ -13,25 +13,25 @@ set winname title
 msgwait 3
 set barborder 0
 set bargravity nw
-set barpadding 25 14
+set barpadding 20 10
 set barinpadding 1
 set barsticky on
-set bgcolor #6C7C87
+set bgcolor #6c7c87
 set fgcolor #e3e0d5
-set font "cousine:size=10.5:embolden=true"
+set font monospace:size=11.5
 set inputwidth 0
-set padding 10 40 10 10
+set padding 10 30 10 10
 set winliststyle row
 set winfmt %t
 
 # add leading and trailing space around this now that the padding is small
-set framefmt  current frame 
+set framefmt  frame %f (%wx%h) 
 
 # window borders
 set border 5
 set gap 10
 set fwcolor orange3
-set bwcolor #6C7C87
+set bwcolor gray
 
 # be like screen
 escape C-a
@@ -48,15 +48,6 @@ bind L exec pkill -USR1 xidle
 # prevent accidental closes
 unbind k
 
-# pidgin's window is hard to get to, so control-a,A pops up a dialog to ask me
-# what to set the away status to
-bind A exec sh ~/bin/pidgin_away_status.sh
-# and B comes back
-bind B exec ruby ~/code/pidgin_status/pidgin_status.rb available
-
-# reload firefox through mozrepl without having to focus it
-bind C-r exec echo "BrowserReload()" | nc localhost 4242 >/dev/null
-
 # swap workspaces, but define it in 'top' to avoid having to prefix with C-a
 definekey top M-1 vselect 1
 definekey top M-2 vselect 2
@@ -65,13 +56,14 @@ definekey top M-4 vselect 4
 
 # match symbols on the keys of my current laptop as if Fn Lock were on, without
 # having to actually enable Fn Lock
-definekey top F6 exec wsconsctl display.brightness-=5
-definekey top F7 exec wsconsctl display.brightness+=5
-definekey top M-F6 exec wsconsctl keyboard.backlight-=5
-definekey top M-F7 exec wsconsctl keyboard.backlight+=5
-#definekey top F6 exec mixerctl outputs.master.mute=toggle
-#definekey top F7 exec mixerctl outputs.master=-10
-#definekey top F8 exec mixerctl outputs.master=+10
+definekey top F1 exec mixerctl outputs.master.mute=toggle
+definekey top F2 exec mixerctl outputs.master=-10
+definekey top F3 exec mixerctl outputs.master=+10
+definekey top F5 exec /usr/local/bin/intel_backlight decr
+definekey top F6 exec /usr/local/bin/intel_backlight incr
+#definekey top F7 exec pkill -USR1 -f "ruby choons"
+#definekey top F8 exec pkill -TSTP -f "ruby choons"
+#definekey top F9 exec pkill -USR2 -f "ruby choons"
 
 # don't do that
 warp off
@@ -88,6 +80,7 @@ rudeness 12
 unmanage xmessage
 unmanage xprompt
 unmanage OpenSSH Authentication Passphrase Request
+unmanage dzen title
 
 # startup configuration
 
