@@ -9,12 +9,16 @@ Xcursor.size:			48
 ! a muted palette for athena things like xterm, xfontsel, etc.
 ! created with http://ciembor.github.com/4bit
 *.background:			BG
+*.foreground:			FG
+
 *.scrollbar.background:		BG
-*.scrollbar.foreground:		#bbb
+*.scrollbar.foreground:		FG
+*.scrollBar.minimumThumb:	50
+*.scrollbar.width:		10
 
 *.borderColor:			BG
 
-*.foreground:			FG
+! a muted palette
 
 ! black
 *.color0:			#393939
@@ -50,35 +54,26 @@ Xcursor.size:			48
 
 *.font:				-*-lucida-medium-r-*-*-22-*-*-*-*-*-*-*
 
-*.scrollbar:			true
-*.scrollbar.minimumThumb:	50
-*.scrollbar*width:		20
-*.saveLines:			20000
-
-
 ! xterm-specific settings
 
-*.XTerm.*.faceName:		dejavu sans mono:size=11
-*.XTerm.*.scaleHeight:		1.01
-*.XTerm.*.internalBorder:	8
-
-*.XTerm.*.selectToClipboard:	true
-*.XTerm.*.utmpInhibit:		true
+.xterm*internalBorder:		10
 ! hide when i type
-*.XTerm.*.pointerMode:		2
+.xterm*pointerMode:		2
+.xterm*saveLines:		20000
+.xterm*scrollBar:		false
+.xterm*rightScrollBar:		true
+.xterm*scrollBar.width:		10
+.xterm*selectToClipboard:	true
+.xterm*termName:		xterm-256color
+.xterm*utmpInhibit:		true
 
 ! needed by ratpoison
-*.XTerm.*.allowSendEvents:	true
+.xterm*allowSendEvents:		true
 ! which disables allowColorOps, but empty the list of actual disabled ops
 ! which effectively re-enables color ops
-*.XTerm.*.disallowedColorOps:
-! this requires an xterm hack in ptyx.h
-*.XTerm.*.allowTitleOps:	true
+.xterm*disallowedColorOps:
 
-*.XTerm.*.title:		xterm
-*.XTerm.*.termName:		xterm-256color
-
-*.XTerm.*.visualBell:		false
+.xterm*visualBell:		false
 
 ! make alt+v/command+v paste clipboard
 *.XTerm.*.VT100.translations:	#override\
@@ -92,16 +87,6 @@ Xcursor.size:			48
     <Btn3Down>: StartScroll(Backward) \n\
     <Btn1Motion>: MoveThumb() NotifyThumb() \n\
     <BtnUp>: NotifyScroll(Proportional) EndScroll()
-
-
-! qconsole overrides, inheriting defaults from xterm settings
-qconsole.*.background:		FG
-qconsole.*.borderColor:		FG
-qconsole.*.foreground:		BG
-qconsole.*.scrollbar.background:FG
-qconsole.*.scrollbar.foreground:black
-qconsole.*.rightScrollBar:	true
-qconsole.*.internalBorder:	12
 
 
 SshAskpass*inputTimeout:	15
