@@ -1,12 +1,13 @@
 ! vim:ts=8
 
-#define BG			#e3e0d5
-#define FG			#333333
-
 #ifdef HIDPI
+! pkg_add xcursor-dmz
 Xcursor.theme:			dmz
 Xcursor.size:			48
 #endif
+
+#define BG			#d9d5c6
+#define FG			#333333
 
 ! a muted palette for athena things like xterm, xfontsel, etc.
 ! created with http://ciembor.github.com/4bit
@@ -55,7 +56,7 @@ Xcursor.size:			48
 *.color15:			#ffffff
 
 #ifdef HIDPI
-*.font:				-*-lucida-medium-r-*-*-22-*-*-*-*-*-*-*
+*.font:				-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
 #else
 *.font:				-*-lucida-medium-r-*-*-12-*-*-*-*-*-*-*
 #endif
@@ -63,7 +64,7 @@ Xcursor.size:			48
 ! xterm-specific settings
 
 #ifdef HIDPI
-.xterm*internalBorder:		12
+.xterm*internalBorder:		20
 #else
 .xterm*internalBorder:		10
 #endif
@@ -87,8 +88,7 @@ Xcursor.size:			48
 .xterm*visualBell:		false
 
 #ifdef HIDPI
-.xterm*faceName:		monospace:size=10.5
-.xterm*scaleHeight:		1.1
+.xterm*faceName:		monospace:size=12
 #endif
 
 ! make alt+v/command+v paste clipboard
@@ -105,6 +105,10 @@ Xcursor.size:			48
     <BtnUp>: NotifyScroll(Proportional) EndScroll()
 
 SshAskpass*inputTimeout:	15
-! enlarge fonts
-SshAskpass*Dialog.font:		-adobe-helvetica-bold-r-normal-*-*-200-*-*-*-*-iso8859-1
-SshAskpass*Button.font:		-adobe-helvetica-bold-r-normal-*-*-200-*-*-*-*-iso8859-1
+
+#ifdef HIDPI
+SshAskpass*Button.font:		-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
+SshAskpass*Dialog.font:		-*-lucida-medium-r-*-*-26-*-*-*-*-*-*-*
+SshAskpass*Indicator.width:	30
+SshAskpass*Indicator.height:	15
+#endif
