@@ -33,22 +33,6 @@ set narrow_tree=yes
 set pager_context=2
 set pager_stop=yes
 set pager_format=" %f: %s"
-set pgp_autosign=no
-set pgp_clearsign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --textmode --clearsign %?a?-u %a? %f"
-set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
-set pgp_decrypt_command="gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
-set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust -- -r %r -- %f"
-set pgp_encrypt_sign_command="pgpewrap gpg --passphrase-fd 0 --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust -- -r %r -- %f"
-set pgp_export_command="gpg --no-verbose --export --armor %r"
-set pgp_good_sign="^gpg: Good signature from"
-set pgp_import_command="gpg --no-verbose --import -v %f"
-set pgp_list_pubring_command="gpg --no-verbose --batch --with-colons --list-keys %r"
-set pgp_list_secring_command="gpg --no-verbose --batch --with-colons --list-secret-keys %r"
-set pgp_replyencrypt=yes
-set pgp_sign_command="gpg --no-verbose --batch --output - --passphrase-fd 0 --armor --detach-sign --textmode %?a?-u %a? %f"
-set pgp_timeout=1800
-set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
-set pgp_verify_key_command="gpg --no-verbose --batch --fingerprint --check-sigs %r"
 set pipe_decode=yes
 set postpone=ask-no
 set postponed="=postponed"
@@ -124,9 +108,6 @@ folder-hook sent set strict_threads=yes         # don't group incorrectly
 folder-hook sent set sort=date-sent             # when did i send that?
 folder-hook allmail.* set sort=mailbox-order  # don't sort, for fast loading
 folder-hook allmail.* push <toggle-write>     # don't save changes, read-only
-
-# for old pgp messages with no helpful metadata, process them as pgp
-message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
 
 # create message-ids that don't leak private info (like the number of messages
 # sent in the current mutt session, or the local hostname)
