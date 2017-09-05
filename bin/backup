@@ -1,0 +1,60 @@
+#!/bin/sh -e
+#
+# backup with rsnapshot to a removable, encrypted disk that may need to
+# be configured/mounted first, and then unmount/unconfigure it
+#
+
+# raw device that hosts the encrypted softraid
+BACKUP_RAW_DISK="dedb3918df1c732d"
+
+# encrypted disk on top of $BACKUP_RAW_DISK that we're backing up to
+BACKUP_DISK="24a80eefd213b7d2"
+
+# where $BACKUP_DISK.a will be mounted, must be in fstab
+BACKUP_PARTITION="/backup"
+
+
+# sanity check
+if [ `id -u` -ne "0" ]; then
+	echo "must run as root"
+	exit 1
+fi
+
+# try to locate $BACKUP_RAW_DISK through opendev
+RAW_DL=`disklabel $BACKUP_RAW_DISK 2>/dev/null || exit 0`
+
+if [ X"$RAW_DL" = X"" ]; then
+	echo "backup disk ${BACKUP_RAW_DISK} not found, is it plugged in?"
+	exit 1
+fi
+
+DL=`disklabel $BACKUP_DISK 2>/dev/null || exit 0`
+
+if [ X"$DL" = X"" ]; then
+	echo "attaching encrypted backup disk ${BACKUP_RAW_DISK}..."
+	bioctl -cC -l "${BACKUP_RAW_DISK}.a" softraid0 || exit 1
+	echo ""
+fi
+
+if [ ! -d "${BACKUP_PARTITION}/daily.0" ]; then
+	echo "checking filesystem on ${BACKUP_PARTITION}..."
+	fsck -p $BACKUP_PARTITION || exit 1
+	mount $BACKUP_PARTITION
+	echo ""
+fi
+
+if [ ! -d "${BACKUP_PARTITION}/daily.0" ]; then
+	echo "can't find ${BACKUP_PARTITION}/daily.0"
+	exit 1
+fi
+
+rsnapshot -v daily
+echo ""
+
+df -h $BACKUP_PARTITION
+sync
+echo ""
+
+echo "detaching encrypted backup disk..."
+umount $BACKUP_PARTITION
+bioctl -d $BACKUP_DISK
