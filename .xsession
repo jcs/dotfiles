@@ -2,10 +2,24 @@
 
 export LANG=en_US.UTF-8
 
-# this should be in /etc/X11/xdm/Xsetup_0, but just in case
-xrandr --dpi 120
+SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
+if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
+	export HIDPI=1
+fi
 
-xrdb < ~/.Xdefaults
+MACHINE=`sysctl -n hw.version`
+
+if [ "$HIDPI" = "1" ]; then
+	xrdb -DHIDPI=1 < ~/.Xdefaults
+else
+	xrdb < ~/.Xdefaults
+fi
+
+cleanup() {
+	pkill -9 dzen2 i3status dbus-daemon redshift
+	rm -f ~/.Xauthority
+}
+trap cleanup INT TERM QUIT
 
 if [ `uname -s` == "OpenBSD" ]; then
 	eval `dbus-launch --sh-syntax`
@@ -15,36 +29,30 @@ if [ `uname -s` == "OpenBSD" ]; then
 	xset r rate 350 35
 	xset +fp /usr/local/lib/X11/fonts/jcs fp rehash
 	xset m 3/1 4
+	xset dpms 500 500 500
+	xset b off
 
-	/usr/local/bin/ruby ~/code/dzen-jcs/dzen-jcs.rb &
+	xsetroot -solid '#6c7c87' -cursor_name left_ptr
 
-	/usr/local/bin/xbanish &
+	xidle -timeout 240 -ne -program ~/bin/lock &
+	redshift -l 41.90:-87.66 -t 6500:3200 -m randr:preserve=1 &
+	xdimmer -k -t 30 -n &
+	xbanish &
 
-	VMWARE=`sysctl hw.sensors.vmt0`
-	if [ "${VMWARE}" != X"" ]; then
-		# vmware
+	case $MACHINE in
+	"ThinkPad X1 Carbon 5th")
+		xcalib ~/.icc/x1c5wqhd-LP140QH2_SPB1.icc
 
-		/usr/local/bin/vmwh &
-	else
-		# actual machine
-
-		xidle -timeout 240 -ne -program ~/bin/lock &
-
-		# define the trackpad surface (ASUS UX305FA)
-		synclient LeftEdge=0 RightEdge=3080 TopEdge=10 BottomEdge=2119
-
-		# ignore palm input on right side of trackpad while i type (works better
-		# than palm detection)
-		synclient AreaRightEdge=2450
-
-		# make clicking with two fingers do a right-click
-		synclient ClickFinger2=3
-		# and 3-fingers do a middle-click
-		synclient ClickFinger3=2
-
-		# ignore lazy thumb on the bottom of the trackpad used to click
-		synclient LazyThumbWidth=30 LazyThumbTopEdge=1600
-	fi
+		synclient \
+			PalmDetect=1 \
+			PalmMinWidth=8 \
+			ClickPad=1 \
+			;
+		;;
+	*)
+		return
+		;;
+	esac
 
 	exec /usr/local/bin/ratpoison
 else
