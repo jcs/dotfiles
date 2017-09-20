@@ -6,8 +6,9 @@ Xcursor.theme:			dmz
 Xcursor.size:			48
 #endif
 
-#define BG			#d9d5c6
-#define FG			#333333
+#define BG			#e3e0d5
+! d9d5c6
+#define FG			#222222
 
 ! a muted palette for athena things like xterm, xfontsel, etc.
 ! created with http://ciembor.github.com/4bit
@@ -25,7 +26,7 @@ Xcursor.size:			48
 
 ! black
 *.color0:			FG
-*.color8:			#525252
+*.color8:			#222222
 
 ! red
 *.color1:			#825b69
@@ -64,20 +65,22 @@ Xcursor.size:			48
 ! xterm-specific settings
 
 #ifdef HIDPI
-.xterm*internalBorder:		20
+*.internalBorder:		20
 #else
-.xterm*internalBorder:		10
+*.internalBorder:		10
 #endif
+*.saveLines:			20000
+*.scrollBar:			false
+.xterm*rightScrollBar:		true
+URxvt.scrollBar_right:		true
+URxvt.scrollstyle:		xterm
+*.selectToClipboard:		true
+*.termName:			xterm-256color
+*.utmpInhibit:			true
 
 ! hide when i type
 .xterm*pointerMode:		2
-.xterm*saveLines:		20000
-.xterm*scrollBar:		false
-.xterm*rightScrollBar:		true
-.xterm*scrollBar.width:		10
-.xterm*selectToClipboard:	true
-.xterm*termName:		xterm-256color
-.xterm*utmpInhibit:		true
+URxvt.pointerBlank:		true
 
 ! needed by ratpoison
 .xterm*allowSendEvents:		true
@@ -88,13 +91,24 @@ Xcursor.size:			48
 .xterm*visualBell:		false
 
 #ifdef HIDPI
-.xterm*faceName:		monospace:size=12
+.xterm*faceName:		monospace:pixelsize=16
+URxvt.font:			xft:monospace:pixelsize=16
+URxvt.letterSpace:		-1
 #endif
 
 ! make alt+v/command+v paste clipboard
 *.XTerm.*.VT100.translations:	#override\
     Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)\n\
     Super <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
+
+URxvt.keysym.M-v:		eval:paste_clipboard
+URxvt.cutchars:			`"'&()*,;<=>?@[]^{|}.:/-
+
+! support right-clicking urls to open them
+URxvt.perl-ext-common:		default,matcher,selection-to-clipboard
+URxvt.url-launcher:		/usr/local/bin/firefox
+URxvt.matcher.button:		3
+URxvt.matcher.rend.0:		Uline
 
 ! make xaw scrollbars act like normal ones
 .XTerm.*.Scrollbar.translations: #override\

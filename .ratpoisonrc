@@ -40,8 +40,8 @@ bind C-s split
 bind S hsplit
 bind C-S hsplit
 
-bind c exec xterm
-bind C-c exec xterm
+bind c exec urxvt
+bind C-c exec urxvt
 
 bind L exec pkill -USR1 xidle
 
@@ -88,4 +88,4 @@ unmanage dzen title
 vinit
 hsplit
 
-exec xterm
+exec urxvt
