@@ -19,6 +19,7 @@ set barsticky on
 set bgcolor #6c7c87
 set fgcolor #e3e0d5
 set font monospace:size=12
+set ignorehints on
 set inputwidth 0
 set padding 10 30 10 10
 set winliststyle row
@@ -59,8 +60,8 @@ definekey top M-4 vselect 4
 definekey top F1 exec ratpoison -c "echo `mixerctl outputs.master.mute=toggle`"
 definekey top F2 exec ratpoison -c "echo `mixerctl outputs.master=-10`"
 definekey top F3 exec ratpoison -c "echo `mixerctl outputs.master=+10`"
-definekey top F5 exec ratpoison -c "echo backlight: `xbacklight -dec 10 -time 0; xbacklight | sed 's/\..*//'`"
-definekey top F6 exec ratpoison -c "echo backlight: `xbacklight -inc 10 -time 0; xbacklight | sed 's/\..*//'`"
+definekey top F5 exec ratpoison -c "echo backlight: `xbacklight -dec 5 -time 0; xbacklight | sed 's/\..*//'`"
+definekey top F6 exec ratpoison -c "echo backlight: `xbacklight -inc 5 -time 0; xbacklight | sed 's/\..*//'`"
 #definekey top F7 exec pkill -USR1 -f "ruby choons"
 #definekey top F8 exec pkill -TSTP -f "ruby choons"
 #definekey top F9 exec pkill -USR2 -f "ruby choons"
