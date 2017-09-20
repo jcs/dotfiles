@@ -1,5 +1,12 @@
 #!/bin/sh
 
+cleanup() {
+	echo "cleaning up"
+	pkill -9 dzen2 i3status dbus-daemon redshift
+	rm -f ~/.Xauthority
+}
+trap cleanup INT TERM QUIT
+
 export LANG=en_US.UTF-8
 
 SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
@@ -15,11 +22,7 @@ else
 	xrdb < ~/.Xdefaults
 fi
 
-cleanup() {
-	pkill -9 dzen2 i3status dbus-daemon redshift
-	rm -f ~/.Xauthority
-}
-trap cleanup INT TERM QUIT
+#exec /usr/local/bin/urxvt
 
 if [ `uname -s` == "OpenBSD" ]; then
 	eval `dbus-launch --sh-syntax`
@@ -34,8 +37,8 @@ if [ `uname -s` == "OpenBSD" ]; then
 
 	xsetroot -solid '#6c7c87' -cursor_name left_ptr
 
-	xidle -timeout 240 -ne -program ~/bin/lock &
-	redshift -l 41.90:-87.66 -t 6500:3200 -m randr:preserve=1 &
+	xidle -timeout 600 -ne -program ~/bin/lock &
+	redshift -l 41.90:-87.66 -t 6500:3500 -m randr:preserve=1 &
 	xdimmer -k -t 30 -n &
 	xbanish &
 
@@ -54,7 +57,7 @@ if [ `uname -s` == "OpenBSD" ]; then
 		;;
 	esac
 
-	exec /usr/local/bin/ratpoison
+	/usr/local/bin/ratpoison
 else
 	xset +fp ~/.fontspcf fp rehash
 	xset b off
@@ -63,5 +66,7 @@ else
 
 	xsetroot -cursor_name left_ptr
 
-	exec /usr/local/bin/ratpoison -f ~/.ratpoisonrc.mac
+	/usr/local/bin/ratpoison -f ~/.ratpoisonrc.mac
 fi
+
+cleanup
