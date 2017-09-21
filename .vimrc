@@ -63,9 +63,10 @@ endif
 
 
 " nerdtree customizations
-let NERDTreeDirArrows=0				 " use normal ascii
+let g:NERDTreeDirArrowExpandable="+"		 " use normal ascii
+let g:NERDTreeDirArrowCollapsible="~"		 " use normal ascii
 let NERDTreeMinimalUI=1				 " and save space
-let NERDTreeWinSize=29				 " leave 80 chars for editing
+let NERDTreeWinSize=20				 " leave 80 chars for editing
 let NERDTreeMapOpenRecursively="+"
 let NERDTreeMapCloseChildren="-"		 " easier for me to remember
 let NERDTreeIgnore = ['\.(o|pyc)$']
