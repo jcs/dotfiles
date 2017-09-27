@@ -10,18 +10,20 @@
 set winname title
 
 # keep the bar in the upper left displaying the active frame title
-msgwait 3
 set barborder 0
 set bargravity nw
 set barpadding 20 10
 set barinpadding 1
 set barsticky on
-set bgcolor #6c7c87
+set bgcolor black
 set fgcolor #e3e0d5
 set font monospace:size=12
 set ignorehints on
 set inputwidth 0
-set padding 10 30 10 10
+set msgwait 3
+set onlyborder 0
+set padding 0 40 0 0
+set warp off
 set winliststyle row
 set winfmt %t
 
@@ -66,16 +68,13 @@ definekey top F6 exec ratpoison -c "echo backlight: `xbacklight -inc 5 -time 0; 
 #definekey top F8 exec pkill -TSTP -f "ruby choons"
 #definekey top F9 exec pkill -USR2 -f "ruby choons"
 
-# don't do that
-warp off
-
 # i like tab just going between the same two windows
 bind Tab focuslast
 bind grave focus
 
 # act normal but prevent firefox raising itself when links are opened from
 # other apps
-rudeness 12
+set rudeness 12
 
 # let popups stay centered
 unmanage xmessage
