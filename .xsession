@@ -29,17 +29,22 @@ if [ `uname -s` == "OpenBSD" ]; then
 	ruby ~/code/dzen-jcs/dzen-jcs.rb &
 
 	xmodmap ~/.xmodmap
+	xset b off
 	xset r rate 350 35
 	xset +fp /usr/local/lib/X11/fonts/jcs fp rehash
 	xset m 3/1 4
-	xset dpms 500 500 500
-	xset b off
+
+	# disable built-in saver, because xidle will handle it
+	xset s off
+	# disable dpms, because slock will handle it
+	xset dpms 0 0 0
+
+	xidle -timeout 500 -ne -program ~/bin/lock &
 
 	xsetroot -solid '#6c7c87' -cursor_name left_ptr
 
-	xidle -timeout 600 -ne -program ~/bin/lock &
 	redshift -l 41.90:-87.66 -t 6500:3500 -m randr:preserve=1 &
-	xdimmer -k -t 30 -n &
+	xdimmer -k -t 20 -n &
 	xbanish &
 
 	case $MACHINE in
@@ -53,6 +58,7 @@ if [ `uname -s` == "OpenBSD" ]; then
 			;
 		;;
 	*)
+		echo "running on unknown machine \"${MACHINE}\""
 		return
 		;;
 	esac

@@ -7,13 +7,10 @@ sudo -K
 ssh-add -D
 
 if [ `uname -s` = "OpenBSD" ]; then
-
-	# power the laptop screen down
-	(sleep 1; xset dpms force off) &
+	pkill -KILL -f _chat@
 
 	# lock
-	xlock -mode blank +description -mousemotion -timeelapsed \
-		-username "user: " -password "password: " -info " "
+	slock
 
 elif [ `uname -s` = "Darwin" ]; then
 	# clear clipboard
