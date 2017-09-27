@@ -165,6 +165,13 @@ if [[ $OSTYPE != darwin* ]]; then
    watch=
 fi
 
+case $TERM in
+    xterm*)
+        precmd() {print -Pn "\e]0;%m:%~>\a"}
+        preexec() {print -Pn "\e]0;%m:%~> $1\a"}
+    ;;
+esac
+
 if [ -f ~/.zshrc.local ]; then
    source ~/.zshrc.local
 fi
