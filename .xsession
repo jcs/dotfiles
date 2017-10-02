@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 
 cleanup() {
 	echo "cleaning up"
@@ -13,9 +13,8 @@ export MOZ_USE_XINPUT2=1
 SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
 if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
 	export HIDPI=1
+	echo "using HIDPI"
 fi
-
-MACHINE=`sysctl -n hw.version`
 
 if [ "$HIDPI" = "1" ]; then
 	xrdb -DHIDPI=1 < ~/.Xdefaults
@@ -23,7 +22,7 @@ else
 	xrdb < ~/.Xdefaults
 fi
 
-#exec /usr/local/bin/urxvt
+MACHINE="`sysctl -n hw.vendor` `sysctl -n hw.product`"
 
 if [ `uname -s` == "OpenBSD" ]; then
 	eval `dbus-launch --sh-syntax`
@@ -49,7 +48,7 @@ if [ `uname -s` == "OpenBSD" ]; then
 	xbanish &
 
 	case $MACHINE in
-	"ThinkPad X1 Carbon 5th")
+	"LENOVO 20HRCTO1WW")
 		xcalib ~/.icc/x1c5wqhd-LP140QH2_SPB1.icc
 
 		synclient \
@@ -58,9 +57,9 @@ if [ `uname -s` == "OpenBSD" ]; then
 			ClickPad=1 \
 			;
 		;;
+
 	*)
 		echo "running on unknown machine \"${MACHINE}\""
-		return
 		;;
 	esac
 
