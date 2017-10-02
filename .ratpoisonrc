@@ -64,9 +64,9 @@ definekey top F2 exec ratpoison -c "echo `mixerctl outputs.master=-10`"
 definekey top F3 exec ratpoison -c "echo `mixerctl outputs.master=+10`"
 definekey top F5 exec ratpoison -c "echo backlight: `xbacklight -dec 5 -time 0; xbacklight | sed 's/\..*//'`"
 definekey top F6 exec ratpoison -c "echo backlight: `xbacklight -inc 5 -time 0; xbacklight | sed 's/\..*//'`"
-#definekey top F7 exec pkill -USR1 -f "ruby choons"
-#definekey top F8 exec pkill -TSTP -f "ruby choons"
-#definekey top F9 exec pkill -USR2 -f "ruby choons"
+
+# allow machine-specific overrides of keys
+source .ratpoisonrc.local
 
 # i like tab just going between the same two windows
 bind Tab focuslast
