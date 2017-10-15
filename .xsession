@@ -31,7 +31,6 @@ if [ `uname -s` == "OpenBSD" ]; then
 	xmodmap ~/.xmodmap
 	xset b off
 	xset r rate 350 35
-	xset +fp /usr/local/lib/X11/fonts/jcs fp rehash
 	xset m 3/1 4
 
 	# disable built-in saver, because xidle will handle it
@@ -44,18 +43,24 @@ if [ `uname -s` == "OpenBSD" ]; then
 	xsetroot -solid '#6c7c87' -cursor_name left_ptr
 
 	redshift -l 41.90:-87.66 -t 6500:3500 -m randr:preserve=1 &
-	xdimmer -k -t 20 -n &
 	xbanish &
 
 	case $MACHINE in
 	"LENOVO 20HRCTO1WW")
 		xcalib ~/.icc/x1c5wqhd-LP140QH2_SPB1.icc
+		xdimmer -k -t 20 -n &
 
 		synclient \
 			PalmDetect=1 \
 			PalmMinWidth=8 \
 			ClickPad=1 \
 			;
+		;;
+
+	"HUAWEI HUAWEI MateBook X")
+		xcalib ~/.icc/matebookx.icc
+		xdimmer -n -a &
+
 		;;
 
 	*)
