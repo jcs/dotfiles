@@ -7,7 +7,6 @@ Xcursor.size:			48
 #endif
 
 #define BG			#e3e0d5
-! d9d5c6
 #define FG			#222222
 
 ! a muted palette for athena things like xterm, xfontsel, etc.
@@ -65,13 +64,13 @@ Xcursor.size:			48
 ! xterm-specific settings
 
 #ifdef HIDPI
-*.internalBorder:		20
+*.internalBorder:		16
 #else
 *.internalBorder:		10
 #endif
 *.saveLines:			20000
 *.scrollBar:			false
-.xterm*rightScrollBar:		true
+XTerm.rightScrollBar:		true
 URxvt.scrollBar_right:		true
 URxvt.scrollstyle:		xterm
 *.selectToClipboard:		true
@@ -79,25 +78,25 @@ URxvt.scrollstyle:		xterm
 *.utmpInhibit:			true
 
 ! hide when i type
-.xterm*pointerMode:		2
+XTerm.pointerMode:		2
 URxvt.pointerBlank:		true
 
 ! needed by ratpoison
-.xterm*allowSendEvents:		true
+XTerm.allowSendEvents:		true
 ! which disables allowColorOps, but empty the list of actual disabled ops
 ! which effectively re-enables color ops
-.xterm*disallowedColorOps:
+XTerm.disallowedColorOps:
 
-.xterm*visualBell:		false
+XTerm.visualBell:		false
 
 #ifdef HIDPI
-.xterm*faceName:		monospace:pixelsize=16
+XTerm.vt100.faceName:		monospace:pixelsize=16
 URxvt.font:			xft:monospace:pixelsize=16
 URxvt.letterSpace:		-1
 #endif
 
 ! make alt+v/command+v paste clipboard
-*.XTerm.*.VT100.translations:	#override\
+XTerm.vt100.translations:	#override\
     Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)\n\
     Super <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
 
@@ -111,7 +110,7 @@ URxvt.matcher.button:		3
 URxvt.matcher.rend.0:		Uline
 
 ! make xaw scrollbars act like normal ones
-.XTerm.*.Scrollbar.translations: #override\
+XTerm.*.Scrollbar.translations: #override\
     <Btn1Down>: StartScroll(Continuous) MoveThumb() NotifyThumb() \n\
     <Btn2Down>: StartScroll(Forward) \n\
     <Btn3Down>: StartScroll(Backward) \n\
@@ -119,6 +118,12 @@ URxvt.matcher.rend.0:		Uline
     <BtnUp>: NotifyScroll(Proportional) EndScroll()
 
 SshAskpass*inputTimeout:	15
+
+! invert for qconsole
+qconsole.*.background:		FG
+qconsole.*.foreground:		#999999
+qconsole.*.borderColor:		FG
+qconsole.*.color0:		#999999
 
 #ifdef HIDPI
 SshAskpass*Button.font:		-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
