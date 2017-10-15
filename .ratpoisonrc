@@ -12,7 +12,7 @@ set winname title
 # keep the bar in the upper left displaying the active frame title
 set barborder 0
 set bargravity nw
-set barpadding 20 10
+set barpadding 14 10
 set barinpadding 1
 set barsticky on
 set bgcolor black
@@ -32,7 +32,7 @@ set framefmt  frame %f (%wx%h)
 
 # window borders
 set border 5
-set gap 10
+set gap 8
 set fwcolor orange3
 set bwcolor gray
 
@@ -46,7 +46,8 @@ bind C-S hsplit
 bind c exec urxvt
 bind C-c exec urxvt
 
-bind L exec pkill -USR1 xidle
+# lock the screen
+bind L exec xset s activate
 
 # prevent accidental closes
 unbind k
