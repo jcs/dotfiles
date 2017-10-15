@@ -18,7 +18,7 @@ set folder=~/Mail                               # overridden by imap
 set forward_format="fwd: %s"
 set header_cache=~/.mutt-cache/
 set include=yes
-set index_format="%[!%m%d] [%Z] [%4c] %-52.52s %F"
+set index_format="%[!%m%d] [%Z] %-54.54s %F"
 set ispell="aspell --mode=email --add-email-quote=%,#,:,} --check"
 set mail_check=60
 set mark_old=no
@@ -44,7 +44,7 @@ set sendmail="msmtp"
 set sidebar_divider_char="| "
 set sidebar_format="%B%*  %?N?(%N)?"
 set sidebar_visible=yes
-set sidebar_width=21
+set sidebar_width=18
 set smart_wrap=yes
 set sort=threads
 set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%d?%?F? flag:%F?%?t? tag:%t?%?p? post:%p?%?b? inc:%b?%?l??) %> %_v "
