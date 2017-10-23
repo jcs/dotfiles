@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # remove cruft installed by default in openbsd
 rm -f ~/.cshrc \
 	~/.login \
