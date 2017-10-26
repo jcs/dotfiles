@@ -1,0 +1,123 @@
+#!/bin/sh -e
+#
+# xsudo
+# Run an X11 command via sudo (most likely as an unprivileged user) with
+# temporary, untrusted xauth forwarding and rc-file copying
+#
+# Copyright (c) 2017 joshua stein <jcs@jcs.org>
+#
+# Permission to use, copy, modify, and distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+#
+
+#
+# Example setup:
+#  groupadd _firefox
+#  usermod -G _firefox $USER
+#  useradd -g _firefox -m _firefox
+#  chmod 770 ~_firefox
+#  cp -r ~/.mozilla ~_firefox/
+#  chown -R _firefox:_firefox ~_firefox/.mozilla
+#
+# Add to sudoers:
+#  %wheel ALL=(_firefox) NOPASSWD: /usr/local/bin/firefox
+#
+# Example usage:
+#  xsudo -u _firefox /usr/local/bin/firefox
+#
+# By default, ~/.fonts.conf and ~/.config/gtk-3.0 are copied into the
+# unprivileged user's home directory before running.  Additional
+# files/directories can be specified with multiple -f flags.
+#
+# X11 connections are untrusted by default, but some programs (like firefox)
+# run much slower in this mode for some reason.  Passing -t will mark these
+# temporary connections as trusted (see Xsecurity(7)).
+#
+
+usage() {
+	echo "usage: `basename $0` [-f file to copy] [-t] -u username command"
+	exit 1
+}
+
+UNPRIV_USER=
+CMD=
+TRUSTED="untrusted"
+RC_FILES=".fonts.conf .config/gtk-3.0/"
+
+while getopts "f:tu:" o; do
+	case "$o" in
+	f)
+		RC_FILES="${RC_FILES} ${OPTARG}"
+		;;
+	t)
+		TRUSTED="trusted"
+		;;
+	u)
+		UNPRIV_USER="$OPTARG"
+		;;
+	*)
+		usage
+		;;
+	esac
+done
+shift $((OPTIND-1))
+
+if [ X"${1}" = X"" ]; then
+	usage
+fi
+
+CMD=$1
+
+# validate unprivileged user
+if [ X"$UNPRIV_USER" = X"" ]; then
+	usage
+fi
+PLINE="getent passwd ${UNPRIV_USER}"
+if [ X"`${PLINE}`" = X"" ]; then
+	echo "user \"${UNPRIV_USER}\" does not exist" > /dev/stderr
+	usage
+fi
+UNPRIV_HOME=`${PLINE} | awk '{ FS=":" }{ print $6 }'`
+if [ X"${UNPRIV_HOME}" = X"" -o ! -d $UNPRIV_HOME ]; then
+	echo "home of ${UNPRIV_USER} (${UNPRIV_HOME}) does not exist" > /dev/stderr
+	exit 1
+fi
+
+# validate unprivileged user's home directory permissions, which must
+# allow us to write to it, but noone else to read from it
+UNPRIV_HOME_P=`ls -l ${UNPRIV_HOME} | awk '{ print $1 }'`
+if [ X"$UNPRIV_HOME_P" = X"drwxrwx---" ]; then
+	echo "permissions on ${UNPRIV_HOME} must be 0770, are ${UNPRIV_HOME_P}"
+	exit 1
+fi
+
+# generate temporary untrusted authorization
+if [ -f $UNPRIV_HOME/.Xauthority ]; then
+	rm -f $UNPRIV_HOME/.Xauthority
+fi
+touch $UNPRIV_HOME/.Xauthority
+xauth -f $UNPRIV_HOME/.Xauthority generate $DISPLAY . $TRUSTED
+chmod 660 $UNPRIV_HOME/.Xauthority
+
+# copy files into the untrusted user's home
+(cd ~; tar -chf - $RC_FILES) | (cd $UNPRIV_HOME; tar xf -)
+for f in $RC_FILES; do
+	chgrp -R $UNPRIV_USER $UNPRIV_HOME/$f
+	chmod -R g=u $UNPRIV_HOME/$f
+done
+
+# run the actual command
+cd $UNPRIV_HOME
+sudo -u $UNPRIV_USER -H $CMD
+
+# remove auth
+rm -f $UNPRIV_HOME/.Xauthority
