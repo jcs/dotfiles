@@ -55,6 +55,9 @@ set use_envelope_from=yes
 set use_from
 unset user_agent
 
+# format=flowed
+set text_flowed
+
 # things to bind keys to
 bind pager <down> next-line
 bind pager <up> previous-line

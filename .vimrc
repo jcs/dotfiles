@@ -102,6 +102,9 @@ au FileType cvs,gitcommit,mail setlocal tw=68 et spell colorcolumn=69
 " (openbsd's cvs does this by default)
 au FileType cvs s/^CVS:/CVS:/|1
 
+" and for email, work properly with format=flowed
+au FileType mail setlocal formatoptions+=wq
+
 
 " tell gutentags to use ectags
 let g:gutentags_ctags_executable="/usr/local/bin/ectags"
