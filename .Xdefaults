@@ -93,6 +93,9 @@ XTerm.visualBell:		false
 XTerm.vt100.faceName:		monospace:pixelsize=16
 URxvt.font:			xft:monospace:pixelsize=16
 URxvt.letterSpace:		-1
+#else
+URxvt.font:			fixed
+URxvt.letterSpace:		0
 #endif
 
 ! make alt+v/command+v paste clipboard
