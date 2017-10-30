@@ -10,7 +10,8 @@ folder-hook . set \
 	signature=
 folder-hook . my_hdr Bcc: jcs@jcs.org
 
-# default archiving
+# default archiving, for folders where messages aren't already copied to allmail
+# from sieve rules
 folder-hook . macro index A <save-message>=allmail.`date +%Y`<enter><sync-mailbox>
 folder-hook . macro pager A <save-message>=allmail.`date +%Y`<enter><sync-mailbox>
 
@@ -38,8 +39,9 @@ folder-hook =(superblock|crs).* set \
 	sort_aux=last-date-received
 folder-hook =(superblock|crs).* unmy_hdr Bcc
 folder-hook =(superblock|crs).* my_hdr Bcc: jcs@superblock.net
-folder-hook =superblock.* macro index A <save-message>=superblock-`date +%Y`<enter><sync-mailbox>
-folder-hook =superblock.* macro pager A <save-message>=superblock-`date +%Y`<enter><sync-mailbox>
+# archive is delete
+folder-hook =superblock macro index A <delete-message><sync-mailbox>
+folder-hook =superblock macro pager A <delete-message><sync-mailbox>
 
 folder-hook =pushover.* set \
 	from="support@pushover.net" \
@@ -50,8 +52,9 @@ folder-hook =pushover.* set \
 	sort_aux=last-date-received
 folder-hook =pushover.* unmy_hdr Bcc
 folder-hook =pushover.* my_hdr Bcc: support@pushover.net
-folder-hook =pushover.* macro index A <save-message>=pushover-`date +%Y`<enter><sync-mailbox>
-folder-hook =pushover.* macro pager A <save-message>=pushover-`date +%Y`<enter><sync-mailbox>
+# archive is delete
+folder-hook =pushover macro index A <delete-message><sync-mailbox>
+folder-hook =pushover macro pager A <delete-message><sync-mailbox>
 
 # imap mailboxes
 
