@@ -75,7 +75,7 @@ if [ X"${1}" = X"" ]; then
 	usage
 fi
 
-CMD=$1
+CMD=$*
 
 # validate unprivileged user
 if [ X"$UNPRIV_USER" = X"" ]; then
