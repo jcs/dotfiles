@@ -1,0 +1,3 @@
+#!/bin/sh
+
+~/bin/xsudo -u _firefox -t /usr/local/bin/firefox $*

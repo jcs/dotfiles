@@ -108,7 +108,7 @@ URxvt.cutchars:			`"'&()*,;<=>?@[]^{|}.:/-
 
 ! support right-clicking urls to open them
 URxvt.perl-ext-common:		default,matcher,selection-to-clipboard,-selection
-URxvt.url-launcher:		/usr/local/bin/firefox
+URxvt.url-launcher:		/home/jcs/bin/firefox
 URxvt.matcher.button:		3
 URxvt.matcher.rend.0:		Uline
 
