@@ -74,9 +74,6 @@ mailboxes =lobsters
 
 # mailing lists, alpha
 
-mailboxes =android-gcm
-subscribe android-gcm
-
 mailboxes =chibug
 subscribe talk
 
