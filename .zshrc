@@ -114,7 +114,7 @@ if [[ $OSTYPE = darwin* ]]; then
 
    # bring in rbenv
    export PATH="${HOME}/.rbenv/shims:${PATH}:/opt/X11/bin"
-   source "/usr/local/Cellar/rbenv/1.0.0/completions/rbenv.zsh";
+   source /usr/local/Cellar/rbenv/*/completions/rbenv.zsh;
 
    export STORE_LASTDIR=1
    export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"

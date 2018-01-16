@@ -17,9 +17,9 @@ if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
 fi
 
 if [ "$HIDPI" = "1" ]; then
-	xrdb -DHIDPI=1 < ~/.Xdefaults
+	xrdb -DHIDPI=1 -DHOME=$HOME < ~/.Xdefaults
 else
-	xrdb < ~/.Xdefaults
+	xrdb -DHOME=$HOME < ~/.Xdefaults
 fi
 
 MACHINE="`sysctl -n hw.vendor` `sysctl -n hw.product`"
