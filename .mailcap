@@ -1,8 +1,25 @@
+# things mutt can view inline
 application/msword; antiword %s; copiousoutput
 text/html; ~/bin/html_mail %s; copiousoutput
 application/x-gunzip; gzcat %s; copiousoutput
 
-# things that need to spawn (after forking)
-application/pdf; ~/bin/mutt_bgrun firefox %s
-image/png; ~/bin/mutt_bgrun firefox %s
-image/jpeg; ~/bin/mutt_bgrun firefox %s
+# things it should open on the mac
+application/ics; ~/bin/mutt_bgrun %s
+application/excel; ~/bin/mutt_bgrun %s
+application/vnd.ms-excel; ~/bin/mutt_bgrun %s
+application/pdf; ~/bin/mutt_bgrun %s
+application/vnd.openxmlformats-officedocument.presentationml.presentation; ~/bin/mutt_bgrun %s
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/bin/mutt_bgrun %s
+audio/x-wav; ~/bin/mutt_bgrun %s
+image/jpeg; ~/bin/mutt_bgrun %s
+image/pjpeg; ~/bin/mutt_bgrun %s
+image/jpg; ~/bin/mutt_bgrun %s
+image/gif; ~/bin/mutt_bgrun %s
+image/png; ~/bin/mutt_bgrun %s
+image/tiff; ~/bin/mutt_bgrun %s
+application/octet-stream; ~/bin/mutt_bgrun %s
+video/quicktime; ~/bin/mutt_bgrun %s
+video/3gpp; ~/bin/mutt_bgrun %s
+audio/x-wav; ~/bin/mutt_bgrun %s
+video/mp4; ~/bin/mutt_bgrun %s
+text/calendar; ~/bin/mutt_bgrun %s
