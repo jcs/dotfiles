@@ -7,14 +7,6 @@ cleanup() {
 }
 trap cleanup INT TERM QUIT
 
-export LANG=en_US.UTF-8
-export MOZ_USE_XINPUT2=1
-
-SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
-if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
-	export HIDPI=1
-	echo "using HIDPI"
-fi
 
 if [ "$HIDPI" = "1" ]; then
 	xrdb -DHIDPI=1 -DHOME=$HOME < ~/.Xdefaults
@@ -22,9 +14,19 @@ else
 	xrdb -DHOME=$HOME < ~/.Xdefaults
 fi
 
-MACHINE="`sysctl -n hw.vendor` `sysctl -n hw.product`"
+export LANG=en_US.UTF-8
 
 if [ `uname -s` == "OpenBSD" ]; then
+	export MOZ_USE_XINPUT2=1
+
+	SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
+	if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
+		export HIDPI=1
+		echo "using HIDPI"
+	fi
+
+	MACHINE="`sysctl -n hw.vendor` `sysctl -n hw.product`"
+
 	eval `dbus-launch --sh-syntax`
 	ruby ~/code/dzen-jcs/dzen-jcs.rb &
 
@@ -67,17 +69,19 @@ if [ `uname -s` == "OpenBSD" ]; then
 		echo "running on unknown machine \"${MACHINE}\""
 		;;
 	esac
-
-	/usr/local/bin/ratpoison
 else
-	xset +fp ~/.fontspcf fp rehash
+	cd $HOME
 	xset b off
+	xset +fp /opt/X11/lib/X11/fonts/misc
+	xset fp rehash
 
 	/usr/local/bin/xbanish &
 
 	xsetroot -cursor_name left_ptr
 
-	/usr/local/bin/ratpoison -f ~/.ratpoisonrc.mac
+	export PATH=~/bin:~/go/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin
 fi
+
+/usr/local/bin/ratpoison
 
 cleanup
