@@ -9,6 +9,7 @@ folder-hook . set \
 	realname=\"joshua stein\" \
 	signature=
 folder-hook . my_hdr Bcc: jcs@jcs.org
+folder-hook . unset include_onlyfirst
 
 # default archiving, for folders where messages aren't already copied to allmail
 # from sieve rules
@@ -52,6 +53,7 @@ folder-hook =pushover.* set \
 	sort_aux=last-date-received
 folder-hook =pushover.* unmy_hdr Bcc
 folder-hook =pushover.* my_hdr Bcc: support@pushover.net
+folder-hook =pushover.* set include_onlyfirst
 # archive is delete
 folder-hook =pushover macro index A <delete-message><sync-mailbox>
 folder-hook =pushover macro pager A <delete-message><sync-mailbox>
