@@ -121,23 +121,25 @@ if [[ $OSTYPE = darwin* ]]; then
 
    # show upcoming events with icalBuddy, but because it's slow, show the
    # cached version and update the cache in the background
-   ICAL_BUDDY="icalBuddy -li 3 -eed -n -npn -nc -iep 'title,datetime' \
-      -ps '| - |' -po 'datetime,title' -b '' -tf '%H:%M' eventsToday+7"
-   _AGE=0
-   if [ -f ~/.icalcache ]; then
-      # but if the cache is more than 6 hours old, it's not helpful to show an
-      # old cache, so force it to be re-run
-      _CACHE_MTIME=`stat -f "%m" ~/.icalcache`
-      _AGE=$((`date "+%s"` - $_CACHE_MTIME))
-      if [ $_AGE -gt 28800 ]; then
-         rm -f ~/.icalcache
-      fi
-   fi
-   if [ -f ~/.icalcache ]; then
-      cat ~/.icalcache
-      sh -c "${ICAL_BUDDY} > ~/.icalcache &" > /dev/null
-   else
-      eval ${ICAL_BUDDY} | tee ~/.icalcache
+   if [ -x /usr/local/bin/icalBuddy ]; then
+       ICAL_BUDDY="icalBuddy -li 3 -eed -n -npn -nc -iep 'title,datetime' \
+          -ps '| - |' -po 'datetime,title' -b '' -tf '%H:%M' eventsToday+7"
+       _AGE=0
+       if [ -f ~/.icalcache ]; then
+          # but if the cache is more than 6 hours old, it's not helpful to show
+          # an old cache, so force it to be re-run
+          _CACHE_MTIME=`stat -f "%m" ~/.icalcache`
+          _AGE=$((`date "+%s"` - $_CACHE_MTIME))
+          if [ $_AGE -gt 28800 ]; then
+             rm -f ~/.icalcache
+          fi
+       fi
+       if [ -f ~/.icalcache ]; then
+          cat ~/.icalcache
+          sh -c "${ICAL_BUDDY} > ~/.icalcache &" > /dev/null
+       else
+          eval ${ICAL_BUDDY} | tee ~/.icalcache
+       fi
    fi
 
 # openbsd
