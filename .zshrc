@@ -91,6 +91,21 @@ _block_quick_bail() {
 zle -N _block_quick_bail
 bindkey '^d' _block_quick_bail
 
+# cmd && pushover "done running cmd"
+# requires $PUSHOVER_USER_KEY and $PUSHOVER_APP_TOKEN set in ~/.zshrc.local
+pushover() {
+   if [ X"${PUSHOVER_USER_KEY}" = X"" ]; then
+      echo "\$PUSHOVER_USER_KEY not set"
+      return 1
+   fi
+
+	curl -s \
+		--form-string "user=${PUSHOVER_USER_KEY}" \
+		--form-string "token=${PUSHOVER_APP_TOKEN}" \
+		--form-string "message=${1}" \
+		https://api.pushover.net/1/messages.json | grep -q 'status":1'
+}
+
 # show all logins and such
 watch=all
 WATCHFMT="%B%n%b %a %l at %@"
