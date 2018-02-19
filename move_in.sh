@@ -16,11 +16,11 @@ for f in .bash_history .sqlite_history .mysql_history; do
 done
 
 if [ -d ~/.dotfiles ]; then
-	echo "~/.dotfiles already exists"
-	exit 1
+	cd ~/.dotfiles
+	git pull --ff-only
+else
+	git clone https://github.com/jcs/dotfiles ~/.dotfiles
 fi
-
-git clone https://github.com/jcs/dotfiles ~/.dotfiles
 
 cd ~/.dotfiles
 for f in .???*; do
