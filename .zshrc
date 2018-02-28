@@ -128,8 +128,10 @@ if [[ $OSTYPE = darwin* ]]; then
    alias update_dotfiles='curl https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -x -'
 
    # bring in rbenv
-   export PATH="${HOME}/.rbenv/shims:${PATH}:/opt/X11/bin"
-   source /usr/local/Cellar/rbenv/*/completions/rbenv.zsh;
+   if [ -d /usr/local/Cellar/rbenv ]; then
+       export PATH="${HOME}/.rbenv/shims:${PATH}:/opt/X11/bin"
+       source /usr/local/Cellar/rbenv/*/completions/rbenv.zsh;
+   fi
 
    export STORE_LASTDIR=1
    export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
