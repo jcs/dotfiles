@@ -1,0 +1,17 @@
+#!/bin/sh
+# cmd && pushover "done running cmd"
+# requires $PUSHOVER_USER_KEY and $PUSHOVER_APP_TOKEN set in ~/.zshrc.local
+
+if [ X"${PUSHOVER_USER_KEY}" = X"" ]; then
+  echo "\$PUSHOVER_USER_KEY not set"
+  exit 1
+fi
+
+curl -s \
+  --form-string "user=${PUSHOVER_USER_KEY}" \
+  --form-string "token=${PUSHOVER_APP_TOKEN}" \
+  --form-string "message=${1}" \
+  https://api.pushover.net/1/messages.json | grep -v 'status":1'
+
+# reverse exit code so that no output exits 0, any output exits 1
+[ $? == 1 ] && exit 0
