@@ -39,6 +39,7 @@ set postponed="=postponed"
 set print=ask-no
 set query_command="/usr/local/bin/lbdbq '%s'"
 set quit=ask-yes
+set read_inc=100
 set record="=sent"
 set sendmail="msmtp"
 set sidebar_divider_char="| "
@@ -54,9 +55,6 @@ set timeout=15
 set use_envelope_from=yes
 set use_from
 unset user_agent
-
-# format=flowed
-set text_flowed
 
 # things to bind keys to
 bind pager <down> next-line
@@ -182,8 +180,9 @@ color index brightcolor19 default '~z 500000-'
 auto_view application/pgp-encrypted
 auto_view application/pgp-keys
 auto_view application/pgp-signature
-auto_view text/html application/msword                    # html with lynx,
-                                                          # .doc with antiword
+auto_view text/html                                       # html with lynx
+auto_view application/msword                              # .doc with antiword
+
 # but that doesn't mean i don't like text/plain
 alternative_order text/plain text/html
 

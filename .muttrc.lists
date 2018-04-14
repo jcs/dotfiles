@@ -15,6 +15,7 @@ folder-hook . unset include_onlyfirst
 # from sieve rules
 folder-hook . macro index A <save-message>=allmail.`date +%Y`<enter><sync-mailbox>
 folder-hook . macro pager A <save-message>=allmail.`date +%Y`<enter><sync-mailbox>
+folder-hook . set text_flowed
 
 # common folders
 macro index U <change-folder>=superblock<enter>
@@ -24,8 +25,9 @@ macro pager P <change-folder>=pushover<enter>
 macro index H <change-folder>=openbsd-hackers<enter>
 macro pager H <change-folder>=openbsd-hackers<enter>
 
-reply-hook '~t .@openbsd\.org' 'set from="jcs@openbsd.org"'
 send-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
+send-hook '~t .*@openbsd\.org' 'unset text_flowed'
+reply-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
 
 folder-hook .*openbsd-.* set \
 	from="jcs@openbsd.org" \
