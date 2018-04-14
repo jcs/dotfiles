@@ -7,13 +7,6 @@ cleanup() {
 }
 trap cleanup INT TERM QUIT
 
-
-if [ "$HIDPI" = "1" ]; then
-	xrdb -DHIDPI=1 -DHOME=$HOME < ~/.Xdefaults
-else
-	xrdb -DHOME=$HOME < ~/.Xdefaults
-fi
-
 export LANG=en_US.UTF-8
 
 if [ `uname -s` == "OpenBSD" ]; then
@@ -23,6 +16,12 @@ if [ `uname -s` == "OpenBSD" ]; then
 	if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
 		export HIDPI=1
 		echo "using HIDPI"
+	fi
+
+	if [ "$HIDPI" = "1" ]; then
+		xrdb -DHIDPI=1 -DHOME=$HOME < ~/.Xdefaults
+	else
+		xrdb -DHOME=$HOME < ~/.Xdefaults
 	fi
 
 	MACHINE="`sysctl -n hw.vendor` `sysctl -n hw.product`"
@@ -71,6 +70,9 @@ if [ `uname -s` == "OpenBSD" ]; then
 	esac
 else
 	cd $HOME
+
+	xrdb -DHOME=$HOME < ~/.Xdefaults
+
 	xset b off
 	xset +fp /opt/X11/lib/X11/fonts/misc
 	xset fp rehash
