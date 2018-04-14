@@ -1,7 +1,7 @@
 # vim:tw=0
 
 # whois me
-alternates (jcs@(rt\.fm|((noc|backup)\.)?superblock.net|jcs\.org|lowerca\.se|(cvs\.)?openbsd\.org|1\.8T\.org|lobste\.rs)|admin@1\.8T\.org|(billing|corduroy)@superblock\.net|(support|jcs)@pushover\.net|sale-.*@craigslist\.org)
+alternates (jcs@(rt\.fm|((noc|backup)\.)?superblock.net|jcs\.org|lowerca\.se|(cvs\.)?openbsd\.org|1\.8T\.org)|admin@1\.8T\.org|(billing|corduroy)@superblock\.net|(support|jcs)@pushover\.net)
 
 # default address, no signature
 folder-hook . set \
@@ -72,9 +72,6 @@ mailboxes =pushover-daily
 mailboxes =superblock
 mailboxes =superblock-daily
 mailboxes =superblock-cvs
-
-mailboxes =lobsters
-# subscribe line in .muttrc.personal
 
 # mailing lists, alpha
 
