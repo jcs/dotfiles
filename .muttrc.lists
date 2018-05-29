@@ -79,6 +79,9 @@ mailboxes =lobsters
 mailboxes =chibug
 subscribe talk
 
+mailboxes =chiclassiccomp
+subscribe chiclassiccomp
+
 mailboxes =coreboot
 subscribe coreboot
 
