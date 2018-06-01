@@ -97,9 +97,6 @@ subscribe bugs
 mailboxes =openbsd-hackers
 subscribe hackers
 
-mailboxes =openbsd-mirrors
-subscribe mirrors-discuss
-
 mailboxes =openbsd-misc
 subscribe misc
 
