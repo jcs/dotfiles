@@ -57,6 +57,7 @@ set use_from
 unset user_agent
 
 # things to bind keys to
+bind attach <left> exit
 bind pager <down> next-line
 bind pager <up> previous-line
 bind pager <left> exit
