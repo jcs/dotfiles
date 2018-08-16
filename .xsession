@@ -2,7 +2,7 @@
 
 cleanup() {
 	echo "cleaning up"
-	pkill -9 dzen2 i3status dbus-daemon redshift
+	pkill -9 dzen2 i3status dbus-daemon redshift compton
 	rm -f ~/.Xauthority
 }
 trap cleanup INT TERM QUIT
@@ -14,8 +14,10 @@ if [ `uname -s` == "OpenBSD" ]; then
 
 	SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
 	if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
-		export HIDPI=1
 		echo "using HIDPI"
+		export HIDPI=1
+		export GDK_SCALE=1.5
+		export QT_SCALE_FACTOR=1.5
 	fi
 
 	if [ "$HIDPI" = "1" ]; then
@@ -39,27 +41,18 @@ if [ `uname -s` == "OpenBSD" ]; then
 	# disable dpms, because slock will handle it
 	xset dpms 0 0 0
 
-	xidle -timeout 500 -ne -program ~/bin/lock &
+	xidle -timeout 300 -ne -program ~/bin/lock &
 
 	xsetroot -solid '#6c7c87' -cursor_name left_ptr
 
-	redshift -l 41.90:-87.66 -t 6500:3500 -m randr:preserve=1 &
+	redshift -l 41.90:-87.66 -t 6500:3250 -m randr &
 	xbanish &
 
 	case $MACHINE in
-	"LENOVO 20HRCTO1WW")
-		xcalib ~/.icc/x1c5wqhd-LP140QH2_SPB1.icc
-		xdimmer -k -t 20 -n &
-
-		synclient \
-			PalmDetect=1 \
-			PalmMinWidth=8 \
-			ClickPad=1 \
-			;
-		;;
-
 	"HUAWEI HUAWEI MateBook X")
 		xcalib ~/.icc/matebookx.icc
+		hsetroot -solid '#566273'
+		compton -b
 		xdimmer -n -a &
 
 		;;
