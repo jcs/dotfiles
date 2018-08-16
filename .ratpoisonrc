@@ -31,8 +31,8 @@ set winfmt %t
 set framefmt  frame %f (%wx%h) 
 
 # window borders
-set border 5
-set gap 8
+set border 0
+set gap 14
 set fwcolor orange3
 set bwcolor gray
 
@@ -58,14 +58,6 @@ definekey top M-2 vselect 2
 definekey top M-3 vselect 3
 definekey top M-4 vselect 4
 
-# match symbols on the keys of my current laptop as if Fn Lock were on, without
-# having to actually enable Fn Lock
-definekey top F1 exec ratpoison -c "echo `mixerctl outputs.master.mute=toggle`"
-definekey top F2 exec ratpoison -c "echo `mixerctl outputs.master.mute=off outputs.master=-10`"
-definekey top F3 exec ratpoison -c "echo `mixerctl outputs.master.mute=off outputs.master=+10`"
-definekey top F5 exec ratpoison -c "echo backlight: `xbacklight -dec 5 -time 0; xbacklight | sed 's/\..*//'`"
-definekey top F6 exec ratpoison -c "echo backlight: `xbacklight -inc 5 -time 0; xbacklight | sed 's/\..*//'`"
-
 # allow machine-specific overrides of keys
 source .ratpoisonrc.local
 
@@ -87,6 +79,7 @@ unmanage dzen title
 
 # initialize workspaces
 vinit
-hsplit
+#hsplit
+exec sh -c "ratpoison -c 'frestore $(< ~/.ratpoison_frames)'"
 
 exec urxvt
