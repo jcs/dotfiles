@@ -6,7 +6,7 @@ Xcursor.theme:			dmz
 Xcursor.size:			48
 #endif
 
-#define BG			#e3e0d5
+#define BG			#e5e3d9
 #define FG			#222222
 
 ! a muted palette for athena things like xterm, xfontsel, etc.
@@ -90,8 +90,9 @@ XTerm.disallowedColorOps:
 XTerm.visualBell:		false
 
 #ifdef HIDPI
-XTerm.vt100.faceName:		monospace:pixelsize=16
-URxvt.font:			xft:monospace:pixelsize=16
+XTerm.vt100.faceName:		monospace:size=12
+URxvt.font:			xft:monospace:size=12
+URxvt.boldFont:			xft:monospace:weight=bold:size=12
 URxvt.letterSpace:		-1
 #else
 URxvt.font:			fixed
