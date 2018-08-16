@@ -28,6 +28,9 @@ macro pager H <change-folder>=openbsd-hackers<enter>
 send-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
 send-hook '~t .*@openbsd\.org' 'unset text_flowed'
 reply-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
+reply-hook '~t .*@openbsd\.org' 'unset text_flowed'
+reply-hook '~f .*@openbsd\.org' 'set from="jcs@openbsd.org"'
+reply-hook '~f .*@openbsd\.org' 'unset text_flowed'
 
 folder-hook .*openbsd-.* set \
 	from="jcs@openbsd.org" \
@@ -83,12 +86,6 @@ subscribe chiclassiccomp
 
 mailboxes =coreboot
 subscribe coreboot
-
-mailboxes =dns-operations
-subscribe dns-operations
-
-mailboxes =dragonflybsd-users
-subscribe users
 
 mailboxes =openbsd-bugs
 subscribe bugs
