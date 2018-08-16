@@ -6,31 +6,54 @@
 # the program
 #
 # usage in ~/.mailcap:
-# application/pdf; ~/bin/mutt_bgrun xpdf %s
+# application/*; ~/bin/mutt_bgrun %t %s
 #
 
 require "fileutils"
 require "open3"
 
-viewer = ARGV[0]
+mime = ARGV[0]
 orig_file = ARGV[1]
 
 if !orig_file
-  STDERR.puts "usage: #{$0} <viewing application> <filename>"
+  STDERR.puts "usage: #{$0} <mime type> <filename>"
+  exit 1
+end
+
+if mime == "application/octet-stream"
+  if orig_file.to_s.match(/\.pdf$/i)
+    mime = "application/pdf"
+  end
+end
+
+viewer = nil
+if `uname`.strip == "Darwin"
+  viewer = "open"
+else
+  case mime.to_s.downcase
+  when
+  "application/pdf",
+  /^image\//
+    viewer = "firefox"
+  end
+end
+
+if !viewer
+  STDERR.puts "no viewer for type #{mime.inspect}"
   exit 1
 end
 
 tmp_dir = `mktemp -d -t`.chomp
 tmp_file = tmp_dir + "/" + File.basename(orig_file).gsub(/[^A-Za-z_\.-]/, "")
+launch_file = tmp_file.dup
+
+if viewer == "firefox"
+  launch_file = "file:///#{launch_file}"
+end
 
 system("cp", orig_file, tmp_file)
 
 Kernel.fork do
-  launch_file = tmp_file.dup
-  if viewer == "firefox"
-    launch_file = "file:///#{launch_file}"
-  end
-
   i, _, _, w = Open3.popen3(viewer, launch_file)
   i.close
 
@@ -39,8 +62,10 @@ Kernel.fork do
   rescue Errno::ECHILD
     # process ended really quickly, most likely just handed it off to another
     # process, so wait a bit for it to process the tmp file before removing it
-    sleep 3
+    sleep 5
   end
+
+  sleep 5
 
   File.unlink tmp_file
   Dir.unlink tmp_dir
