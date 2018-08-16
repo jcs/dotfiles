@@ -38,15 +38,18 @@ bindkey -e
 # i'm too lazy to type these out
 alias calc='perl -pe "print eval(\$_) . chr(10);"'
 alias cdu='cvs -q diff -upRN'
+alias clip='xclip -in -selection clipboard'
 alias cp='cp -i'
 alias hg='history | grep '
 alias jobs='jobs -p'
+alias k9='kill -9 %1'
 alias ll='ls -alF'
 alias lo='logout'
 alias ls='ls -aF'
 alias manfile='groff -man -Tascii \!* | less'
 alias mv='mv -i'
 alias offline_mutt='mutt -R -F ~/.muttrc.offline'
+alias pastebin="curl -F 'f:1=<-' ix.io"
 alias ph='ps auwwx | head'
 alias pg='ps auwwx | grep -i -e ^USER -e '
 alias publicip='curl -s http://ifconfig.me'
