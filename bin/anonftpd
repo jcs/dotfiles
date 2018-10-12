@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require "ftpd"
+require "socket"
+
+class Driver
+  def initialize
+    @temp_dir = Dir.pwd
+  end
+  def authenticate(user, password)
+    true
+  end
+  def file_system(user)
+    Ftpd::DiskFileSystem.new(@temp_dir)
+  end
+end
+
+ip = `ifconfig egress | grep 'inet '`.gsub(/.*inet /, "").gsub(/ .*/, "").strip
+
+server = Ftpd::FtpServer.new(Driver.new)
+server.log = Logger.new(STDOUT)
+server.interface = ip
+
+if Process.uid == 0
+  server.port = 21
+else
+  server.port = 2121
+end
+
+puts "ftpd listening on #{ip}:#{server.port}"
+
+server.start
+while true do
+  gets
+end
