@@ -1,4 +1,5 @@
 .gitcookies
-.vim/swp
 .vim/backup
+.vim/gutentags
+.vim/swp
 .vim/.netrwhist
