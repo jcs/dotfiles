@@ -3,6 +3,12 @@
 " vim 8 config
 " joshua stein <jcs@jcs.org>
 "
+" packages can be added with:
+" git submodule add .../vim-somepackage .vim/pack/auto/start/vim-somepackage
+"
+" and updated with:
+" git submodule update --remote --merge
+"
 
 " defaults for everything
 let c_minlines=500
@@ -111,10 +117,11 @@ au FileType mail setlocal formatoptions+=wq
 let g:gutentags_ctags_executable="/usr/local/bin/ectags"
 let g:gutentags_ctags_executable_go="~/go/bin/gotags"
 let g:gutentags_cache_dir="~/.vim/gutentags"
-let g:gutentags_project_root=[ "CVS" ]
+let g:gutentags_project_root=[ "CVS", ".gutentags_stop" ]
 " i'll manually invoke :GutentagsUpdate when i need to
 let g:gutentags_generate_on_missing=0
 let g:gutentags_generate_on_new=0
+let g:gutentags_generate_on_write=0
 
 
 " when writing new files, mkdir -p their paths
@@ -177,6 +184,10 @@ nmap <C-p> :bp<CR>
 " sbd plugin
 nmap <C-x> :Sbd<CR>
 
+" make < > shifts keep selection
+vnoremap < <gv
+vnoremap > >gv
+
 " prevent those from running the nerdtree
 autocmd FileType nerdtree noremap <buffer> <C-h> <nop>
 autocmd FileType nerdtree noremap <buffer> <C-j> <nop>
@@ -209,9 +220,6 @@ cabbr Q q
 " disable annoying behavior where starting an auto-indented line with a hash
 " makes it unindent and refuse to >>
 :inoremap # X#
-
-" load pathogen for nerdtree and things
-call pathogen#infect()
 
 " restore cursor position from viminfo
 au BufReadPost *
