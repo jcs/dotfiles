@@ -18,8 +18,9 @@ done
 if [ -d ~/.dotfiles ]; then
 	cd ~/.dotfiles
 	git pull --ff-only
+	git submodule update --init --recursive
 else
-	git clone https://github.com/jcs/dotfiles ~/.dotfiles
+	git clone --recursive https://github.com/jcs/dotfiles ~/.dotfiles
 fi
 
 cd ~/.dotfiles
