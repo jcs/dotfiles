@@ -151,8 +151,6 @@ if [[ $OSTYPE = darwin* ]]; then
 elif [[ $OSTYPE = openbsd* ]]; then
    alias watchbw='netstat -w1 -b -I'
 
-   alias update_dotfiles='ftp -Vo - https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -'
-
    # for ports
    alias remake='cd ../../; rm w-*/.build*; make; cd -'
 
@@ -170,6 +168,8 @@ fi
 
 if [[ $OSTYPE != darwin* ]]; then
    watch=
+
+   alias pbcopy='xclip -in -selection clipboard'
 fi
 
 case $TERM in
