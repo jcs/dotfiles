@@ -16,3 +16,7 @@
 	noprefix = true
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[http]
+	cookiefile = /home/jcs/.gitcookies
+[rebase]
+	autostash = true
