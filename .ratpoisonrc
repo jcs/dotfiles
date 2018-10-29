@@ -58,9 +58,6 @@ definekey top M-2 vselect 2
 definekey top M-3 vselect 3
 definekey top M-4 vselect 4
 
-# allow machine-specific overrides of keys
-source .ratpoisonrc.local
-
 # i like tab just going between the same two windows
 bind Tab focuslast
 bind grave focus
@@ -79,7 +76,9 @@ unmanage dzen title
 
 # initialize workspaces
 vinit
-#hsplit
-exec sh -c "ratpoison -c 'frestore $(< ~/.ratpoison_frames)'"
+hsplit
+
+# allow machine-specific overrides of keys
+source .ratpoisonrc.local
 
 exec urxvt
