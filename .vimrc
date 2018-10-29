@@ -161,7 +161,9 @@ au FileType mail setlocal formatoptions+=wq
 " gutentags
 let g:gutentags_cache_dir="~/.vim/gutentags"
 " use ectags
-let g:gutentags_ctags_executable="/usr/local/bin/ectags"
+if filereadable("/usr/local/bin/ectags")
+	let g:gutentags_ctags_executable="/usr/local/bin/ectags"
+endif
 let g:gutentags_ctags_executable_go="~/go/bin/gotags"
 let g:gutentags_project_root=[ "CVS", ".gutentags_stop" ]
 " i'll manually invoke :GutentagsUpdate when i need to
