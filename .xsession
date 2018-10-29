@@ -7,7 +7,11 @@ cleanup() {
 }
 trap cleanup INT TERM QUIT
 
-MACHINE="`sysctl -n hw.vendor` `sysctl -n hw.product`"
+if [ `uname -o` = "GNU/Linux" ]; then
+	MACHINE="`cat /sys/devices/virtual/dmi/id/sys_vendor` `cat /sys/devices/virtual/dmi/id/product_name`"
+else
+	MACHINE="`sysctl -n hw.vendor` `sysctl -n hw.product`"
+fi
 
 export LANG=en_US.UTF-8
 
@@ -42,8 +46,6 @@ xset dpms 0 0 0
 
 xidle -timeout 300 -ne -program ~/bin/lock &
 
-xsetroot -solid '#6c7c87' -cursor_name left_ptr
-
 redshift -l 41.90:-87.66 -t 6500:3250 -m randr &
 xbanish &
 
@@ -53,14 +55,17 @@ case $MACHINE in
 	hsetroot -solid '#83988E'
 	compton -b
 	xdimmer -n -a &
-
 	;;
-
 *)
 	echo "running on unknown machine \"${MACHINE}\""
+	xsetroot -solid '#6c7c87' -cursor_name left_ptr
 	;;
 esac
 
-/usr/local/bin/ratpoison
+if [ -f ~/.xsession.local ]; then
+	. ~/.xsession.local
+fi
+
+ratpoison
 
 cleanup
