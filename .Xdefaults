@@ -6,11 +6,10 @@ Xcursor.theme:			dmz
 Xcursor.size:			48
 #endif
 
-#define BG			#e5e3d9
-#define FG			#222222
-
 ! a muted palette for athena things like xterm, xfontsel, etc.
 ! created with http://ciembor.github.com/4bit
+#define BG			#e5e3d9
+#define FG			#444444
 *.background:			BG
 *.foreground:			FG
 
@@ -25,7 +24,7 @@ Xcursor.size:			48
 
 ! black
 *.color0:			FG
-*.color8:			#222222
+*.color8:			#333333
 
 ! red
 *.color1:			#825b69
@@ -64,7 +63,7 @@ Xcursor.size:			48
 ! xterm-specific settings
 
 #ifdef HIDPI
-*.internalBorder:		16
+*.internalBorder:		18
 #else
 *.internalBorder:		10
 #endif

@@ -32,7 +32,7 @@ set framefmt  frame %f (%wx%h)
 
 # window borders
 set border 0
-set gap 14
+set gap 20
 set fwcolor orange3
 set bwcolor gray
 
