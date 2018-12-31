@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require "rexml/document"
+require "net/https"
+
+RSS_FEED = "https://www.merriam-webster.com/wotd/feed/rss2"
+rss = Net::HTTP.get(URI.parse(RSS_FEED))
+
+xml = REXML::Document.new(rss)
+
+cur = if ARGV[0] == "yesterday"
+  xml.elements["rss/channel/item[2]"]
+else
+  xml.elements["rss/channel/item[1]"]
+end
+
+puts "[1;1m#{cur.elements["title"].text}[0;0m: #{cur.elements["merriam:shortdef"].text}"
