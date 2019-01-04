@@ -37,14 +37,14 @@ folder-hook .*openbsd-.* set \
 	signature= \
 	sort=threads
 
-folder-hook =(superblock|crs).* set \
+folder-hook =superblock.* set \
 	from="jcs@superblock.net" \
 	signature=~/.signature \
 	sort=threads \
 	strict_threads=yes \
 	sort_aux=last-date-received
-folder-hook =(superblock|crs).* unmy_hdr Bcc
-folder-hook =(superblock|crs).* my_hdr Bcc: jcs@superblock.net
+folder-hook =superblock.* unmy_hdr Bcc
+folder-hook =superblock.* my_hdr Bcc: jcs@superblock.net
 # archive is delete
 folder-hook =superblock macro index A <delete-message><sync-mailbox>
 folder-hook =superblock macro pager A <delete-message><sync-mailbox>
