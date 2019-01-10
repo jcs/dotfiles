@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e -x
+
+SETS="comp man game xbase xshare xserv base"
+
+REL=`uname -r | sed 's/\.//'`
+T=`mktemp -t -d upsnap.XXXXXXX`
+cd $T
+
+fetch() {
+	ftp `cat /etc/installurl`/snapshots/`arch -s`/$1
+}
+
+fetch "SHA256"
+fetch "SHA256.sig"
+
+for f in $SETS; do
+	fetch "${f}${REL}.tgz"
+	signify -C -x SHA256.sig ${f}${REL}.tgz || exit 1
+	sudo tar -xvpz -C / -f ${f}${REL}.tgz
+done
+
+sudo sysmerge
+sudo fw_update
+sudo pkg_add -u
