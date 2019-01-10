@@ -44,9 +44,11 @@ xset s off
 # disable dpms, because slock will handle it
 xset dpms 0 0 0
 
+# ~/bin/lock does some protections and runs slock
 xidle -timeout 300 -ne -program ~/bin/lock &
 
 redshift -l 41.90:-87.66 -t 6500:3250 -m randr &
+
 xbanish &
 
 case $MACHINE in
@@ -56,9 +58,18 @@ case $MACHINE in
 	compton -b
 	xdimmer -n -a &
 	;;
+
+"Apple Inc. MacBookPro12,1")
+	echo "Xft.dpi: 100" | xrdb -merge
+
+	xcalib ~/.icc/macbookpro.icc
+	hsetroot -solid '#83988E'
+	compton -b
+	;;
+
 *)
 	echo "running on unknown machine \"${MACHINE}\""
-	xsetroot -solid '#6c7c87' -cursor_name left_ptr
+	xsetroot -solid '#83988E' -cursor_name left_ptr
 	;;
 esac
 
