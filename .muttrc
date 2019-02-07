@@ -14,7 +14,7 @@ set date_format="!%a, %d %b %Y at %H:%M:%S %Z"
 set delete=yes
 set editor="vim"
 set fast_reply=yes
-set folder=~/Mail                               # overridden by imap
+set folder=~/Mail
 set forward_format="fwd: %s"
 set header_cache=~/.mutt-cache/
 set include=yes
@@ -37,7 +37,6 @@ set pipe_decode=yes
 set postpone=ask-no
 set postponed="=postponed"
 set print=ask-no
-set query_command="/usr/local/bin/lbdbq '%s'"
 set quit=ask-yes
 set read_inc=100
 set record="=Sent"
@@ -56,6 +55,9 @@ set timeout=15
 set use_envelope_from=yes
 set use_from
 unset user_agent
+
+# https://github.com/jcs/fastmail-ldap
+set query_command="~/bin/fastmail-ldap.pl '%s'"
 
 # things to bind keys to
 bind attach <left> exit

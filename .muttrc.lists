@@ -17,6 +17,9 @@ macro pager P <change-folder>=Other%20Users/support@pushover.net<enter>
 macro index H <change-folder>=openbsd-hackers<enter>
 macro pager H <change-folder>=openbsd-hackers<enter>
 
+# by default, set format=flowed on outbound e-mail so it looks right in
+# variable-width mail readers, but disable it for openbsd things because
+# i'm often sending patches that may get mangled by that
 folder-hook . set text_flowed
 
 # openbsd identity
@@ -43,10 +46,8 @@ folder-hook =.*pushover.* set \
 folder-hook =.*pushover.* unmy_hdr Bcc
 folder-hook =.*pushover.* my_hdr Bcc: support@pushover.net
 folder-hook =.*pushover.* set include_onlyfirst
-# archive is delete
-folder-hook =.*pushover.* macro index A <delete-message><sync-mailbox>
-folder-hook =.*pushover.* macro pager A <delete-message><sync-mailbox>
 
+# remove all mailboxes, then auto-load imap ones
 unmailboxes *
 
 # fastmail's shared folders have dots in them which confuses mutt so
@@ -63,9 +64,10 @@ set sidebar_indent_string=" "
 # reconnect as needed
 set imap_passive=no
 
+# put these mailboxes first before imap-subscribed ones
 mailboxes =INBOX =Other%20Users/support@pushover.net
 
-# mailing lists, alpha
+# mailing lists for list-reply
 
 # chibug
 subscribe talk
