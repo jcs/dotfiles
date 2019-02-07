@@ -105,6 +105,11 @@ umask 022                            # be nice
 autoload -Uz compinit
 compinit
 
+# https://superuser.com/questions/458906
+__git_files () {
+    _wanted files expl 'local files' _files
+}
+
 # os-specific tweaks
 
 # mac os
