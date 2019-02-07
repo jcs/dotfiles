@@ -11,20 +11,15 @@ folder-hook . set \
 folder-hook . my_hdr Bcc: jcs@jcs.org
 folder-hook . unset include_onlyfirst
 
-# default archiving, for folders where messages aren't already copied to allmail
-# from sieve rules
-folder-hook . macro index A <save-message>=allmail.`date +%Y`<enter><sync-mailbox>
-folder-hook . macro pager A <save-message>=allmail.`date +%Y`<enter><sync-mailbox>
-folder-hook . set text_flowed
-
 # common folders
-macro index U <change-folder>=superblock<enter>
-macro pager U <change-folder>=superblock<enter>
-macro index P <change-folder>=pushover<enter>
-macro pager P <change-folder>=pushover<enter>
+macro index P <change-folder>=Other%20Users/support@pushover.net<enter>
+macro pager P <change-folder>=Other%20Users/support@pushover.net<enter>
 macro index H <change-folder>=openbsd-hackers<enter>
 macro pager H <change-folder>=openbsd-hackers<enter>
 
+folder-hook . set text_flowed
+
+# openbsd identity
 send-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
 send-hook '~t .*@openbsd\.org' 'unset text_flowed'
 reply-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
@@ -37,82 +32,59 @@ folder-hook .*openbsd-.* set \
 	signature= \
 	sort=threads
 
-folder-hook =superblock.* set \
-	from="jcs@superblock.net" \
-	signature=~/.signature \
-	sort=threads \
-	strict_threads=yes \
-	sort_aux=last-date-received
-folder-hook =superblock.* unmy_hdr Bcc
-folder-hook =superblock.* my_hdr Bcc: jcs@superblock.net
-# archive is delete
-folder-hook =superblock macro index A <delete-message><sync-mailbox>
-folder-hook =superblock macro pager A <delete-message><sync-mailbox>
-
-folder-hook =pushover.* set \
+# pushover identity
+folder-hook =.*pushover.* set \
 	from="support@pushover.net" \
-	realname=\"joshua stein (Pushover Support)\" \
+	realname=\"Pushover Support\" \
 	signature=~/.signature.pushover \
 	sort=threads \
 	strict_threads=yes \
 	sort_aux=last-date-received
-folder-hook =pushover.* unmy_hdr Bcc
-folder-hook =pushover.* my_hdr Bcc: support@pushover.net
-folder-hook =pushover.* set include_onlyfirst
+folder-hook =.*pushover.* unmy_hdr Bcc
+folder-hook =.*pushover.* my_hdr Bcc: support@pushover.net
+folder-hook =.*pushover.* set include_onlyfirst
 # archive is delete
-folder-hook =pushover macro index A <delete-message><sync-mailbox>
-folder-hook =pushover macro pager A <delete-message><sync-mailbox>
-
-# imap mailboxes
+folder-hook =.*pushover.* macro index A <delete-message><sync-mailbox>
+folder-hook =.*pushover.* macro pager A <delete-message><sync-mailbox>
 
 unmailboxes *
 
-mailboxes =inbox
+# fastmail's shared folders have dots in them which confuses mutt so
+# remove dot as a delim char
+set imap_delim_chars="/"
 
-mailboxes =pushover
-mailboxes =pushover-daily
+# make the sidebar list all imap folders
+set imap_list_subscribed=yes
+set imap_check_subscribed=yes
+set sidebar_short_path=yes
+set sidebar_folder_indent=yes
+set sidebar_indent_string=" "
 
-mailboxes =superblock
-mailboxes =superblock-daily
-mailboxes =superblock-cvs
+# reconnect as needed
+set imap_passive=no
+
+mailboxes =INBOX =Other%20Users/support@pushover.net
 
 # mailing lists, alpha
 
-mailboxes =chibug
+# chibug
 subscribe talk
 
-mailboxes =chiclassiccomp
 subscribe chiclassiccomp
 
-mailboxes =coreboot
 subscribe coreboot
 
-mailboxes =openbsd-bugs
+# openbsd
 subscribe bugs
-
-mailboxes =openbsd-hackers
 subscribe hackers
-
-mailboxes =openbsd-misc
 subscribe misc
-
-mailboxes =openbsd-ports
 subscribe ports
-
-mailboxes =openbsd-ports-changes
 subscribe ports-changes
-
-mailboxes =openbsd-source-changes
 subscribe source-changes
-
-mailboxes =openbsd-tech
 subscribe tech
 
-mailboxes =openssh-unix-dev
 subscribe openssh-unix-dev
 
-mailboxes =oss-security
 subscribe oss-security
 
-mailboxes =ratpoison-devel
 subscribe ratpoison-devel

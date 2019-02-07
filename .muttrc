@@ -40,8 +40,9 @@ set print=ask-no
 set query_command="/usr/local/bin/lbdbq '%s'"
 set quit=ask-yes
 set read_inc=100
-set record="=sent"
+set record="=Sent"
 set sendmail="msmtp"
+set sidebar_delim_chars="/"
 set sidebar_divider_char="| "
 set sidebar_format="%B%*  %?N?(%N)?"
 set sidebar_visible=yes
@@ -106,8 +107,8 @@ macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen><enter
 folder-hook . set sort=threads                  # everything else
 folder-hook . set strict_threads=no             # compensate for stupid clients
 folder-hook . set sort_aux=last-date-received   # bumped threads appear new
-folder-hook sent set strict_threads=yes         # don't group incorrectly
-folder-hook sent set sort=date-sent             # when did i send that?
+folder-hook Sent set strict_threads=yes         # don't group incorrectly
+folder-hook Sent set sort=date-sent             # when did i send that?
 folder-hook allmail.* set sort=mailbox-order  # don't sort, for fast loading
 folder-hook allmail.* push <toggle-write>     # don't save changes, read-only
 
@@ -183,6 +184,8 @@ auto_view application/pgp-keys
 auto_view application/pgp-signature
 auto_view text/html                                       # html with lynx
 auto_view application/msword                              # .doc with antiword
+auto_view application/x-tar-gz
+auto_view application/x-zip-compressed
 
 # but that doesn't mean i don't like text/plain
 alternative_order text/plain text/html
