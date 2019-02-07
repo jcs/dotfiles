@@ -14,7 +14,6 @@ else
 fi
 
 export LANG=en_US.UTF-8
-
 export MOZ_USE_XINPUT2=1
 
 SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
@@ -30,6 +29,8 @@ if [ "$HIDPI" = "1" ]; then
 else
 	xrdb -DHOME=$HOME < ~/.Xdefaults
 fi
+
+xsetroot -cursor_name left_ptr
 
 eval `dbus-launch --sh-syntax`
 ruby ~/code/dzen-jcs/dzen-jcs.rb &
@@ -69,7 +70,7 @@ case $MACHINE in
 
 *)
 	echo "running on unknown machine \"${MACHINE}\""
-	xsetroot -solid '#83988E' -cursor_name left_ptr
+	xsetroot -solid '#6c7c87'
 	;;
 esac
 
