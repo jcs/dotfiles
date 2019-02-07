@@ -134,14 +134,14 @@ au BufNewFile,BufRead *.dsl setlocal ft=
 au FileType * setlocal colorcolumn=0
 
 " all source code gets wrapped at <80 and auto-indented
-au FileType asm,c,cpp,go,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
+au FileType arduino,asm,c,cpp,go,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
 
 " ruby has soft tabs
 au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=80
 au FileType yaml setlocal ts=2 sw=2 et colorcolumn=80
 
 " makefiles and c have tabstops at 8 for portability
-au FileType make,c,cpp setlocal ts=8 sw=8
+au FileType arduino,asm,make,c,cpp setlocal ts=8 sw=8
 
 " email and commit messages - expand tabs, wrap at 68 for future quoting, enable spelling
 au FileType cvs,gitcommit,mail setlocal tw=68 et spell colorcolumn=69
@@ -220,6 +220,7 @@ command! ToggleColorColumn :call ToggleColorColumn()
 " i hold shift a lot, make :W work like :w and :Q like :q
 cabbr W w
 cabbr Q q
+cabbr E e
 
 " w! still failed?  try w!! to write as root
 cmap w!! w !sudo tee >/dev/null %
