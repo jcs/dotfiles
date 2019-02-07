@@ -1,0 +1,34 @@
+#!/bin/sh
+
+set -e
+
+SETS="comp man game xbase xfont xshare xserv base"
+REL="6.4"
+T=~/up
+
+if [ ! -d $T ]; then
+	mkdir -f $T
+fi
+
+RELFN=`echo ${REL} | sed 's/\.//'`
+
+cd $T
+
+fetch() {
+	ftp `cat /etc/installurl`/${REL}/`arch -s`/$1
+}
+
+fetch "SHA256"
+fetch "SHA256.sig"
+
+for f in $SETS; do
+	fetch "${f}${RELFN}.tgz"
+	signify -C -x SHA256.sig ${f}${RELFN}.tgz || exit 1
+done
+
+for f in bsd.mp bsd.rd; do
+	fetch $f
+	signify -C -x SHA256.sig $f || exit 1
+done
+
+echo "fetched ${REL} to ${T}"
