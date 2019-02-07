@@ -7,6 +7,11 @@ if [ X"${PUSHOVER_USER_KEY}" = X"" ]; then
   exit 1
 fi
 
+if [ X"${PUSHOVER_APP_TOKEN}" = X"" ]; then
+  echo "\$PUSHOVER_APP_TOKEN not set"
+  exit 1
+fi
+
 curl -s \
   --form-string "user=${PUSHOVER_USER_KEY}" \
   --form-string "token=${PUSHOVER_APP_TOKEN}" \
