@@ -7,7 +7,7 @@ REL="6.4"
 T=~/up
 
 if [ ! -d $T ]; then
-	mkdir -f $T
+	mkdir $T
 fi
 
 RELFN=`echo ${REL} | sed 's/\.//'`
