@@ -40,6 +40,7 @@ set print=ask-no
 set quit=ask-yes
 set read_inc=100
 set record="=Sent"
+set reply_to=yes
 set sendmail="msmtp"
 set sidebar_delim_chars="/"
 set sidebar_divider_char="| "
