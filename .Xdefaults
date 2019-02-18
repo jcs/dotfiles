@@ -7,8 +7,7 @@ Xcursor.size:			48
 #endif
 
 ! a muted palette for athena things like xterm, xfontsel, etc.
-! created with http://ciembor.github.com/4bit
-#define BG			#e5e3d9
+#define BG			#d9d5ba
 #define FG			#444444
 *.background:			BG
 *.foreground:			FG

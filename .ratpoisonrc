@@ -15,8 +15,6 @@ set bargravity nw
 set barpadding 14 10
 set barinpadding 1
 set barsticky on
-set bgcolor black
-set fgcolor #e3e0d5
 set font monospace:size=12
 set ignorehints on
 set inputwidth 0
@@ -26,6 +24,10 @@ set padding 0 40 0 0
 set warp off
 set winliststyle row
 set winfmt %t
+
+# extract terminal background from Xdefaults to use as fgcolor
+exec _C=`xrdb -query | grep '^*.background' | sed 's/.*:[[:space:]]//'`; ratpoison -c "set fgcolor $_C"
+set bgcolor black
 
 # add leading and trailing space around this now that the padding is small
 set framefmt  frame %f (%wx%h) 

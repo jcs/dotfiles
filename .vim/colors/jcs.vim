@@ -40,6 +40,7 @@ hi SpecialKey		cterm=bold		ctermfg=NONE
 hi Statement		cterm=bold		ctermfg=NONE
 hi StatusLine		cterm=bold,reverse	ctermfg=NONE
 hi StatusLineNC		cterm=reverse		ctermfg=NONE
+hi TabLine		cterm=reverse		ctermfg=NONE
 hi Title		cterm=bold		ctermfg=NONE
 hi Todo			cterm=bold,standout	ctermfg=185	ctermbg=0
 hi Type			cterm=bold		ctermfg=NONE
@@ -50,7 +51,7 @@ hi VisualNOS		cterm=bold,underline	ctermfg=NONE
 hi WarningMsg		cterm=standout		ctermfg=NONE
 hi WildMenu		cterm=standout		ctermfg=NONE
 
-hi ColorColumn							ctermbg=251
+hi ColorColumn		cterm=NONE		ctermfg=NONE	ctermbg=251
 
 " for highlighting stray spaces/tabs (requires match statements in vimrc)
 hi ExtraWhitespace	cterm=reverse		ctermfg=185	ctermbg=NONE
