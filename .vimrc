@@ -153,6 +153,11 @@ au FileType cvs s/^CVS:/CVS:/|1
 " and for email, work properly with format=flowed
 au FileType mail setlocal formatoptions+=wq
 
+" z80 assembler syntax file is outdated
+au Syntax z8a syn match z8aPreProc "\.equ"
+au Syntax z8a syn match z8aPreProc "\.gblequ"
+au Syntax z8a syn match z8aPreProc "\.lclequ"
+
 
 "
 " package configuration
