@@ -35,7 +35,7 @@ set pager_stop=yes
 set pager_format=" %f: %s"
 set pipe_decode=yes
 set postpone=ask-no
-set postponed="=postponed"
+set postponed="=Drafts"
 set print=ask-no
 set quit=ask-yes
 set read_inc=100
