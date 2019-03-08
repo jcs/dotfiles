@@ -36,7 +36,7 @@ eval `dbus-launch --sh-syntax`
 ruby ~/code/dzen-jcs/dzen-jcs.rb &
 
 xmodmap ~/.xmodmap
-xset b off
+xset b 0 0 0
 xset r rate 350 35
 xset m 3/1 4
 
