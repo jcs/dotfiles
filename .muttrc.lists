@@ -65,7 +65,7 @@ set sidebar_indent_string=" "
 set imap_passive=no
 
 # put these mailboxes first before imap-subscribed ones
-mailboxes =INBOX =Other%20Users/support@pushover.net
+mailboxes =INBOX =Other%20Users/support@pushover.net =Other%20Users/support@pushover.net/daily
 
 # mailing lists for list-reply
 
@@ -73,8 +73,6 @@ mailboxes =INBOX =Other%20Users/support@pushover.net
 subscribe talk
 
 subscribe chiclassiccomp
-
-subscribe coreboot
 
 # openbsd
 subscribe bugs
