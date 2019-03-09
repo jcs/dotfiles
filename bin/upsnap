@@ -1,8 +1,8 @@
 #!/bin/sh
 
-set -e -x
+set -e
 
-SETS="comp man game xbase xshare xserv base"
+SETS="bsd.rd comp man game xbase xshare xserv base"
 
 REL=`uname -r | sed 's/\.//'`
 T=`mktemp -t -d upsnap.XXXXXXX`
@@ -16,9 +16,19 @@ fetch "SHA256"
 fetch "SHA256.sig"
 
 for f in $SETS; do
-	fetch "${f}${REL}.tgz"
-	signify -C -x SHA256.sig ${f}${REL}.tgz || exit 1
-	sudo tar -xvpz -C / -f ${f}${REL}.tgz
+	fn="${f}${REL}.tgz"
+	if [ $f = "bsd.rd" ]; then
+		fn=$f
+	fi
+
+	fetch ${fn}
+	signify -C -x SHA256.sig ${fn} || exit 1
+
+	if [ $f = "bsd.rd" ]; then
+		sudo cp -f $f /
+	else
+		sudo tar -xvpz -C / -f ${f}${REL}.tgz
+	fi
 done
 
 sudo sysmerge
