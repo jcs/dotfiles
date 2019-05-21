@@ -3,12 +3,6 @@
 " vim 8 config
 " joshua stein <jcs@jcs.org>
 "
-" packages can be added with:
-" git submodule add .../vim-somepackage .vim/pack/auto/start/vim-somepackage
-"
-" and updated with:
-" git submodule update --remote --merge
-"
 
 "
 " defaults for everything
@@ -20,6 +14,7 @@ set ignorecase
 set incsearch
 set laststatus=2
 set modelines=5
+set nocompatible
 set nofoldenable
 set nohlsearch
 set nostartofline
@@ -35,6 +30,9 @@ set spellfile=~/.vimspell.add
 set spelllang=en_us
 set tabstop=4
 set wildmode=longest,list,full
+
+" required for vundle
+filetype off
 
 " don't pollute directories with swap files, keep them in one place
 silent !mkdir -p ~/.vim/{backup,swp}/
@@ -87,6 +85,26 @@ augroup BWCCreateDir
     au!
     au BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 augroup END
+
+"
+" init vundle
+"
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" these require apostrophes instead of quotes for some dumb reason
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ap/vim-buftabline'
+Plugin 'rhysd/vim-crystal'
+Plugin 'fatih/vim-go'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'cespare/vim-sbd'
+Plugin 'scrooloose/nerdtree'
+
+call vundle#end()
+
+" re-enable
+filetype plugin indent on
 
 "
 " make buffer windows easier to navigate
@@ -181,7 +199,7 @@ let g:NERDTreeDirArrowExpandable="+"		 " use normal ascii
 let g:NERDTreeDirArrowCollapsible="~"
 let NERDTreeMinimalUI=1
 " leave 80 chars for editing
-let NERDTreeWinSize=str2nr(system('expr $COLUMNS - 80'))
+let NERDTreeWinSize=str2nr(system('expr $COLUMNS - 81'))
 let NERDTreeMapOpenRecursively="+"
 let NERDTreeMapCloseChildren="-"		 " easier to remember
 let NERDTreeIgnore = ['\.(o|pyc)$']
