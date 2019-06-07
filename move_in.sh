@@ -24,15 +24,17 @@ else
 	git clone https://github.com/jcs/dotfiles ~/.dotfiles
 fi
 
-if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
-	git clone https://github.com/VundleVim/Vundle.vim.git \
-		~/.vim/bundle/Vundle.vim
-fi
-
-vim +PluginInstall +qall
-
 cd ~/.dotfiles
 for f in .???*; do
 	rm -f ~/$f
 	(cd ~/; ln -s .dotfiles/$f $f)
 done
+
+if [[ ! -d ~/.vim/bundle/Vundle.vim ]]; then
+	git clone https://github.com/VundleVim/Vundle.vim.git \
+		~/.vim/bundle/Vundle.vim
+fi
+
+# we're probably being piped to a shell (ftp -o - .. | sh -) so this
+# won't work running it ourselves
+echo "vim +PluginInstall +qall"
