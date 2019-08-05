@@ -95,8 +95,6 @@ call vundle#begin()
 " these require apostrophes instead of quotes for some dumb reason
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ap/vim-buftabline'
-Plugin 'rhysd/vim-crystal'
-Plugin 'fatih/vim-go'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'cespare/vim-sbd'
 Plugin 'scrooloose/nerdtree'
