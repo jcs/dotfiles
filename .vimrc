@@ -29,6 +29,7 @@ set smartcase
 set spellfile=~/.vimspell.add
 set spelllang=en_us
 set tabstop=4
+set timeoutlen=0
 set wildmode=longest,list,full
 
 " required for vundle
@@ -150,11 +151,11 @@ au BufNewFile,BufRead *.dsl setlocal ft=
 au FileType * setlocal colorcolumn=0
 
 " all source code gets wrapped at <80 and auto-indented
-au FileType arduino,asm,c,cpp,go,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=80
+au FileType arduino,asm,c,cpp,go,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=81
 
 " ruby has soft tabs
-au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=80
-au FileType yaml setlocal ts=2 sw=2 et colorcolumn=80
+au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=81
+au FileType yaml setlocal ts=2 sw=2 et colorcolumn=81
 
 " makefiles and c have tabstops at 8 for portability
 au FileType arduino,asm,make,c,cpp setlocal ts=8 sw=8
