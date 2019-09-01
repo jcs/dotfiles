@@ -102,9 +102,6 @@ Plugin 'scrooloose/nerdtree'
 
 call vundle#end()
 
-" re-enable
-filetype plugin indent on
-
 "
 " make buffer windows easier to navigate
 "
