@@ -12,6 +12,8 @@ Xcursor.size:			48
 *.background:			BG
 *.foreground:			FG
 
+URxvt.geometry:			80x40
+
 *.scrollbar.background:		BG
 *.scrollbar.foreground:		FG
 *.scrollBar.minimumThumb:	50
@@ -49,9 +51,9 @@ Xcursor.size:			48
 *.color6:			#5b8275
 *.color14:			#a0bdb3
 
-! white
-*.color7:			#cacaca
-*.color15:			#ffffff
+! white (gray)
+*.color7:			#d9d7cc
+*.color15:			#e5e5e5
 
 #ifdef HIDPI
 *.font:				-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
@@ -62,7 +64,7 @@ Xcursor.size:			48
 ! xterm-specific settings
 
 #ifdef HIDPI
-*.internalBorder:		18
+*.internalBorder:		20
 #else
 *.internalBorder:		10
 #endif
@@ -89,8 +91,8 @@ XTerm.visualBell:		false
 
 #ifdef HIDPI
 XTerm.vt100.faceName:		monospace:size=12
-URxvt.font:			xft:monospace:size=12
-URxvt.boldFont:			xft:monospace:weight=bold:size=12
+URxvt.font:			xft:monospace:size=12,xft:noto emoji:size=12,xft:symbola
+URxvt.boldFont:			xft:monospace:weight=bold:size=12,xft:noto emoji:weight=bold:size=12,xft:symbola
 URxvt.letterSpace:		-1
 #else
 URxvt.font:			fixed

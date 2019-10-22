@@ -1,0 +1,58 @@
+set ignoreresizehints 1
+
+escape C-a
+bind s split
+bind C-s split
+bind S hsplit
+bind C-S hsplit
+
+bind c exec urxvt
+bind C-c exec urxvt
+
+# lock the screen
+bind L exec xset s activate
+
+# prevent accidental closes
+unbind k
+
+# swap workspaces, but define it in 'top' to avoid having to prefix with C-a
+definekey top M-1 vselect 0
+definekey top M-2 vselect 1
+definekey top M-3 vselect 2
+definekey top M-4 vselect 3
+
+# quickly jump to music
+definekey root 9 exec sdorfehs -c "vselect 0" -c "fselect 2" -c "select 9"
+
+# map to X1C7 F keys
+definekey top F1 exec mixerctl -q outputs.master.mute=toggle; pkill -USR1 i3status; true
+definekey top F2 exec mixerctl -q outputs.master.mute=off outputs.master=-10; pkill -USR1 i3status; true
+definekey top F3 exec mixerctl -q outputs.master.mute=off outputs.master=+10; pkill -USR1 i3status; true
+definekey top F5 exec sdorfehs -c "echo backlight: `xbacklight -dec 5 -time 0; xbacklight | sed 's/\..*//'`"
+definekey top F6 exec sdorfehs -c "echo backlight: `xbacklight -inc 5 -time 0; xbacklight | sed 's/\..*//'`"
+
+definekey top F10 exec ~/bin/music prev
+definekey top F11 exec ~/bin/music next
+definekey top F12 exec ~/bin/music playpause
+
+# i like tab just going between the same two windows
+bind Tab focuslast
+bind grave focus
+
+# act normal but prevent firefox raising itself when links are opened from
+# other apps
+#set rudeness 12
+
+# let popups stay centered
+unmanage xmessage
+unmanage xprompt
+unmanage OpenSSH Authentication Passphrase Request
+unmanage dzen title
+
+# startup configuration
+
+exec ruby ~/code/sdorfehs-bar/sdorfehs-bar.rb
+
+frestore (frame :number 0 :x 0 :y 40 :width 1280 :height 1400 :screenw 2560 :screenh 1440 :window 23068681 :last-access 29 :dedicated 0),(frame :number 1 :x 1280 :y 40 :width 1280 :height 1130 :screenw 2560 :screenh 1440 :window 18874377 :last-access 28 :dedicated 0),(frame :number 2 :x 1280 :y 1170 :width 1280 :height 270 :screenw 2560 :screenh 1440 :window 20971529 :last-access 24 :dedicated 0)
+
+exec urxvt

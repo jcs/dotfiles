@@ -2,7 +2,8 @@
 
 cleanup() {
 	echo "cleaning up"
-	pkill -9 dzen2 i3status dbus-daemon redshift compton
+	pkill ssh-agent-card-prompt dbus-daemon redshift compton
+	pkill -f "ruby.*sdorfehs-bar"
 	rm -f ~/.Xauthority
 }
 trap cleanup INT TERM QUIT
@@ -15,6 +16,10 @@ fi
 
 export LANG=en_US.UTF-8
 export MOZ_USE_XINPUT2=1
+
+# XXX: disable DRM until inteldrm hangs are fixed
+#export MOZ_ACCELERATED=1
+#export MOZ_WEBRENDER=1
 
 SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
 if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
@@ -32,13 +37,9 @@ fi
 
 xsetroot -cursor_name left_ptr
 
-eval `dbus-launch --sh-syntax`
-ruby ~/code/dzen-jcs/dzen-jcs.rb &
-
 xmodmap ~/.xmodmap
 xset b 0 0 0
 xset r rate 350 35
-xset m 3/1 4
 
 # disable built-in saver, because xidle will handle it
 xset s off
@@ -52,25 +53,35 @@ redshift -l 41.90:-87.66 -t 6500:3250 -m randr &
 
 xbanish &
 
+hsetroot -solid "#83988E"
+
+eval `dbus-launch --sh-syntax`
+
+compton -b
+
 case $MACHINE in
 "HUAWEI HUAWEI MateBook X")
 	xcalib ~/.icc/matebookx.icc
-	hsetroot -solid '#83988E'
-	compton -b
 	xdimmer -n -a &
 	;;
 
 "Apple Inc. MacBookPro12,1")
 	echo "Xft.dpi: 100" | xrdb -merge
-
 	xcalib ~/.icc/macbookpro.icc
-	hsetroot -solid '#83988E'
-	compton -b
+	;;
+
+"LENOVO 20QDCTO1WW")
+	xcalib ~/.icc/thinkpadx1c7.icc
+	xdimmer -k -s 100 &
+
+	# use ssh key on yubikey
+	pgrep -q ssh-agent || eval `ssh-agent -s`
+	ssh-add -s /usr/local/lib/pkcs11/opensc-pkcs11.so </dev/null
+	ssh-agent-card-prompt &
 	;;
 
 *)
 	echo "running on unknown machine \"${MACHINE}\""
-	xsetroot -solid '#6c7c87'
 	;;
 esac
 
@@ -78,6 +89,6 @@ if [ -f ~/.xsession.local ]; then
 	. ~/.xsession.local
 fi
 
-ratpoison
+~/code/sdorfehs/sdorfehs
 
 cleanup

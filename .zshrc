@@ -36,6 +36,7 @@ fi
 bindkey -e
 
 # i'm too lazy to type these out
+alias ag='ag --nocolor'
 alias calc='perl -pe "print eval(\$_) . chr(10);"'
 alias cdu='cvs -q diff -upRN'
 alias clip='xclip -in -selection clipboard'
@@ -56,6 +57,7 @@ alias publicip='curl -s http://ifconfig.me'
 alias refetch='cvs -q up -PACd'
 alias telnet='telnet -K'
 alias tin='tin -arQ'
+alias tm='tail -f /var/log/messages'
 alias u='cvs -q up -PAd'
 # serve up the current directory
 alias webserver="ifconfig | grep 'inet ' | grep -v 127.0.0.1; python -m SimpleHTTPServer"
@@ -155,10 +157,10 @@ if [[ $OSTYPE != darwin* ]]; then
 fi
 
 case $TERM in
-    xterm*)
-        precmd() {print -Pn "\e]0;%m:%~>\a"}
-        preexec() {print -Pn "\e]0;%m:%~> $1\a"}
-    ;;
+xterm*)
+    precmd() {print -Pn "\e]0;%m:%~>\a"}
+    preexec() {print -Pn "\e]0;%m:%~> $1\a"}
+;;
 esac
 
 if [ -f ~/.zshrc.local ]; then
