@@ -3,6 +3,7 @@
 	name = joshua stein
 
 [alias]
+	catchup = !git fetch upstream && git rebase upstream/master
 	diff-remote = diff origin..master
 	ff = pull --ff-only
 	fixup = rebase -i HEAD~5
