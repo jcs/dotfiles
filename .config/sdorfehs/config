@@ -32,8 +32,9 @@ definekey top F5 exec sdorfehs -c "echo backlight: `xbacklight -dec 5 -time 0; x
 definekey top F6 exec sdorfehs -c "echo backlight: `xbacklight -inc 5 -time 0; xbacklight | sed 's/\..*//'`"
 
 definekey top F10 exec ~/bin/music prev
-definekey top F11 exec ~/bin/music next
-definekey top F12 exec ~/bin/music playpause
+definekey top F11 exec ~/bin/music playpause
+definekey top F12 exec ~/bin/music next
+definekey top M-F12 exec ~/bin/music nextalbum
 
 # i like tab just going between the same two windows
 bind Tab focuslast
