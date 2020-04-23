@@ -8,6 +8,7 @@
 set ascii_chars=no
 set alias_file=~/.muttrc.aliases
 set attach_format="%u%D%I %t%2n %T%.20d  %> [%.7m/%.10M, %.6e%?C?, %C?, %s]                               "
+set charset=utf-8
 set confirmappend=no
 set connect_timeout=3
 set date_format="!%a, %d %b %Y at %H:%M:%S %Z"
@@ -35,12 +36,11 @@ set pager_stop=yes
 set pager_format=" %f: %s"
 set pipe_decode=yes
 set postpone=ask-no
-set postponed="=Drafts"
 set print=ask-no
 set quit=ask-yes
 set read_inc=100
-set record="=Sent"
 set reply_to=yes
+set send_charset="utf-8:us-ascii"
 set sendmail="msmtp"
 set sidebar_delim_chars="/"
 set sidebar_divider_char="| "
@@ -189,6 +189,7 @@ auto_view text/html                                       # html with lynx
 auto_view application/msword                              # .doc with antiword
 auto_view application/x-tar-gz
 auto_view application/x-zip-compressed
+auto_view application/zip
 
 # but that doesn't mean i don't like text/plain
 alternative_order text/plain text/html
