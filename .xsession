@@ -15,11 +15,10 @@ else
 fi
 
 export LANG=en_US.UTF-8
-export MOZ_USE_XINPUT2=1
 
-# XXX: disable DRM until inteldrm hangs are fixed
-#export MOZ_ACCELERATED=1
-#export MOZ_WEBRENDER=1
+export MOZ_USE_XINPUT2=1
+export MOZ_ACCELERATED=1
+export MOZ_WEBRENDER=1
 
 SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
 if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
