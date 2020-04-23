@@ -203,6 +203,15 @@ let NERDTreeIgnore = ['\.(o|pyc)$']
 " only enable buftabline on multiple buffers
 let g:buftabline_show=1
 
+" nerdtree
+let g:NERDTreeDirArrowExpandable="+"		" use normal ascii
+let g:NERDTreeDirArrowCollapsible="~"
+let NERDTreeMinimalUI=1
+" leave 80 chars for editing
+let NERDTreeWinSize=str2nr(system('expr $COLUMNS - 81'))
+let NERDTreeMapOpenRecursively="+"
+let NERDTreeMapCloseChildren="-"		" easier to remember
+let NERDTreeIgnore = ['\.(o|pyc)$']
 
 "
 " macros
