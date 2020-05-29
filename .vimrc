@@ -26,6 +26,7 @@ set showcmd
 set showmatch
 set showmode
 set smartcase
+set smarttab
 set spellfile=~/.vimspell.add
 set spelllang=en_us
 set tabstop=4
@@ -88,19 +89,20 @@ augroup BWCCreateDir
 augroup END
 
 "
-" init vundle
+" init vim-plug (run "vim +PlugInstall +qall" after modifying)
 "
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
 " these require apostrophes instead of quotes for some dumb reason
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ap/vim-buftabline'
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'cespare/vim-sbd'
-Plugin 'scrooloose/nerdtree'
+call plug#begin()
+Plug 'VundleVim/Vundle.vim'
+Plug 'ap/vim-buftabline'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'cespare/vim-sbd'
+Plug 'scrooloose/nerdtree'
+call plug#end()
 
-call vundle#end()
+" disable plugin auto-indenting
+filetype indent off
+filetype plugin indent off
 
 "
 " make buffer windows easier to navigate
@@ -252,6 +254,17 @@ cabbr E e
 
 " w! still failed?  try w!! to write as root
 cmap w!! w !sudo tee >/dev/null %
+
+" f will show the current function name
+fun! ShowFuncName()
+  let lnum = line(".")
+  let col = col(".")
+  echohl ModeMsg
+  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
+  echohl None
+  call search("\\%" . lnum . "l" . "\\%" . col . "c")
+endfun
+map f :call ShowFuncName() <CR>
 
 
 "
