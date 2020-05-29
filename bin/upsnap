@@ -2,9 +2,8 @@
 
 set -e
 
-SETS="bsd.rd comp man game xbase xshare xserv base"
+SETS="bsd.mp bsd.rd comp man game xbase xshare xserv base"
 
-REL=`uname -r | sed 's/\.//'`
 T=`mktemp -t -d upsnap.XXXXXXX`
 cd $T
 
@@ -15,9 +14,16 @@ fetch() {
 fetch "SHA256"
 fetch "SHA256.sig"
 
+REL=`grep 'comp...tgz' ${T}/SHA256.sig | sed -e 's/.tgz.*//' -e 's/.*comp//'`
+
+if [ "${REL}" = "" ]; then
+	echo "can't find release version in SHA256.sig"
+	exit 1
+fi
+
 for f in $SETS; do
 	fn="${f}${REL}.tgz"
-	if [ $f = "bsd.rd" ]; then
+	if [ $f = "bsd.rd" ] || [ $f = "bsd.mp" ]; then
 		fn=$f
 	fi
 
@@ -26,11 +32,14 @@ for f in $SETS; do
 
 	if [ $f = "bsd.rd" ]; then
 		sudo cp -f $f /
+	elif [ $f = "bsd.mp" ]; then
+		sudo cp -f $f /bsd.snap
 	else
 		sudo tar -xvpz -C / -f ${f}${REL}.tgz
 	fi
 done
 
+(cd /dev; sudo sh MAKEDEV all)
 sudo sysmerge
 sudo fw_update
 sudo pkg_add -u
