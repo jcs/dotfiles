@@ -18,6 +18,7 @@ set fast_reply=yes
 set folder=~/Mail
 set forward_format="fwd: %s"
 set header_cache=~/.mutt-cache/
+set hostname=localhost
 set include=yes
 set index_format="%[!%m%d] [%Z] %-54.54s %F"
 set ispell="aspell --mode=email --add-email-quote=%,#,:,} --check"
