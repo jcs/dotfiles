@@ -5,3 +5,6 @@ def history(num=100)
     puts " #{(i).to_s.rjust(4)}  #{cmd}"
   end
 end
+
+IRB.conf[:USE_COLORIZE] = false
+IRB.conf[:AUTO_INDENT] = false
