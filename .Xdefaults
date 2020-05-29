@@ -12,6 +12,7 @@ Xcursor.size:			48
 *.background:			BG
 *.foreground:			FG
 
+XTerm*geometry:			80x40
 URxvt.geometry:			80x40
 
 *.scrollbar.background:		BG
@@ -135,3 +136,11 @@ SshAskpass*Dialog.font:		-*-lucida-medium-r-*-*-26-*-*-*-*-*-*-*
 SshAskpass*Indicator.width:	30
 SshAskpass*Indicator.height:	15
 #endif
+
+XClock*.update:			1
+XClock*.analog:			False
+XClock*.render:			True
+XClock*.padding:		40
+XClock*.face:			Microsoft Sans Serif:size=20
+XClock*.strftime:		%H:%M:%S %D
+XClock*.background:		#c0c7c8
