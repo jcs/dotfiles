@@ -1,7 +1,7 @@
 # vim:tw=0
 
 # whois me
-alternates (jcs@(rt\.fm|((noc|backup)\.)?superblock.net|jcs\.org|lowerca\.se|(cvs\.)?openbsd\.org|1\.8T\.org)|admin@1\.8T\.org|(billing|corduroy)@superblock\.net|(support|jcs)@pushover\.net)
+alternates (jcs@(superblock\.net|jcs\.org|(cvs\.)?openbsd\.org|pushover\.net)|((billing|support)@(superblock|pushover)\.net))
 
 # default address, no signature
 folder-hook . set \
@@ -10,6 +10,7 @@ folder-hook . set \
 	signature=
 folder-hook . my_hdr Bcc: jcs@jcs.org
 folder-hook . unset include_onlyfirst
+folder-hook . set record="=Sent"
 
 # common folders
 macro index P <change-folder>=Other%20Users/support@pushover.net<enter>
@@ -23,15 +24,11 @@ macro pager H <change-folder>=openbsd-hackers<enter>
 folder-hook . set text_flowed
 
 # openbsd identity
-send-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
 send-hook '~t .*@openbsd\.org' 'unset text_flowed'
-reply-hook '~t .*@openbsd\.org' 'set from="jcs@openbsd.org"'
 reply-hook '~t .*@openbsd\.org' 'unset text_flowed'
-reply-hook '~f .*@openbsd\.org' 'set from="jcs@openbsd.org"'
 reply-hook '~f .*@openbsd\.org' 'unset text_flowed'
 
 folder-hook .*openbsd-.* set \
-	from="jcs@openbsd.org" \
 	signature= \
 	sort=threads
 
@@ -46,6 +43,7 @@ folder-hook =.*pushover.* set \
 folder-hook =.*pushover.* unmy_hdr Bcc
 folder-hook =.*pushover.* my_hdr Bcc: support@pushover.net
 folder-hook =.*pushover.* set include_onlyfirst
+folder-hook =.*pushover.* set record="=Other%20Users/support@pushover.net/Sent"
 
 # remove all mailboxes, then auto-load imap ones
 unmailboxes *
@@ -64,8 +62,18 @@ set sidebar_indent_string=" "
 # reconnect as needed
 set imap_passive=no
 
+# set these as defaults in case the folder-hook doesn't run,
+# such as when sending from the command line
+set from="jcs@jcs.org"
+set realname="joshua stein"
+set signature=
+my_hdr Bcc: jcs@jcs.org
+set record="=Sent"
+
 # put these mailboxes first before imap-subscribed ones
-mailboxes =INBOX =Other%20Users/support@pushover.net =Other%20Users/support@pushover.net/daily
+mailboxes =INBOX
+mailboxes =Other%20Users/support@pushover.net =Other%20Users/support@pushover.net/daily
+mailboxes =Other%20Users/support@pushover.net/Sent
 
 # mailing lists for list-reply
 
