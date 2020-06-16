@@ -192,16 +192,6 @@ let g:gutentags_generate_on_missing=0
 let g:gutentags_generate_on_new=0
 let g:gutentags_generate_on_write=0
 
-" nerdtree
-let g:NERDTreeDirArrowExpandable="+"		 " use normal ascii
-let g:NERDTreeDirArrowCollapsible="~"
-let NERDTreeMinimalUI=1
-" leave 80 chars for editing
-let NERDTreeWinSize=str2nr(system('expr $COLUMNS - 81'))
-let NERDTreeMapOpenRecursively="+"
-let NERDTreeMapCloseChildren="-"		 " easier to remember
-let NERDTreeIgnore = ['\.(o|pyc)$']
-
 " only enable buftabline on multiple buffers
 let g:buftabline_show=1
 
@@ -267,9 +257,7 @@ endfun
 map f :call ShowFuncName() <CR>
 
 
-"
 " me fail english?  that's unpossible!
-"
 abbr seperate separate
 abbr furnature furniture
 abbr rediculous ridiculous
