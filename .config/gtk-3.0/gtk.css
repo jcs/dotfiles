@@ -1,3 +1,18 @@
+* {
+	font-family: "Microsoft Sans Serif";
+	/*font-weight: bold; */
+	font-size: 14pt;
+}
+
+menubar {
+	background-color: white;
+}
+
+menubar menuitem:hover {
+	background-color: #0000a8;
+	color: white;
+}
+
 scrollbar slider {
   min-width: 15px;
   min-height: 15px;
