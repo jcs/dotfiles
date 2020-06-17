@@ -24,8 +24,8 @@ macro pager H <change-folder>=openbsd-hackers<enter>
 folder-hook . set text_flowed
 
 # openbsd identity
-send-hook '~t .*@openbsd\.org' 'unset text_flowed'
-reply-hook '~t .*@openbsd\.org' 'unset text_flowed'
+send-hook '~C .*@openbsd\.org' 'unset text_flowed'
+reply-hook '~C .*@openbsd\.org' 'unset text_flowed'
 reply-hook '~f .*@openbsd\.org' 'unset text_flowed'
 
 folder-hook .*openbsd-.* set \
