@@ -1,0 +1,12 @@
+configuration {
+	modi: "run";
+	font: "Microsoft Sans Serif 14";
+	lines: 10;
+	width: 40;
+	padding: 10;
+	color-normal: "white,black,white,#0000a8,white";
+	color-window: "white,#c0c7c8,white";
+	bw: 8;
+	scrollbar-width: 0;
+	separator-style: "solid";
+}
