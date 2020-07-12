@@ -96,7 +96,8 @@ URxvt.font:			xft:monospace:size=12,xft:noto emoji:size=12,xft:symbola
 URxvt.boldFont:			xft:monospace:weight=bold:size=12,xft:noto emoji:weight=bold:size=12,xft:symbola
 URxvt.letterSpace:		-1
 #else
-URxvt.font:			fixed
+URxvt.font:			6x13
+URxvt.boldFont:			6x13bold
 URxvt.letterSpace:		0
 #endif
 
