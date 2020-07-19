@@ -9,6 +9,7 @@
 "
 let c_minlines=500
 set backspace=indent,eol,start
+set encoding=utf-8
 set hidden
 set ignorecase
 set incsearch
