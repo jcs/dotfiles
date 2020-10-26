@@ -8,20 +8,12 @@
 export BLOCKSIZE=1k
 export CVS_RSH=/usr/bin/ssh
 export IRCNAME="*Unknown*"
-
-# pass through to bash in case it somehow gets invoked
 export HISTFILE=
-
-# always allow case insensitive searching when using less
 export LESS="-i"
-
-# ow my security
 export MYSQL_HISTFILE=/dev/null
-
-# get off my lawn
 export NO_COLOR=1
-
 export PATH=~/bin:~/go/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin
+export SSH_ASKPASS_REQUIRE=prefer
 
 # let control+w only delete one directory of a path, not the whole word
 export WORDCHARS='*?_[]~=&;!#$%^(){}'
@@ -41,6 +33,7 @@ alias calc='perl -pe "print eval(\$_) . chr(10);"'
 alias cdu='cvs -q diff -upRN'
 alias clip='xclip -in -selection clipboard'
 alias cp='cp -i'
+alias gs='git status'
 alias hg='history | grep '
 alias jobs='jobs -p'
 alias k9='kill -9 %1'
@@ -55,6 +48,7 @@ alias ph='ps auwwx | head'
 alias pg='ps auwwx | grep -i -e ^USER -e '
 alias publicip='curl -s http://ifconfig.me'
 alias refetch='cvs -q up -PACd'
+alias rg='rg --color=never -N -z'
 alias telnet='telnet -K'
 alias tin='tin -arQ'
 alias tm='tail -f /var/log/messages'
