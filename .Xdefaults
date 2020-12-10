@@ -67,7 +67,7 @@ URxvt.geometry:			80x40
 #ifdef HIDPI
 *.internalBorder:		20
 #else
-*.internalBorder:		10
+*.internalBorder:		12
 #endif
 *.saveLines:			20000
 *.scrollBar:			false
@@ -92,12 +92,12 @@ XTerm.visualBell:		false
 
 #ifdef HIDPI
 XTerm.vt100.faceName:		monospace:size=12
-URxvt.font:			xft:monospace:size=12,xft:noto emoji:size=12,xft:symbola
+URxvt.font:			xft:monospace:size=12,xft:noto emoji:size=12
 URxvt.boldFont:			xft:monospace:weight=bold:size=12,xft:noto emoji:weight=bold:size=12,xft:symbola
 URxvt.letterSpace:		-1
 #else
-URxvt.font:			6x13
-URxvt.boldFont:			6x13bold
+URxvt.font:			6x13,xft:noto emoji:size=12,xft:symbola
+URxvt.boldFont:			6x13bold,xft:noto emoji:weight=bold:size=12
 URxvt.letterSpace:		0
 #endif
 
@@ -105,8 +105,8 @@ URxvt.letterSpace:		0
 XTerm.vt100.translations:	#override\
     Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)\n\
     Super <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
-
 URxvt.keysym.M-v:		eval:paste_clipboard
+URxvt.keysym.Mod4-v:		eval:paste_clipboard
 URxvt.cutchars:			`"'&()*,;<=>?@[]^{|}.:/-
 
 ! support right-clicking urls to open them
