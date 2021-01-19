@@ -28,38 +28,32 @@ fi
 bindkey -e
 
 # i'm too lazy to type these out
-alias ag='ag --nocolor'
 alias calc='perl -pe "print eval(\$_) . chr(10);"'
-alias cdu='cvs -q diff -upRN'
-alias clip='xclip -in -selection clipboard'
-alias cp='cp -i'
-alias gs='git status'
-alias hg='history | grep '
-alias jobs='jobs -p'
-alias k9='kill -9 %1'
-alias ll='ls -alF'
-alias lo='logout'
-alias ls='ls -aF'
-alias manfile='groff -man -Tascii \!* | less'
-alias mv='mv -i'
-alias offline_mutt='mutt -R -F ~/.muttrc.offline'
-alias pastebin="curl -F 'f:1=<-' ix.io"
-alias ph='ps auwwx | head'
-alias pg='ps auwwx | grep -i -e ^USER -e '
-alias publicip='curl -s http://ifconfig.me'
-alias refetch='cvs -q up -PACd'
-alias rg='rg --color=never -N -z'
-alias telnet='telnet -K'
-alias tin='tin -arQ'
-alias tm='tail -f /var/log/messages'
-alias u='cvs -q up -PAd'
+alias cdu="cvs -q diff -upRN"
+alias cp="cp -i"
+alias gs="git status"
+alias hg="history | grep "
+alias jobs="jobs -p"
+alias k9="kill -9 %1"
+alias ll="ls -alF"
+alias ls="ls -aF"
+alias mv="mv -i"
+alias offline_mutt="mutt -R -F ~/.muttrc.offline"
+alias ph="ps auwwx | head"
+alias pg="ps auwwx | grep -i -e ^USER -e "
+alias publicip="curl -s http://ifconfig.me"
+alias refetch="cvs -q up -PACd"
+alias rg="rg --color=never -N -z"
+alias telnet="telnet -K"
+alias tm="tail -f /var/log/messages"
+alias u="cvs -q up -PAd"
 # serve up the current directory
 alias webserver="ifconfig | grep 'inet ' | grep -v 127.0.0.1; python -m SimpleHTTPServer"
 
 # when i say vi i mean vim (if it's installed)
 if [ -x "`which vim`" ]; then
-   alias vi='vim'
-   alias view='vim -R'
+   alias vi="vim"
+   alias view="vim -R"
    export EDITOR=`which vim`
 else
    export EDITOR=/usr/bin/vi
@@ -70,7 +64,7 @@ setopt noclobber                     # halp me
 setopt nohup                         # don't kill things when i logout
 setopt print_exit_value              # i want to know if something went wrong
 HISTSIZE=500
-PS1='%n@%m:%~%(!.#.>) '              # prompt
+PS1="%n@%m:%~%(!.#.>) "              # prompt
 TMOUT=0                              # don't auto logout
 
 # i am frequently too quick to logout with control+d twice (one to exit ssh,
@@ -106,36 +100,25 @@ __git_files () {
     _wanted files expl 'local files' _files
 }
 
+# envs.sh file service
+mirror() {
+    curl -F "url=$1" https://envs.sh/
+}
+upload() {
+    if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
+    curl -F $a https://envs.sh/
+}
+
 # os-specific tweaks
 
 # mac os
 if [[ $OSTYPE = darwin* ]]; then
-   alias ldd='otool -L'
-   alias sha1='openssl dgst -sha1'
-
-   # update dotfiles
-   alias update_dotfiles='curl https://raw.githubusercontent.com/jcs/dotfiles/master/move_in.sh | sh -x -'
-
-   # bring in rbenv
-   if [ -d /usr/local/Cellar/rbenv ]; then
-       export PATH="${HOME}/.rbenv/shims:${PATH}:/opt/X11/bin"
-       source /usr/local/Cellar/rbenv/*/completions/rbenv.zsh;
-   fi
-
    export STORE_LASTDIR=1
    export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
 
-# openbsd
-elif [[ $OSTYPE = openbsd* ]]; then
-   alias watchbw='netstat -w1 -b -I'
-
-   # for ports
-   alias remake='cd ../../; rm w-*/.build*; make; cd -'
-
-# loonix
 elif [[ $OSTYPE = linux* ]]; then
-   alias ls='ls -aFv'
-   alias ph='ps auwwx | sort -rk 3,3 | head'
+   alias ls="ls -aFv"
+   alias ph="ps auwwx | sort -rk 3,3 | head"
 fi
 
 # and the reverse
@@ -146,14 +129,13 @@ fi
 
 if [[ $OSTYPE != darwin* ]]; then
    watch=
-
-   alias pbcopy='xclip -in -selection clipboard'
+   alias pbcopy="xclip -in -selection clipboard"
 fi
 
 case $TERM in
 xterm*)
-    precmd() {print -Pn "\e]0;%m:%~>\a"}
-    preexec() {print -Pn "\e]0;%m:%~> $1\a"}
+    precmd() { print -Pn "\e]0;%m:%~>\a" }
+    preexec() { print -Pn "\e]0;%m:%~> $1\a" }
 ;;
 esac
 
