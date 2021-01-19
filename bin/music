@@ -1,0 +1,96 @@
+#!/bin/sh
+
+CMUS="cmus"
+PIANOBAR="pianobar"
+AUDACIOUS="audacious"
+
+PLAYER=""
+if [ ! X`pgrep cmus` = X"" ]; then
+	PLAYER=$CMUS
+elif [ ! X`pgrep pianobar` = X"" ]; then
+	PLAYER=$PIANOBAR
+elif [ ! X`pgrep audacious` = X"" ]; then
+	PLAYER=$AUDACIOUS
+else
+	echo "no music player"
+	exit 1
+fi
+
+case "$1" in
+next)
+	case $PLAYER in
+	$CMUS)
+		;;
+	$PIANOBAR)
+		echo -n 'n' > ~/.config/pianobar/ctl
+		;;
+	$AUDACIOUS)
+		audtool playlist-advance
+		;;
+	esac
+	;;
+nextalbum)
+	case $PLAYER in
+	$CMUS)
+		;;
+	$PIANOBAR)
+		;;
+	$AUDACIOUS)
+		audtool playlist-advance-album
+		;;
+	esac
+	;;
+prev)
+	case $PLAYER in
+	$CMUS)
+		;;
+	$PIANOBAR)
+		# not possible
+		;;
+	$AUDACIOUS)
+		audtool playlist-reverse
+		;;
+	esac
+	;;
+prevalbum)
+	case $PLAYER in
+	$CMUS)
+		;;
+	$PIANOBAR)
+		;;
+	$AUDACIOUS)
+		audtool playlist-reverse-album
+		;;
+	esac
+	;;
+pause)
+	case $PLAYER in
+	$CMUS)
+		cmus-remote -u
+		;;
+	$PIANOBAR)
+		echo -n 'S' > ~/.config/pianobar/ctl
+		;;
+	$AUDACIOUS)
+		audtool playback-pause
+		;;
+	esac
+	;;
+playpause)
+	case $PLAYER in
+	$CMUS)
+		cmus-remote -u
+		;;
+	$PIANOBAR)
+		echo -n 'p' > ~/.config/pianobar/ctl
+		;;
+	$AUDACIOUS)
+		audtool playback-playpause
+		;;
+	esac
+	;;
+*)
+	echo "unknown command \"${1}\""
+	exit 1
+	;;
+esac
