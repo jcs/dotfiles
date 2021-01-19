@@ -72,8 +72,10 @@ set record="=Sent"
 
 # put these mailboxes first before imap-subscribed ones
 mailboxes =INBOX
-mailboxes =Other%20Users/support@pushover.net =Other%20Users/support@pushover.net/daily
+mailboxes =Other%20Users/support@pushover.net
+mailboxes =Other%20Users/support@pushover.net/daily
 mailboxes =Other%20Users/support@pushover.net/Sent
+#mailboxes =Other%20Users/support@pushover.net/Archive
 
 # mailing lists for list-reply
 
@@ -90,6 +92,8 @@ subscribe ports
 subscribe ports-changes
 subscribe source-changes
 subscribe tech
+
+subscribe mailstation
 
 subscribe openssh-unix-dev
 

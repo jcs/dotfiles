@@ -93,7 +93,7 @@ macro index J "<enter-command>push <sidebar-next><sidebar-open><enter>"
 macro index,pager i "<change-folder>!<enter>" "go home"
 macro index,pager n "<change-folder><enter>" "go to box with new mail"
 macro index,pager p "<change-folder><up><up><enter>" "go back to the previous mailbox"
-macro index D "<tag-pattern>~d >1m<enter><tag-prefix-cond><delete-message>" "delete old mail"
+macro index D "<tag-pattern>~d >6m<enter><tag-prefix-cond><delete-message>" "delete old mail"
 
 # do a one-time reply with sig on top, for e-mail chains where everyone else
 # is doing annoying top-replying
