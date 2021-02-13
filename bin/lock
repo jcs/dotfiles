@@ -1,20 +1,20 @@
 #!/bin/sh
 
-# kill any active tokens
-sudo -K
+# force keyboard backlight to dim
+pkill -USR1 xdimmer
 
-# remove ssh passphrase key
-ssh-add -D
+# kill any active tokens
+doas -L
+
+# clear clipboard
+echo -n | pbcopy
 
 if [ `uname -s` = "OpenBSD" ]; then
-	pkill -KILL -f _chat@
-
-	# lock
+	pkill -KILL -f chat@
+	pkill -USR2 -f sdorfehs-bar
+	~/bin/music pause
 	slock
 
 elif [ `uname -s` = "Darwin" ]; then
-	# clear clipboard
-	echo "" | pbcopy
-
 	~/bin/mac/sleepdisplay
 fi
