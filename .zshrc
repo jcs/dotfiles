@@ -48,7 +48,7 @@ alias telnet="telnet -K"
 alias tm="tail -f /var/log/messages"
 alias u="cvs -q up -PAd"
 # serve up the current directory
-alias webserver="ifconfig | grep 'inet ' | grep -v 127.0.0.1; python -m SimpleHTTPServer"
+alias webserver="ifconfig | grep 'inet ' | grep -v 127.0.0.1; python2 -m SimpleHTTPServer"
 
 # when i say vi i mean vim (if it's installed)
 if [ -x "`which vim`" ]; then
@@ -64,7 +64,7 @@ setopt noclobber                     # halp me
 setopt nohup                         # don't kill things when i logout
 setopt print_exit_value              # i want to know if something went wrong
 HISTSIZE=500
-PS1="%n@%m:%~%(!.#.>) "              # prompt
+PS1="%m:%~%(!.#.$) "                 # prompt
 TMOUT=0                              # don't auto logout
 
 # i am frequently too quick to logout with control+d twice (one to exit ssh,
@@ -91,9 +91,6 @@ WATCHFMT="%B%n%b %a %l at %@"
 # etc
 limit coredumpsize 0                 # don't know why you'd want anything else
 umask 022                            # be nice
-
-autoload -Uz compinit
-compinit
 
 # https://superuser.com/questions/458906
 __git_files () {
