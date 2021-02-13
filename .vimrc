@@ -163,6 +163,9 @@ au FileType arduino,asm,make,c,cpp setlocal ts=8 sw=8
 " email and commit messages - expand tabs, wrap at 68 for future quoting, enable spelling
 au FileType cvs,gitcommit,mail setlocal tw=68 et spell colorcolumn=69
 
+" markdown files get hard tabs, wrapped at 79 and spell checking
+au FileType markdown setlocal tw=79 spell colorcolumn=81
+
 " and make sure cvs adds a blank line for me to start typing
 " (openbsd's cvs does this by default)
 au FileType cvs s/^CVS:/CVS:/|1
