@@ -17,15 +17,15 @@ fi
 export LANG=en_US.UTF-8
 
 export MOZ_USE_XINPUT2=1
-export MOZ_ACCELERATED=1
-export MOZ_WEBRENDER=1
+#export MOZ_ACCELERATED=1
+#export MOZ_WEBRENDER=1
 
 SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
 if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
 	echo "using HIDPI"
 	export HIDPI=1
 	export GDK_SCALE=1.5
-	export QT_SCALE_FACTOR=1.5
+	#export QT_SCALE_FACTOR=1.5
 fi
 
 if [ "$HIDPI" = "1" ]; then
@@ -45,14 +45,15 @@ xset s off
 # disable dpms, because slock will handle it
 xset dpms 0 0 0
 
+# ~/bin/music called from lock needs DBUS_SESSION_BUS_ADDRESS
+eval `dbus-launch --sh-syntax`
+
 # ~/bin/lock does some protections and runs slock
 xidle -timeout 300 -ne -program ~/bin/lock &
 
 xbanish &
 
-eval `dbus-launch --sh-syntax`
-
-compton -b
+#compton -b
 
 WM=sdorfehs
 
@@ -72,6 +73,7 @@ case $MACHINE in
 "LENOVO 20UN0008US")
 	xcalib ~/.icc/thinkpadx1n1.icc
 	xdimmer -nk -t 5 -s 3 -b 3 &
+	WM=~/code/progman/progman
 	WM=~/code/sdorfehs/sdorfehs
 	;;
 
