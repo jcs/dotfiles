@@ -48,15 +48,15 @@ xset dpms 0 0 0
 # ~/bin/lock does some protections and runs slock
 xidle -timeout 300 -ne -program ~/bin/lock &
 
-redshift -l 41.90:-87.66 -t 6500:3250 -m randr &
-
 xbanish &
-
-hsetroot -solid "#83988E"
 
 eval `dbus-launch --sh-syntax`
 
 compton -b
+
+WM=sdorfehs
+
+hsetroot -solid "#83988E"
 
 case $MACHINE in
 "HUAWEI HUAWEI MateBook X")
@@ -65,18 +65,14 @@ case $MACHINE in
 	;;
 
 "Apple Inc. MacBookPro12,1")
-	echo "Xft.dpi: 100" | xrdb -merge
 	xcalib ~/.icc/macbookpro.icc
+	echo "Xft.dpi: 100" | xrdb -merge
 	;;
 
-"LENOVO 20QDCTO1WW")
-	xcalib ~/.icc/thinkpadx1c7.icc
-	xdimmer -k -s 100 &
-
-	# use ssh key on yubikey
-	pgrep -q ssh-agent || eval `ssh-agent -s`
-	ssh-add -s /usr/local/lib/pkcs11/opensc-pkcs11.so </dev/null
-	ssh-agent-card-prompt &
+"LENOVO 20UN0008US")
+	xcalib ~/.icc/thinkpadx1n1.icc
+	xdimmer -nk -t 5 -s 3 -b 3 &
+	WM=~/code/sdorfehs/sdorfehs
 	;;
 
 *)
@@ -84,10 +80,13 @@ case $MACHINE in
 	;;
 esac
 
+# run after any icc profile loading
+redshift -l 41.90:-87.66 -t 6500:3500 -m randr &
+
 if [ -f ~/.xsession.local ]; then
 	. ~/.xsession.local
 fi
 
-~/code/sdorfehs/sdorfehs
+$WM
 
 cleanup
