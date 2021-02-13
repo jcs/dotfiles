@@ -72,7 +72,12 @@ pause)
 		echo -n 'S' > ~/.config/pianobar/ctl
 		;;
 	$AUDACIOUS)
-		audtool playback-pause
+		# "audtool playback-pause" should just pause, but it stupidly inverts
+		# playing status so we need to check if it's both playing and not
+		# paused
+		if [ `audtool playback-status` == "playing" ]; then
+			audtool playback-pause
+		fi
 		;;
 	esac
 	;;
