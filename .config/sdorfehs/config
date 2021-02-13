@@ -12,7 +12,7 @@ bind c exec urxvt
 bind C-c exec urxvt
 
 # lock the screen
-bind L exec xset s activate
+bind L exec pkill -USR1 xidle
 
 # prevent accidental closes
 unbind k
