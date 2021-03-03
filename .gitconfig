@@ -7,7 +7,8 @@
 	diff-remote = diff origin..master
 	ff = pull --ff-only
 	fixup = rebase -i HEAD~5
-	graph = log --oneline --all --graph --decorate
+	tree = log --graph --pretty=format:'[%h] [%<(8,trunc)%al] [%cs] %<(50,trunc)%s' --abbrev-commit
+	touch = commit --amend --reset-author --no-edit
 [push]
 	default = simple
 [color]
