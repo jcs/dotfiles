@@ -31,16 +31,16 @@ for f in $SETS; do
 	signify -C -x SHA256.sig ${fn} || exit 1
 
 	if [ $f = "bsd.rd" ]; then
-		sudo cp -f $f /
+		doas cp -f $f /
 	elif [ $f = "bsd.mp" ]; then
-		sudo cp -f $f /bsd.snap
+		doas cp -f $f /bsd.snap
 	else
-		sudo tar -xvpz -C / -f ${f}${REL}.tgz
+		doas tar -xvpz -C / -f ${f}${REL}.tgz
 	fi
 done
 
-(cd /dev; sudo sh MAKEDEV all)
-sudo env USER=jcs sh /etc/X11/xenodm/GiveConsole
-sudo sysmerge
-sudo fw_update
-sudo pkg_add -u
+(cd /dev; doas sh MAKEDEV all)
+doas env USER=$USER sh /etc/X11/xenodm/GiveConsole
+doas sysmerge
+doas fw_update
+doas pkg_add -u
