@@ -9,6 +9,8 @@
 	fixup = rebase -i HEAD~5
 	tree = log --graph --pretty=format:'[%h] [%<(8,trunc)%al] [%cs] %<(50,trunc)%s' --abbrev-commit
 	touch = commit --amend --reset-author --no-edit
+[merge]
+	conflictstyle = diff3
 [push]
 	default = simple
 [color]
