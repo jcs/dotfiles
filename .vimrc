@@ -99,6 +99,8 @@ Plug 'ap/vim-buftabline'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'cespare/vim-sbd'
 Plug 'scrooloose/nerdtree'
+Plug 'wsdjeg/vim-fetch'
+Plug 'markonm/traces.vim'
 call plug#end()
 
 " disable plugin auto-indenting
