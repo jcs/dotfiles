@@ -34,6 +34,7 @@ nextalbum)
 	$CMUS)
 		;;
 	$PIANOBAR)
+		echo -n 'n' > ~/.config/pianobar/ctl
 		;;
 	$AUDACIOUS)
 		audtool playlist-advance-album
