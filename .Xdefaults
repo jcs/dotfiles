@@ -65,7 +65,7 @@ URxvt.geometry:			80x40
 ! xterm-specific settings
 
 #ifdef HIDPI
-*.internalBorder:		20
+*.internalBorder:		22
 #else
 *.internalBorder:		12
 #endif
@@ -77,6 +77,7 @@ URxvt.scrollstyle:		xterm
 *.selectToClipboard:		true
 *.termName:			xterm-256color
 *.utmpInhibit:			true
+URxvt.loginShell:		true
 
 ! hide when i type
 XTerm.pointerMode:		2

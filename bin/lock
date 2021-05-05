@@ -5,6 +5,7 @@ pkill -USR1 xdimmer
 
 # kill any active tokens
 doas -L
+ssh-add -D
 
 # clear clipboard
 echo -n | pbcopy

@@ -16,16 +16,19 @@ fi
 
 export LANG=en_US.UTF-8
 
+# better two-finger touchpad scrolling
 export MOZ_USE_XINPUT2=1
-#export MOZ_ACCELERATED=1
-#export MOZ_WEBRENDER=1
+# opengl acceleration
+export MOZ_ACCELERATED=1
+# force webrender to enable
+export MOZ_WEBRENDER=1
 
 SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
-if [ "${SCREEN_WIDTH}" -gt 2000 ]; then
+if [ "${SCREEN_WIDTH}" -ge 1920 ]; then
 	echo "using HIDPI"
 	export HIDPI=1
 	export GDK_SCALE=1.5
-	#export QT_SCALE_FACTOR=1.5
+	export QT_SCALE_FACTOR=1.5
 fi
 
 if [ "$HIDPI" = "1" ]; then
@@ -49,20 +52,21 @@ xset dpms 0 0 0
 eval `dbus-launch --sh-syntax`
 
 # ~/bin/lock does some protections and runs slock
-xidle -timeout 300 -ne -program ~/bin/lock &
+xidle -timeout 900 -ne -program ~/bin/lock &
 
 xbanish &
 
-#compton -b
-
 WM=sdorfehs
 
-hsetroot -solid "#83988E"
+hsetroot -solid "#aab6b3"
+compton -b
 
 case $MACHINE in
 "HUAWEI HUAWEI MateBook X")
-	xcalib ~/.icc/matebookx.icc
+	xcalib ~/.icc/matebookx-P130ZDZ-EF1.icm
 	xdimmer -n -a &
+	compton -b
+	#WM=progman
 	;;
 
 "Apple Inc. MacBookPro12,1")

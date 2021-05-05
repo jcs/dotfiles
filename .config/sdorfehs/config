@@ -1,5 +1,5 @@
 set barpadding 20 10
-set gap 22
+set gap 26
 set ignoreresizehints 1
 set onlyborder 0
 
@@ -26,12 +26,12 @@ definekey top M-4 vselect 3
 # quickly jump to music
 definekey root 9 exec sdorfehs -c "vselect 0" -c "fselect 2" -c "select 9"
 
-# map to X1N1 F keys
-definekey top F1 exec sndioctl -q output.mute=!; pkill -USR1 i3status; true
-definekey top F2 exec sndioctl -q output.mute=0; sndioctl -q output.level=-0.025; pkill -USR1 i3status; true
-definekey top F3 exec sndioctl -q output.mute=0; sndioctl -q output.level=+0.025; pkill -USR1 i3status; true
-definekey top F5 exec sdorfehs -c "echo backlight: `xbacklight -dec 5 -time 0; xbacklight | sed 's/\..*//'`"
-definekey top F6 exec sdorfehs -c "echo backlight: `xbacklight -inc 5 -time 0; xbacklight | sed 's/\..*//'`"
+# map to matebook F keys
+definekey top F1 exec sdorfehs -c "echo backlight: `xbacklight -dec 5 -time 0; xbacklight | sed 's/\..*//'`"
+definekey top F2 exec sdorfehs -c "echo backlight: `xbacklight -inc 5 -time 0; xbacklight | sed 's/\..*//'`"
+definekey top F4 exec sndioctl -q output.mute=!; pkill -USR1 i3status; true
+definekey top F5 exec sndioctl -q output.mute=0; sndioctl -q output.level=-0.025; pkill -USR1 i3status; true
+definekey top F6 exec sndioctl -q output.mute=0; sndioctl -q output.level=+0.025; pkill -USR1 i3status; true
 
 definekey top F10 exec ~/bin/music prev
 definekey top F11 exec ~/bin/music playpause
@@ -54,10 +54,9 @@ unmanage dzen title
 
 # startup configuration
 exec ruby ~/code/sdorfehs-bar/sdorfehs-bar.rb
-frestore (frame :number 0 :x 0 :y 40 :width 1080 :height 1310 :screenw 2160 :screenh 1350 :window 54525961 :last-access 58 :dedicated 0),(frame :number 1 :x 1080 :y 40 :width 1080 :height 1055 :screenw 2160 :screenh 1350 :window 14680073 :last-access 57 :dedicated 0),(frame :number 2 :x 1080 :y 1095 :width 1080 :height 255 :screenw 2160 :screenh 1350 :window 18874371 :last-access 16 :dedicated 0)
-execf 0 env RUN_AND_RETURN=mutt urxvt
-execf 1 urxvt
+frestore (frame :number 0 :x 0 :y 40 :width 1080 :height 1400 :screenw 2160 :screenh 1440 :window 27262985 :last-access 29 :dedicated 0),(frame :number 1 :x 1080 :y 40 :width 1080 :height 1150 :screenw 2160 :screenh 1440 :window 18874377 :last-access 28 :dedicated 0),(frame :number 2 :x 1080 :y 1190 :width 1080 :height 250 :screenw 2160 :screenh 1440 :window 20971523 :last-access 26 :dedicated 0)
+execf 0 env RUN_AND_RETURN=mutt urxvt -title mutt
+execf 1 env RUN_AND_RETURN=irc urxvt -title irssi
 fselect 2
 execf 2 audacious
-#number 9
-exec sleep 1; sdorfehs -c "number 9" -c "fselect 1" -c stick -c "fselect 0" -c stick
+exec sleep 2; sdorfehs -c "fselect 1" -c "fselect 0"
