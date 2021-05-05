@@ -175,6 +175,9 @@ au FileType cvs s/^CVS:/CVS:/|1
 " and for email, work properly with format=flowed
 au FileType mail setlocal formatoptions+=wq
 
+" website stuff
+au BufNewFile,BufRead *_posts/*.md setlocal tw=80 spell
+
 " z80 assembler syntax file is outdated
 au Syntax z8a syn match z8aPreProc "\.equ"
 au Syntax z8a syn match z8aPreProc "\.gblequ"
@@ -192,7 +195,7 @@ if filereadable("/usr/local/bin/ectags")
 	let g:gutentags_ctags_executable="/usr/local/bin/ectags"
 endif
 let g:gutentags_ctags_executable_go="~/go/bin/gotags"
-let g:gutentags_project_root=[ "CVS", ".gutentags_stop" ]
+let g:gutentags_project_root=[ "CVS", ".git", ".gutentags_stop" ]
 " i'll manually invoke :GutentagsUpdate when i need to
 let g:gutentags_generate_on_missing=0
 let g:gutentags_generate_on_new=0
