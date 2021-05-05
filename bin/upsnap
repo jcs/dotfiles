@@ -39,6 +39,11 @@ for f in $SETS; do
 	fi
 done
 
+# rebuild/install my local changes
+cd /usr/src/usr.bin/doas && make clean obj all && doas make install
+cd /usr/src && doas make includes
+cd /usr/src/sbin/sysctl && make clean obj all && doas make install
+
 (cd /dev; doas sh MAKEDEV all)
 doas env USER=$USER sh /etc/X11/xenodm/GiveConsole
 doas sysmerge
