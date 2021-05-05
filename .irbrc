@@ -8,3 +8,4 @@ end
 
 IRB.conf[:USE_COLORIZE] = false
 IRB.conf[:AUTO_INDENT] = false
+IRB.conf[:USE_MULTILINE] = false
