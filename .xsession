@@ -5,6 +5,8 @@ cleanup() {
 	pkill ssh-agent-card-prompt dbus-daemon redshift compton
 	pkill -f "ruby.*sdorfehs-bar"
 	rm -f ~/.Xauthority
+	rm -f ~/audacious.core
+	rm -rf ~/.local/share/Trash
 }
 trap cleanup INT TERM QUIT
 
