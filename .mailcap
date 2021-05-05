@@ -4,5 +4,7 @@ text/html; ~/bin/html_mail %s; copiousoutput
 application/x-gunzip; gzcat %s; copiousoutput
 
 # things that need external programs
-application/*; ~/bin/mutt_bgrun %t %s
+#application/pdf; /usr/local/bin/mupdf %s
 image/*; ~/bin/mutt_bgrun %t %s
+
+application/*; ~/bin/mutt_bgrun %t %s
