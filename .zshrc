@@ -8,7 +8,7 @@
 export BLOCKSIZE=1k
 export CVS_RSH=/usr/bin/ssh
 export IRCNAME="*Unknown*"
-export HISTFILE=
+unset HISTFILE
 export LESS="-i"
 export MYSQL_HISTFILE=/dev/null
 export NO_COLOR=1
