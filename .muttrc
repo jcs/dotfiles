@@ -69,7 +69,6 @@ bind pager <left> exit
 bind pager <right> next-entry
 bind pager j next-line
 bind pager k previous-line
-bind pager h exit
 bind pager l next-entry
 bind pager K previous-entry
 bind pager J next-entry
