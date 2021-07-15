@@ -56,7 +56,7 @@ weather.start = function(location, api_key)
 	weather.api_key = api_key
 	weather.menu = hs.menubar.new()
 	weather.update()
-	weather.timer = hs.timer.doEvery(300, function() weather.update() end)
+	weather.timer = hs.timer.doEvery(60*20, function() weather.update() end)
 end
 
 weather.stop = function()
