@@ -1,4 +1,5 @@
 .gitcookies
+.hammerspoon/config.json
 .vim/backup
 .vim/gutentags
 .vim/swp
