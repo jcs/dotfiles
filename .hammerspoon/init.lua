@@ -2,6 +2,7 @@ local config = hs.json.read("config.json")
 local log = hs.logger.new("local", "debug")
 
 require("keys")
+require("drag")
 
 if config.weather.api_key == "" then
 	log.e("no weather.api_key in config.json")
