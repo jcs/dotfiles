@@ -52,7 +52,7 @@ end)
 
 -- F10: previous track
 hs.hotkey.bind({}, "F10", function()
-	sendSystemKey("PREVIOUS", {})
+	hs.itunes.previous()
 end)
 -- cmd+F10: previous album
 hs.hotkey.bind({ "cmd" }, "F10", function()
@@ -84,12 +84,12 @@ end)
 
 -- F11: play/pause
 hs.hotkey.bind({}, "F11", function()
-	sendSystemKey("PLAY", {})
+	hs.itunes.playpause()
 end)
 
 -- F12: next track
 hs.hotkey.bind({}, "F12", function()
-	sendSystemKey("NEXT", {})
+	hs.itunes.next()
 end)
 -- cmd+F12: next album
 hs.hotkey.bind({ "cmd" }, "F12", function()
