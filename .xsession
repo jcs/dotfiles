@@ -2,7 +2,7 @@
 
 cleanup() {
 	echo "cleaning up"
-	pkill ssh-agent-card-prompt dbus-daemon redshift compton
+	pkill ssh-agent-card-prompt dbus-daemon redshift picom
 	pkill -f "ruby.*sdorfehs-bar"
 	rm -f ~/.Xauthority
 	rm -f ~/audacious.core
@@ -61,14 +61,13 @@ xbanish &
 WM=sdorfehs
 
 hsetroot -solid "#aab6b3"
-compton -b
+picom -b
 
 case $MACHINE in
 "HUAWEI HUAWEI MateBook X")
 	xcalib ~/.icc/matebookx-P130ZDZ-EF1.icm
 	xdimmer -n -a &
-	compton -b
-	#WM=progman
+	WM=~/code/sdorfehs/sdorfehs
 	;;
 
 "Apple Inc. MacBookPro12,1")
