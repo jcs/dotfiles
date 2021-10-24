@@ -1,0 +1,8 @@
+QMainWindow {
+    background-color:#eae5ce;
+}
+QTreeView {
+    alternate-background-color: #d3ceb9;
+    selection-color: black;
+    selection-background-color: #a3ccbd;
+}

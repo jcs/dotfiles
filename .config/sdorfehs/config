@@ -1,7 +1,15 @@
-set barpadding 20 10
-set gap 26
+set barinpadding 0
+set barpadding 24 14
+set barbordercolor black
+set barborder 6
+set bgcolor #eae5ce
+set border 6
+set fgcolor #444444
 set ignoreresizehints 1
-set onlyborder 0
+set font "comic neue:bold:embolden:size=14"
+set gap 20
+set onlyborder 1
+set padding 40 40 40 40
 
 bind s split
 bind C-s split
@@ -13,6 +21,9 @@ bind C-c exec urxvt
 
 # lock the screen
 bind L exec pkill -USR1 xidle
+
+# web development view, split firefox and a terminal
+bind W exec sdorfehs -c "hsplit" -c "resize 200 0"
 
 # prevent accidental closes
 unbind k
@@ -47,14 +58,16 @@ bind grave focus
 #set rudeness 12
 
 # let popups stay centered
-unmanage xmessage
-unmanage xprompt
 unmanage OpenSSH Authentication Passphrase Request
-unmanage dzen title
 
 # startup configuration
 exec ruby ~/code/sdorfehs-bar/sdorfehs-bar.rb
-frestore (frame :number 0 :x 0 :y 40 :width 1080 :height 1400 :screenw 2160 :screenh 1440 :window 27262985 :last-access 29 :dedicated 0),(frame :number 1 :x 1080 :y 40 :width 1080 :height 1150 :screenw 2160 :screenh 1440 :window 18874377 :last-access 28 :dedicated 0),(frame :number 2 :x 1080 :y 1190 :width 1080 :height 250 :screenw 2160 :screenh 1440 :window 20971523 :last-access 26 :dedicated 0)
+
+hsplit
+fselect 1
+split 1490
+fselect 0
+
 execf 0 env RUN_AND_RETURN=mutt urxvt -title mutt
 execf 1 env RUN_AND_RETURN=irc urxvt -title irssi
 fselect 2

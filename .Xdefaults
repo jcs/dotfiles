@@ -2,12 +2,14 @@
 
 #ifdef HIDPI
 ! pkg_add xcursor-dmz
-Xcursor.theme:			dmz
-Xcursor.size:			48
+Xcursor.theme:			Simp1e
+Xcursor.size:			64
+
+Xft.dpi:			148
 #endif
 
 ! a muted palette for athena things like xterm, xfontsel, etc.
-#define BG			#d9d5ba
+#define BG			#eae5ce
 #define FG			#444444
 *.background:			BG
 *.foreground:			FG
@@ -22,39 +24,40 @@ URxvt.geometry:			80x40
 
 *.borderColor:			BG
 
-! a muted palette
+! solarized (light)
 
 ! black
 *.color0:			FG
 *.color8:			#333333
 
 ! red
-*.color1:			#825b69
-*.color9:			#bda0aa
+*.color1:			#dc322f
+*.color9:			#cb4b16
 
 ! green
-*.color2:			#69825b
-*.color10:			#aabda0
+*.color2:			#859900
+*.color10:			#93a1a1
 
 ! yellow
-*.color3:			#82755b
-*.color11:			#bdb3a0
+*.color3:			#b58900
+*.color11:			#839496
 
 ! blue
-*.color4:			#5b6982
-*.color12:			#a0aabd
+*.color4:			#268bd2
+*.color12:			#657b83
 
 ! magenta
-*.color5:			#755b82
-*.color13:			#b3a0bd
+*.color5:			#d33682
+*.color13:			#6c71c4
 
 ! cyan
-*.color6:			#5b8275
-*.color14:			#a0bdb3
+*.color6:			#2aa198
+*.color14:			#586e75
 
 ! white (gray)
 *.color7:			#d9d7cc
 *.color15:			#e5e5e5
+
 
 #ifdef HIDPI
 *.font:				-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
@@ -65,7 +68,7 @@ URxvt.geometry:			80x40
 ! xterm-specific settings
 
 #ifdef HIDPI
-*.internalBorder:		22
+*.internalBorder:		28
 #else
 *.internalBorder:		12
 #endif
@@ -83,6 +86,11 @@ URxvt.loginShell:		true
 XTerm.pointerMode:		2
 URxvt.pointerBlank:		true
 
+! if i scrolled up, leave it that way when more output comes
+URxvt.scrollTtyOutput:		false
+! but not when i press a key
+URxvt.scrollTtyKeypress:	true
+
 ! needed by ratpoison
 XTerm.allowSendEvents:		true
 ! which disables allowColorOps, but empty the list of actual disabled ops
@@ -95,7 +103,8 @@ XTerm.visualBell:		false
 XTerm.vt100.faceName:		monospace:size=12
 URxvt.font:			xft:monospace:size=12,xft:noto emoji:size=12
 URxvt.boldFont:			xft:monospace:weight=bold:size=12,xft:noto emoji:weight=bold:size=12,xft:symbola
-URxvt.letterSpace:		-1
+URxvt.letterSpace:		-2
+URxvt.lineSpace:		0
 #else
 URxvt.font:			6x13,xft:noto emoji:size=12,xft:symbola
 URxvt.boldFont:			6x13bold,xft:noto emoji:weight=bold:size=12
@@ -133,10 +142,10 @@ qconsole.*.borderColor:		FG
 qconsole.*.color0:		#999999
 
 #ifdef HIDPI
-SshAskpass*Button.font:		-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
-SshAskpass*Dialog.font:		-*-lucida-medium-r-*-*-26-*-*-*-*-*-*-*
-SshAskpass*Indicator.width:	30
-SshAskpass*Indicator.height:	15
+SshAskpass*Button.font:		-*-lucida-medium-r-*-*-32-*-*-*-*-*-*-*
+SshAskpass*Dialog.font:		-*-lucida-medium-r-*-*-36-*-*-*-*-*-*-*
+SshAskpass*Indicator.width:	40
+SshAskpass*Indicator.height:	20
 #endif
 
 XClock*.update:			1
@@ -144,5 +153,5 @@ XClock*.analog:			False
 XClock*.render:			True
 XClock*.padding:		40
 XClock*.face:			Microsoft Sans Serif:size=20
-XClock*.strftime:		%H:%M:%S %D
+XClock*.strftime:		%a %b %d  %H:%M
 XClock*.background:		#c0c7c8

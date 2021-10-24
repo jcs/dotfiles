@@ -131,8 +131,8 @@ fi
 
 case $TERM in
 xterm*)
-    precmd() { print -Pn "\e]0;%m:%~>\a" }
-    preexec() { print -Pn "\e]0;%m:%~> $1\a" }
+    precmd() { print -Pn "\e]0;%m:%~$\a" }
+    preexec() { print -Pn "\e]0;%m:%~$ $1\a" }
 ;;
 esac
 

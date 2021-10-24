@@ -25,6 +25,9 @@ export MOZ_ACCELERATED=1
 # force webrender to enable
 export MOZ_WEBRENDER=1
 
+# to allow style changes with qt5ct
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
 SCREEN_WIDTH=`xrandr 2>&1 | grep "Screen 0: minimum" | sed -e 's/.*, current //' -e 's/ x.*//'`
 if [ "${SCREEN_WIDTH}" -ge 1920 ]; then
 	echo "using HIDPI"
@@ -60,7 +63,7 @@ xbanish &
 
 WM=sdorfehs
 
-hsetroot -solid "#aab6b3"
+hsetroot -solid "#a3ccbd"
 picom -b
 
 case $MACHINE in
@@ -75,10 +78,10 @@ case $MACHINE in
 	echo "Xft.dpi: 100" | xrdb -merge
 	;;
 
-"LENOVO 20UN0008US")
-	xcalib ~/.icc/thinkpadx1n1.icc
-	xdimmer -nk -t 5 -s 3 -b 3 &
-	WM=~/code/progman/progman
+"HUAWEI EUL-WX9")
+	xdimmer -n -a &
+	# turn off the touchscreen
+	xinput disable /dev/wsmouse2
 	WM=~/code/sdorfehs/sdorfehs
 	;;
 
