@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+#
+# $ progress dump.sql.gz
+# gzip (68010): 56.13%, 27m52s left (1804580 bytes/sec)
+#
+
+if !(file = ARGV[0])
+  puts "usage: #{$0} <file>"
+  exit 1
+end
+
+diffs = []
+
+last_off = -1
+loop do
+  fs = `fstat -o #{file}`.split("\n")
+  if fs.count == 1
+    puts "nothing has #{file} open"
+    exit 1
+  end
+	fields = fs.last.split(" ")
+  cmd = fields[1]
+  pid = fields[2]
+  size, off = fields[8].split(":")
+
+  if off == "*"
+    puts "no access to read status of pid #{pid}"
+    exit 1
+  end
+  off = off.to_i
+
+  if last_off > -1
+    diffs.push (off - last_off)
+    if diffs.count == 10
+      diffs.shift
+    end
+  end
+  last_off = off
+
+  if diffs.any?
+    avg = diffs.sum / diffs.count.to_f
+    secs = ((size.to_i - off.to_i) / avg.to_f).floor
+    rem = ""
+    if secs > (60 * 60)
+      h = (secs / (60 * 60).to_f).floor
+      rem = "#{sprintf("%02d", h)}h"
+      secs -= (h * 60 * 60)
+    end
+    if secs > 60 || rem.length > 0
+      m = (secs / 60.0).floor
+      rem += "#{sprintf("%02d", m)}m"
+      secs -= (m * 60)
+    end
+    rem += "#{sprintf("%02d", secs)}s left"
+  else
+    avg = 0
+    rem = "-"
+  end
+
+  perc = sprintf("%0.2f%%", (off / size.to_f) * 100.0)
+  print "\r\e[K#{cmd} (#{pid}): #{perc}, #{rem} (#{avg.floor} bytes/sec)"
+
+  sleep 1
+rescue Interrupt
+  puts ""
+  exit
+end
