@@ -2,7 +2,7 @@ set barinpadding 0
 set barpadding 24 14
 set barbordercolor black
 set barborder 6
-set bgcolor #eae5ce
+set bgcolor #d3ceb9
 set border 6
 set fgcolor #444444
 set ignoreresizehints 1
