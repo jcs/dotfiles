@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+if !ARGV[0]
+  puts "usage: #{$0} 0x12345"
+  exit 1
+end
+
+num = ARGV[0].to_s.to_i(ARGV[0].match(/^0x/) ? 16 : 10)
+b = sprintf("%b", num)
+pad = ((b.length / 8.0).ceil * 8) - b.length
+puts "#{"0" * pad}#{b}"

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+T=`mktemp` && curl -so $T https://plan.cat/~`whoami` && \
+	$EDITOR $T && \
+	curl -su `whoami` -F "plan=<$T" https://plan.cat/stdin

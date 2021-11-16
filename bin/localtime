@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "date"
+
+dt = DateTime.parse(ARGV[0])
+puts "#{dt.to_time} (#{dt.zone}) -> " +
+  "#{dt.new_offset(Time.now.zone).to_time} (#{Time.now.zone})"

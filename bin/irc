@@ -1,0 +1,38 @@
+#!/bin/sh
+
+while :; do
+	host jcs.org > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+
+		env SSH_AUTH_SOCK= ssh -t \
+			-o ServerAliveInterval=5 \
+			-o ServerAliveCountMax=3 \
+			-o ForwardAgent=no \
+			-o AddKeysToAgent=no \
+			-i ~/.ssh/id_chat_ed25519 \
+			chat@jcs.org "tmux -u new-session -A -s main"
+
+		if [ X"$?" = X"0" ]; then
+			exit
+		fi
+
+		# wait until screen is not locked
+		sleep 1
+		if [ X`uname -s` = X"Darwin" ]; then
+			python -c 'import sys, Quartz, time
+while True:
+    d = Quartz.CGSessionCopyCurrentDictionary()
+    if d.get("CGSSessionScreenIsLocked", 0) == 0:
+        sys.exit(0)
+    time.sleep(0.5)
+'
+		elif [ X`uname -s` = X"OpenBSD" ]; then
+			sleep 1
+			while [ X`pgrep slock` != X"" ]; do
+				sleep 1
+			done
+		fi
+	fi
+
+	sleep 2
+done

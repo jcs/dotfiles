@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require "openssl"
+
+len = ARGV[0].to_i
+if len == 0
+  len = 8
+end
+
+str = ""
+
+while str.length < len
+  while str.length < len
+    chr = OpenSSL::Random.random_bytes(1)
+    ord = chr.unpack('C')[0]
+
+    #          0            9              a            z
+    if (ord >= 48 && ord <= 57) || (ord >= 97 && ord <= 122)
+      # avoid ambiguous characters
+      next if chr == "0" || chr == "l"
+
+      str << chr
+    end
+  end
+end
+
+puts str

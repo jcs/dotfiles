@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exiftool -stay_open true -overwrite_original \
+	-all= -tagsfromfile $1 -Orientation $1

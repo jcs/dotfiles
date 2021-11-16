@@ -1,0 +1,5 @@
+#!/bin/sh
+
+DICT=/usr/share/dict/words
+
+sort -R $DICT | head -n1
