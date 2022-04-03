@@ -15,13 +15,16 @@ class Driver
   end
 end
 
-ip = `ifconfig egress | grep 'inet '`.gsub(/.*inet /, "").gsub(/ .*/, "").strip
+int = `route -n get default`.split("\n").select{|l| l.match(/interface:/) }.
+  first.gsub(/.*: /, "")
+ip = `ifconfig #{int} | grep 'inet '`.split("\n")[0].gsub(/.*inet /, "").
+  gsub(/ .*/, "").strip
 
 server = Ftpd::FtpServer.new(Driver.new)
 server.log = Logger.new(STDOUT)
-server.interface = ip
+server.interface = "0.0.0.0"
 
-if Process.uid == 0
+if Process.uid == 0 || `uname -s`.strip == "Darwin"
   server.port = 21
 else
   server.port = 2121
