@@ -8,7 +8,7 @@ T=`mktemp -t -d upsnap.XXXXXXX`
 cd $T
 
 fetch() {
-	ftp `cat /etc/installurl`/snapshots/`arch -s`/$1
+	ftp `cat /etc/installurl`/snapshots/`machine`/$1
 }
 
 fetch "SHA256"
