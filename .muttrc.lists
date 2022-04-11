@@ -99,4 +99,4 @@ subscribe openssh-unix-dev
 
 subscribe oss-security
 
-subscribe ratpoison-devel
+subscribe chibug
