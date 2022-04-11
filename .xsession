@@ -61,42 +61,18 @@ xidle -timeout 900 -ne -program ~/bin/lock &
 
 xbanish &
 
-WM=sdorfehs
-
 hsetroot -solid "#a3ccbd"
 picom -b
 
-case $MACHINE in
-"HUAWEI HUAWEI MateBook X")
-	xcalib ~/.icc/matebookx-P130ZDZ-EF1.icm
-	xdimmer -n -a &
-	WM=~/code/sdorfehs/sdorfehs
-	;;
+#xdimmer -n -a &
 
-"Apple Inc. MacBookPro12,1")
-	xcalib ~/.icc/macbookpro.icc
-	echo "Xft.dpi: 100" | xrdb -merge
-	;;
-
-"HUAWEI EUL-WX9")
-	xdimmer -n -a &
-	# turn off the touchscreen
-	xinput disable /dev/wsmouse2
-	WM=~/code/sdorfehs/sdorfehs
-	;;
-
-*)
-	echo "running on unknown machine \"${MACHINE}\""
-	;;
-esac
+# turn off the touchscreen
+xinput disable /dev/wsmouse2
 
 # run after any icc profile loading
 redshift -l 41.90:-87.66 -t 6500:3500 -m randr &
 
-if [ -f ~/.xsession.local ]; then
-	. ~/.xsession.local
-fi
-
-$WM
+# finally, run the window manager and block
+~/code/sdorfehs/sdorfehs
 
 cleanup
