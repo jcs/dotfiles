@@ -102,7 +102,7 @@ XTerm.visualBell:		false
 #ifdef HIDPI
 XTerm.vt100.faceName:		monospace:size=12
 URxvt.font:			xft:monospace:size=12,xft:noto emoji:size=12
-URxvt.boldFont:			xft:monospace:weight=bold:size=12,xft:noto emoji:weight=bold:size=12,xft:symbola
+URxvt.boldFont:			xft:monospace:weight=bold:size=12,xft:noto emoji:weight=bold:size=12
 URxvt.letterSpace:		-2
 URxvt.lineSpace:		0
 #else
@@ -117,13 +117,16 @@ XTerm.vt100.translations:	#override\
     Super <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
 URxvt.keysym.M-v:		eval:paste_clipboard
 URxvt.keysym.Mod4-v:		eval:paste_clipboard
-URxvt.cutchars:			`"'&()*,;<=>?@[]^{|}.:/-
+URxvt.cutchars:			"`\"'&()*,;<=>?@[]^{|}.:/-"
 
 ! support right-clicking urls to open them
 URxvt.perl-ext-common:		default,matcher,selection-to-clipboard,-selection
 URxvt.url-launcher:		HOME/bin/firefox
 URxvt.matcher.button:		3
 URxvt.matcher.rend.0:		Uline
+
+! disable paste warning
+URxvt.perl-ext:			-confirm-paste
 
 ! make xaw scrollbars act like normal ones
 XTerm.*.Scrollbar.translations: #override\
@@ -146,6 +149,8 @@ SshAskpass*Button.font:		-*-lucida-medium-r-*-*-32-*-*-*-*-*-*-*
 SshAskpass*Dialog.font:		-*-lucida-medium-r-*-*-36-*-*-*-*-*-*-*
 SshAskpass*Indicator.width:	40
 SshAskpass*Indicator.height:	20
+SshAskpass*defaultXResolution:	200/in
+SshAskpass*defaultYResolution:	200/in
 #endif
 
 XClock*.update:			1
