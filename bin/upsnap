@@ -4,6 +4,11 @@ set -e
 
 SETS="bsd.mp bsd.rd comp man game xbase xshare xserv base"
 
+if [ `id -u` = "0" ]; then
+	echo "don't run me as root"
+	exit 1
+fi
+
 T=`mktemp -t -d upsnap.XXXXXXX`
 cd $T
 
@@ -46,5 +51,6 @@ cd /usr/src/sbin/sysctl && make clean obj all && doas make install
 (cd /dev; doas sh MAKEDEV all)
 doas env USER=$USER sh /etc/X11/xenodm/GiveConsole
 doas sysmerge
+doas rm -vf /etc/fonts/conf.d/{11-lcdfilter-default.conf,30-metric-aliases.conf,31-nonmst.conf,60-generic.conf}
 doas fw_update
 doas pkg_add -u
