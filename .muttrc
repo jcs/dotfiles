@@ -13,6 +13,7 @@ set confirmappend=no
 set connect_timeout=3
 set date_format="!%a, %d %b %Y at %H:%M:%S %Z"
 set delete=yes
+set display_filter="~/bin/mutt_filter"
 set editor="vim"
 set fast_reply=yes
 set folder=~/Mail

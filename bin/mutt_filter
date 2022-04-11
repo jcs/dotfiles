@@ -1,0 +1,20 @@
+#!/usr/bin/perl -n
+#
+# a mutt display filter to convert an email's local Date: header into the
+# current local timezone
+#
+# usage:
+#	set display_filter="~/bin/mutt_filter"
+#
+
+use Date::Parse;
+use POSIX;
+use strict;
+
+if (/^Date: (.*)$/) {
+	my $datestr = $1;
+	my $date = strftime("%a, %d %b %Y %H:%M:%S", localtime(str2time($datestr)));
+	print "Date: $date\n";
+} else {
+	print;
+}
