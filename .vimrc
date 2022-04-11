@@ -4,12 +4,11 @@
 " joshua stein <jcs@jcs.org>
 "
 
-"
 " defaults for everything
-"
-let c_minlines=500
 set backspace=indent,eol,start
+let c_minlines=500
 set encoding=utf-8
+set fillchars+=vert:│
 set hidden
 set ignorecase
 set incsearch
@@ -19,7 +18,6 @@ set nocompatible
 set nofoldenable
 set nohlsearch
 set nostartofline
-set pastetoggle=<C-p>
 set ruler
 set scrolloff=10
 set shiftwidth=4
@@ -28,6 +26,7 @@ set showmatch
 set showmode
 set smartcase
 set smarttab
+set spellcapcheck=
 set spellfile=~/.vimspell.add
 set spelllang=en_us
 set tabstop=4
@@ -44,27 +43,21 @@ set directory=~/.vim/swp//
 " except crontab, which will complain that it can't see any changes
 au FileType crontab setlocal bkc=yes
 
-"
 " minor color config
-"
 set t_Co=256
 syntax on
 colorscheme jcs
 
-"
 " highlight stray spaces and tabs when out of insert mode
-"
-au BufWinEnter * match ExtraWhitespace /\s\+$/
+au BufWinEnter * match ExtraWhitespace /\(\s\+$\|\^\s*     \+\)/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
+au InsertLeave * match ExtraWhitespace /\(\s\+$\|\^\s*     \+\)/
 " performance hack
 if version >= 702
   au BufWinLeave * call clearmatches()
 endif
 
-"
 " try to detect xterm pasting to automatically disable autoindent and such
-"
 if &term =~ "xterm.*"
     let &t_ti = &t_ti . "\e[?2004h"
     let &t_te = "\e[?2004l" . &t_te
@@ -81,18 +74,14 @@ if &term =~ "xterm.*"
     cmap <Esc>[201~ <nop>
 endif
 
-"
 " when writing new files, mkdir -p their paths
-"
 augroup BWCCreateDir
     au!
     au BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand("%:h")) | execute "silent! !mkdir -p ".shellescape(expand('%:h'), 1) | redraw! | endif
 augroup END
 
-"
 " init vim-plug (run "vim +PlugInstall +qall" after modifying)
-"
-" these require apostrophes instead of quotes for some dumb reason
+" these require apostrophes instead of quotes
 call plug#begin()
 Plug 'VundleVim/Vundle.vim'
 Plug 'ap/vim-buftabline'
@@ -107,9 +96,7 @@ call plug#end()
 filetype indent off
 filetype plugin indent off
 
-"
 " make buffer windows easier to navigate
-"
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -128,9 +115,12 @@ autocmd FileType nerdtree noremap <buffer> <C-l> <nop>
 autocmd FileType nerdtree noremap <buffer> <C-n> <nop>
 autocmd FileType nerdtree noremap <buffer> <C-p> <nop>
 
-"
+" just highlight the line with the error, i don't need a column
+set signcolumn=no
+" disable previews of completions
+set completeopt-=preview
+
 " make < and > shifts retain selection
-"
 vnoremap < <gv
 vnoremap > >gv
 
@@ -138,9 +128,7 @@ vnoremap > >gv
 " makes it unindent and refuse to >>
 :inoremap # X#
 
-"
 " per-file-type settings
-"
 " tell vim what kinds of files these are based on extension
 au BufNewFile,BufRead *.phtml setlocal ft=php
 au BufNewFile,BufRead *.rake,*.mab setlocal ft=ruby
@@ -154,6 +142,11 @@ au FileType * setlocal colorcolumn=0
 
 " all source code gets wrapped at <80 and auto-indented
 au FileType arduino,asm,c,cpp,go,java,javascript,php,html,make,objc,perl setlocal tw=79 autoindent colorcolumn=81
+
+" recognize crystal
+au BufNewFile,BufReadPost *.cr setlocal filetype=crystal
+au BufNewFile,BufReadPost *.ecr setlocal filetype=ecrystal
+au FileType crystal,ecrystal setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=81
 
 " ruby has soft tabs
 au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=81
@@ -184,9 +177,7 @@ au Syntax z8a syn match z8aPreProc "\.gblequ"
 au Syntax z8a syn match z8aPreProc "\.lclequ"
 
 
-"
 " package configuration
-"
 
 " gutentags
 let g:gutentags_cache_dir="~/.vim/gutentags"
@@ -214,9 +205,7 @@ let NERDTreeMapOpenRecursively="+"
 let NERDTreeMapCloseChildren="-"		" easier to remember
 let NERDTreeIgnore = ['\.(o|pyc)$']
 
-"
 " macros
-"
 
 " control+d - delete the current line and all remaining text of an email up to
 " the line of my signature (or the rest of the file) - useful for deleting lots
