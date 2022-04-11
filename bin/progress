@@ -15,6 +15,9 @@ last_off = -1
 loop do
   fs = `fstat -o #{file}`.split("\n")
   if fs.count == 1
+    if last_off > -1
+      exit
+    end
     puts "nothing has #{file} open"
     exit 1
   end
