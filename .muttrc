@@ -44,7 +44,7 @@ set reply_to=yes
 set send_charset="utf-8:us-ascii"
 set sendmail="msmtp"
 set sidebar_delim_chars="/"
-set sidebar_divider_char="| "
+set sidebar_divider_char="│ "
 set sidebar_format="%B%*  %?N?(%N)?"
 set sidebar_visible=yes
 set sidebar_width=18
@@ -193,6 +193,7 @@ auto_view application/pgp-keys
 auto_view application/pgp-signature
 auto_view text/html                                       # html with lynx
 auto_view application/msword                              # .doc with antiword
+auto_view application/vnd.openxmlformats-officedocument.wordprocessingml.document
 auto_view application/x-tar-gz
 auto_view application/x-zip-compressed
 auto_view application/zip
