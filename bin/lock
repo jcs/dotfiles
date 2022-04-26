@@ -12,7 +12,7 @@ echo -n | pbcopy
 
 if [ `uname -s` = "OpenBSD" ]; then
 	pkill -KILL -f chat@
-	pkill -USR2 -f sdorfehs-bar
+	echo nokeepalive > ~/.config/sdorfehs/bar-control
 	~/bin/music pause
 	slock
 
