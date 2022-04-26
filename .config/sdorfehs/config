@@ -60,6 +60,9 @@ bind grave focus
 # let popups stay centered
 unmanage OpenSSH Authentication Passphrase Request
 
+# tell the bar when we switch vscreens
+addhook switchvscreen exec ~/bin/sdorfehs-vscreen
+
 # startup configuration
 exec ruby ~/code/sdorfehs-bar/sdorfehs-bar.rb
 
