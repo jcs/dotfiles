@@ -1,0 +1,21 @@
+#!/bin/sh
+
+case "$1" in
+up)
+	sndioctl -q output.mute=0 output.level=+0.025
+	pkill -USR1 i3status
+	;;
+down)
+	sndioctl -q output.mute=0 output.level=-0.025
+	pkill -USR1 i3status
+	;;
+mute)
+	sndioctl -q output.mute=!
+	;;
+*)
+	echo "unknown command \"${1}\""
+	exit 1
+	;;
+esac
+
+pkill -USR1 i3status

@@ -40,9 +40,9 @@ definekey root 9 exec sdorfehs -c "vselect 0" -c "fselect 2" -c "select 9"
 # map to matebook F keys
 definekey top F1 exec sdorfehs -c "echo backlight: `xbacklight -dec 5 -time 0; xbacklight | sed 's/\..*//'`"
 definekey top F2 exec sdorfehs -c "echo backlight: `xbacklight -inc 5 -time 0; xbacklight | sed 's/\..*//'`"
-definekey top F4 exec sndioctl -q output.mute=!; pkill -USR1 i3status; true
-definekey top F5 exec sndioctl -q output.mute=0; sndioctl -q output.level=-0.025; pkill -USR1 i3status; true
-definekey top F6 exec sndioctl -q output.mute=0; sndioctl -q output.level=+0.025; pkill -USR1 i3status; true
+definekey top F4 exec ~/bin/volume mute
+definekey top F5 exec ~/bin/volume down
+definekey top F6 exec ~/bin/volume up
 
 definekey top F10 exec ~/bin/music prev
 definekey top F11 exec ~/bin/music playpause
