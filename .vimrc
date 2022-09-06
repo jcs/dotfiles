@@ -148,8 +148,8 @@ au BufNewFile,BufReadPost *.cr setlocal filetype=crystal
 au BufNewFile,BufReadPost *.ecr setlocal filetype=ecrystal
 au FileType crystal,ecrystal setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=81
 
-" ruby has soft tabs
-au FileType ruby,eruby setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=81
+" ruby and lua have soft tabs
+au FileType ruby,eruby,lua setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=81
 au FileType yaml setlocal ts=2 sw=2 et colorcolumn=81
 
 " makefiles and c have tabstops at 8 for portability
@@ -184,6 +184,8 @@ let g:gutentags_cache_dir="~/.vim/gutentags"
 " use ectags
 if filereadable("/usr/local/bin/ectags")
 	let g:gutentags_ctags_executable="/usr/local/bin/ectags"
+elseif filereadable("/opt/homebrew/bin/ctags")
+	let g:gutentags_ctags_executable="/opt/homebrew/bin/ctags"
 endif
 let g:gutentags_ctags_executable_go="~/go/bin/gotags"
 let g:gutentags_project_root=[ "CVS", ".git", ".gutentags_stop" ]
