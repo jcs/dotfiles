@@ -1,9 +1,20 @@
 #!/bin/sh
 
+# doas pip3 install pyobjc-framework-Quartz
+if [ X`uname -s` = X"Darwin" ]; then
+	python3 -c 'import sys, Quartz, time'
+	if [ $? -ne 0 ]; then
+		echo ""
+		echo "Quartz python module not installed"
+		echo "pip3 install pyobjc-framework-Quartz"
+		echo ""
+		exit 1
+	fi
+fi
+
 while :; do
 	host jcs.org > /dev/null 2>&1
 	if [ $? -eq 0 ]; then
-
 		env SSH_AUTH_SOCK= ssh -t \
 			-o ServerAliveInterval=5 \
 			-o ServerAliveCountMax=3 \
@@ -19,7 +30,7 @@ while :; do
 		# wait until screen is not locked
 		sleep 1
 		if [ X`uname -s` = X"Darwin" ]; then
-			python -c 'import sys, Quartz, time
+			python3 -c 'import sys, Quartz, time
 while True:
     d = Quartz.CGSessionCopyCurrentDictionary()
     if d.get("CGSSessionScreenIsLocked", 0) == 0:
