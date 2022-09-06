@@ -10,6 +10,7 @@ export CVS_RSH=/usr/bin/ssh
 export IRCNAME="*Unknown*"
 unset HISTFILE
 export LESS="-i"
+export LESSHISTFILE=/dev/null
 export MYSQL_HISTFILE=/dev/null
 export NO_COLOR=1
 export PATH=~/bin:~/go/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin
