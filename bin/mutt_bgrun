@@ -43,7 +43,7 @@ if !viewer
   exit 1
 end
 
-tmp_dir = `mktemp -d -t`.chomp
+tmp_dir = `mktemp -d`.chomp
 tmp_file = tmp_dir + "/" + File.basename(orig_file).gsub(/[^A-Za-z_\.-]/, "")
 launch_file = tmp_file.dup
 
