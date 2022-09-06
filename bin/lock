@@ -1,21 +1,23 @@
 #!/bin/sh
 
-# force keyboard backlight to dim
-pkill -USR1 xdimmer
-
 # kill any active tokens
-doas -L
 ssh-add -D
+if [ `uname -s` = "OpenBSD" ]; then
+	doas -L
+else
+	sudo -k
+fi
 
 # clear clipboard
 echo -n | pbcopy
+
+pkill -KILL -f chat@
 
 if [ `uname -s` = "OpenBSD" ]; then
 	pkill -KILL -f chat@
 	echo nokeepalive > ~/.config/sdorfehs/bar-control
 	~/bin/music pause
 	slock
-
-elif [ `uname -s` = "Darwin" ]; then
-	~/bin/mac/sleepdisplay
 fi
+
+# on macOS, hammerspoon's lock module pauses music
