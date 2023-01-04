@@ -13,7 +13,7 @@ use strict;
 
 if (/^Date: (.*)$/) {
 	my $datestr = $1;
-	my $date = strftime("%a, %d %b %Y %H:%M:%S", localtime(str2time($datestr)));
+	my $date = strftime("%a, %d %b %Y %H:%M:%S %Z", localtime(str2time($datestr)));
 	print "Date: $date\n";
 } else {
 	print;
