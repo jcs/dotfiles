@@ -1,6 +1,6 @@
 # vim:ts=3:et:ft=muttrc
 #
-# mutt 1.5 (with sidebar patch) config
+# mutt config
 # joshua stein <jcs@jcs.org>
 #
 
@@ -21,7 +21,7 @@ set forward_format="fwd: %s"
 set header_cache=~/.mutt-cache/
 set hostname=localhost
 set include=yes
-set index_format="%[!%m%d] [%Z] %-54.54s %F"
+set index_format="%[!%m%d] [%Z] %-52.52s %F"
 set ispell="aspell --mode=email --add-email-quote=%,#,:,} --check"
 set mail_check=60
 set mark_old=no
@@ -76,6 +76,7 @@ bind pager J next-entry
 bind pager \CF next-page
 bind pager \CB previous-page
 bind pager \CP print-message
+bind pager B sidebar-toggle-visible
 bind index <down> next-entry
 bind index j next-entry
 bind index <up> previous-entry
@@ -84,8 +85,10 @@ bind index <delete> delete-message
 bind index <space> display-message
 bind index <right> display-message
 bind index <tab> next-unread
+bind index \C<tab> next-unread
 bind index \CF next-page
 bind index \CB previous-page
+bind index B sidebar-toggle-visible
 bind compose F edit-from
 
 # always run $query_command when completing addresses instead of requiring C-t
@@ -108,10 +111,6 @@ macro index,pager G "<enter-command>set sig_on_top=yes<enter><group-reply><enter
 
 # imitate the old search-body function, but expensive for imap
 macro index <Esc>b "<search>~B " "search in message bodies"
-
-# sidebar shenanigans
-macro index B '<enter-command>toggle sidebar_visible<enter><refresh><enter>'
-macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen><enter>'
 
 # things to happen
 folder-hook . set sort=threads                  # everything else
