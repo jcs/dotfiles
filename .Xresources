@@ -2,10 +2,10 @@
 
 #ifdef HIDPI
 ! pkg_add xcursor-dmz
-Xcursor.theme:			Simp1e
+Xcursor.theme:			dmz
 Xcursor.size:			64
 
-Xft.dpi:			148
+Xft.dpi:			112
 #endif
 
 ! a muted palette for athena things like xterm, xfontsel, etc.
@@ -68,7 +68,7 @@ URxvt.geometry:			80x40
 ! xterm-specific settings
 
 #ifdef HIDPI
-*.internalBorder:		28
+*.internalBorder:		22
 #else
 *.internalBorder:		12
 #endif

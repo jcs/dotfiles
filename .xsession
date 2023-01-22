@@ -37,9 +37,9 @@ if [ "${SCREEN_WIDTH}" -ge 1920 ]; then
 fi
 
 if [ "$HIDPI" = "1" ]; then
-	xrdb -DHIDPI=1 -DHOME=$HOME < ~/.Xdefaults
+	xrdb -DHIDPI=1 -DHOME=$HOME < ~/.Xresources
 else
-	xrdb -DHOME=$HOME < ~/.Xdefaults
+	xrdb -DHOME=$HOME < ~/.Xresources
 fi
 
 xsetroot -cursor_name left_ptr
@@ -67,12 +67,18 @@ picom -b
 #xdimmer -n -a &
 
 # turn off the touchscreen
-xinput disable /dev/wsmouse2
+#xinput disable /dev/wsmouse2
 
 # run after any icc profile loading
 redshift -l 41.90:-87.66 -t 6500:3500 -m randr &
 
 # finally, run the window manager and block
-~/code/sdorfehs/sdorfehs
+if [ -x ~/code/sdorfehs/sdorfehs ]; then
+	~/code/sdorfehs/sdorfehs
+elif [ -x /usr/local/bin/sdorfehs ]; then
+	/usr/local/bin/sdorfehs
+else
+	/usr/X11R6/bin/fvwm
+fi
 
 cleanup
