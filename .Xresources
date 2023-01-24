@@ -14,9 +14,6 @@ Xft.dpi:			112
 *.background:			BG
 *.foreground:			FG
 
-XTerm*geometry:			80x40
-URxvt.geometry:			80x40
-
 *.scrollbar.background:		BG
 *.scrollbar.foreground:		FG
 *.scrollBar.minimumThumb:	50
@@ -68,7 +65,7 @@ URxvt.geometry:			80x40
 ! xterm-specific settings
 
 #ifdef HIDPI
-*.internalBorder:		22
+*.internalBorder:		24
 #else
 *.internalBorder:		12
 #endif
@@ -100,15 +97,17 @@ XTerm.disallowedColorOps:
 XTerm.visualBell:		false
 
 #ifdef HIDPI
-XTerm.vt100.faceName:		monospace:size=12
-URxvt.font:			xft:monospace:size=12,xft:noto emoji:size=12
-URxvt.boldFont:			xft:monospace:weight=bold:size=12,xft:noto emoji:weight=bold:size=12
-URxvt.letterSpace:		-2
-URxvt.lineSpace:		0
+XTerm.vt100.faceName:		monospace:size=12.5
+URxvt.font:			xft:monospace:size=12.5,xft:noto emoji:size=12.5
+URxvt.boldFont:			xft:monospace:weight=bold:size=12.5,xft:noto emoji:weight=bold:size=12.5
+URxvt.letterSpace:		-1
+URxvt.geometry:			100x100
 #else
 URxvt.font:			6x13,xft:noto emoji:size=12,xft:symbola
 URxvt.boldFont:			6x13bold,xft:noto emoji:weight=bold:size=12
 URxvt.letterSpace:		0
+XTerm*geometry:			80x40
+URxvt.geometry:			80x40
 #endif
 
 ! make alt+v/command+v paste clipboard
