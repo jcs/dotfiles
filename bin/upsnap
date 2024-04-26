@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+#set -x
 
 SETS="bsd.mp bsd.rd comp man game xbase xshare xserv base"
 
@@ -26,6 +27,9 @@ if [ "${REL}" = "" ]; then
 	exit 1
 fi
 
+# upgrade firmware first or wifi might not work on new kernel
+doas fw_update
+
 for f in $SETS; do
 	fn="${f}${REL}.tgz"
 	if [ $f = "bsd.rd" ] || [ $f = "bsd.mp" ]; then
@@ -44,13 +48,15 @@ for f in $SETS; do
 	fi
 done
 
+# delete relink kit since we have our own objects in /usr/share/relink/kernel/
+doas rm -f /usr/share/relink/kernel.tgz
+
 # rebuild/install my local changes
-cd /usr/src && doas make includes
-cd /usr/src/sbin/sysctl && make clean obj all && doas make install
+cd /usr/src && git catchup && doas make includes
+cd /usr/src/sbin/sysctl && (make clean depend all && doas make install)
 
 (cd /dev; doas sh MAKEDEV all)
 doas env USER=$USER sh /etc/X11/xenodm/GiveConsole
 doas sysmerge
 doas rm -vf /etc/fonts/conf.d/{11-lcdfilter-default.conf,30-metric-aliases.conf,31-nonmst.conf,60-generic.conf}
-doas fw_update
-doas pkg_add -u
+doas pkg_add -u -Dsnap
