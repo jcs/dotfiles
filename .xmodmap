@@ -1,4 +1,13 @@
+! make caps lock a left control key
 clear lock
 clear control
 keycode 66 = Control_L
 add control = Control_L Control_R
+
+! swap left alt and windows keys
+remove Mod1 = Alt_L
+remove Mod4 = Super_L
+keycode 64 = Super_L
+keycode 115 = Alt_L
+add Mod1 = Alt_L
+add Mod4 = Super_L
