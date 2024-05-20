@@ -13,6 +13,7 @@ export LESS="-i"
 export LESSHISTFILE=/dev/null
 export MYSQL_HISTFILE=/dev/null
 export NO_COLOR=1
+export PAGER="less -R"
 export PATH=~/bin:~/go/bin:/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin
 export SSH_ASKPASS_REQUIRE=prefer
 
@@ -30,6 +31,7 @@ bindkey -e
 
 # i'm too lazy to type these out
 alias calc='perl -pe "print eval(\$_) . chr(10);"'
+alias cdgmp='cd /usr/src/sys/arch/`arch -s`/compile/GENERIC.MP'
 alias cdu="cvs -q diff -upRN"
 alias cp="cp -i"
 alias gs="git status"
@@ -37,6 +39,7 @@ alias hg="history | grep "
 alias jobs="jobs -p"
 alias k9="kill -9 %1"
 alias ll="ls -alF"
+alias ltr="ls -alFtr"
 alias ls="ls -aF"
 alias mv="mv -i"
 alias offline_mutt="mutt -R -F ~/.muttrc.offline"
