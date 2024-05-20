@@ -8,6 +8,7 @@
 set backspace=indent,eol,start
 let c_minlines=500
 set encoding=utf-8
+" TODO: check for utf-8 term or this gives a warning
 set fillchars+=vert:│
 set hidden
 set ignorecase
@@ -90,6 +91,7 @@ Plug 'cespare/vim-sbd'
 Plug 'scrooloose/nerdtree'
 Plug 'wsdjeg/vim-fetch'
 Plug 'markonm/traces.vim'
+Plug 'tpope/vim-commentary'
 call plug#end()
 
 " disable plugin auto-indenting
@@ -106,6 +108,8 @@ nmap <C-n> :bn<CR>
 nmap <C-p> :bp<CR>
 " sbd plugin
 nmap <C-x> :Sbd<CR>
+" control+/
+noremap <C-_> :Commentary<CR>
 
 " prevent those from running the nerdtree
 autocmd FileType nerdtree noremap <buffer> <C-h> <nop>
@@ -150,10 +154,12 @@ au FileType crystal,ecrystal setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorc
 
 " ruby and lua have soft tabs
 au FileType ruby,eruby,lua setlocal ts=2 sw=2 tw=79 et sts=2 autoindent colorcolumn=81
+au FileType ruby setlocal commentstring=#\ %s
 au FileType yaml setlocal ts=2 sw=2 et colorcolumn=81
 
 " makefiles and c have tabstops at 8 for portability
 au FileType arduino,asm,make,c,cpp setlocal ts=8 sw=8
+au FileType c setlocal commentstring=//\ %s
 
 " email and commit messages - expand tabs, wrap at 68 for future quoting, enable spelling
 au FileType cvs,gitcommit,mail setlocal tw=68 et spell colorcolumn=69
@@ -176,6 +182,16 @@ au Syntax z8a syn match z8aPreProc "\.equ"
 au Syntax z8a syn match z8aPreProc "\.gblequ"
 au Syntax z8a syn match z8aPreProc "\.lclequ"
 
+augroup Binary
+  au!
+  au BufReadPre  *.bin,*.pkt let &bin=1
+  au BufReadPost *.bin,*.pkt if &bin | %!xxd
+  au BufReadPost *.bin,*.pkt set ft=xxd | endif
+  au BufWritePre *.bin,*.pkt if &bin | %!xxd -r
+  au BufWritePre *.bin,*.pkt endif
+  au BufWritePost *.bin,*.pkt if &bin | %!xxd
+  au BufWritePost *.bin,*.pkt set nomod | endif
+augroup END
 
 " package configuration
 
@@ -243,7 +259,7 @@ cabbr Q q
 cabbr E e
 
 " w! still failed?  try w!! to write as root
-cmap w!! w !sudo tee >/dev/null %
+cmap w!! w !doas tee >/dev/null %
 
 " f will show the current function name
 fun! ShowFuncName()
