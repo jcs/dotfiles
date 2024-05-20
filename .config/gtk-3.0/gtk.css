@@ -13,6 +13,10 @@ menubar menuitem:hover {
 }
 
 scrollbar slider {
-  min-width: 15px;
-  min-height: 15px;
+	min-width: 15px;
+	min-height: 15px;
+}
+
+VteTerminal, vte-terminal {
+	padding: 15px;
 }
