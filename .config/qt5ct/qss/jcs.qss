@@ -6,6 +6,8 @@ QTreeView {
     selection-color: black;
     selection-background-color: #a3ccbd;
 }
+/*
 QSlider::groove:horizontal {
     background-color: #a3ccbd;
 }
+*/
