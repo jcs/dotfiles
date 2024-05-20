@@ -55,6 +55,8 @@ set status_format=" %h: %f (msgs:%?M?%M/?%m %l%?n? new:%n?%?o? old:%o?%?d? del:%
 set status_on_top=yes
 set tilde=yes
 set timeout=15
+set ts_enabled=yes
+set ts_status_format="%v: %f %?%n? (%n new)?"
 set use_envelope_from=yes
 set use_from
 unset user_agent
