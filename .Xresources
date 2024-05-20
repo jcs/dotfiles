@@ -21,66 +21,62 @@ Xft.dpi:			112
 
 *.borderColor:			BG
 
-! solarized (light)
-
-! black
-*.color0:			FG
-*.color8:			#333333
-
-! red
-*.color1:			#dc322f
-*.color9:			#cb4b16
-
-! green
-*.color2:			#859900
-*.color10:			#93a1a1
-
-! yellow
-*.color3:			#b58900
-*.color11:			#839496
-
-! blue
-*.color4:			#268bd2
-*.color12:			#657b83
-
-! magenta
-*.color5:			#d33682
-*.color13:			#6c71c4
-
-! cyan
-*.color6:			#2aa198
-*.color14:			#586e75
-
-! white (gray)
-*.color7:			#d9d7cc
-*.color15:			#e5e5e5
-
-
 #ifdef HIDPI
-*.font:				-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
+.font:				-*-lucida-medium-r-*-*-24-*-*-*-*-*-*-*
 #else
 *.font:				-*-lucida-medium-r-*-*-12-*-*-*-*-*-*-*
 #endif
 
-! xterm-specific settings
+! solarized (light)
+
+! black
+URxvt.color0:			FG
+URxvt.color8:			#333333
+
+! red
+URxvt.color1:			#dc322f
+URxvt.color9:			#cb4b16
+
+! green
+URxvt.color2:			#859900
+URxvt.color10:			#93a1a1
+
+! yellow
+URxvt.color3:			#b58900
+URxvt.color11:			#839496
+
+! blue
+URxvt.color4:			#268bd2
+URxvt.color12:			#657b83
+
+! magenta
+URxvt.color5:			#d33682
+URxvt.color13:			#6c71c4
+
+! cyan
+URxvt.color6:			#2aa198
+URxvt.color14:			#586e75
+
+! white (gray)
+URxvt.color7:			#d9d7cc
+URxvt.color15:			#e5e5e5
+
+
+! urxvt-specific settings
 
 #ifdef HIDPI
-*.internalBorder:		24
+URxvt.internalBorder:		24
 #else
-*.internalBorder:		12
+URxvt.internalBorder:		12
 #endif
-*.saveLines:			20000
-*.scrollBar:			false
-XTerm.rightScrollBar:		true
-URxvt.scrollBar_right:		true
-URxvt.scrollstyle:		xterm
-*.selectToClipboard:		true
-*.termName:			xterm-256color
-*.utmpInhibit:			true
+URxvt.utmpInhibit:		true
 URxvt.loginShell:		true
+URxvt.saveLines:		20000
+URxvt.scrollBar:		false
+URxvt.selectToClipboard:	true
+URxvt.termName:			xterm-256color
 
 ! hide when i type
-XTerm.pointerMode:		2
 URxvt.pointerBlank:		true
 
 ! if i scrolled up, leave it that way when more output comes
@@ -88,32 +84,20 @@ URxvt.scrollTtyOutput:		false
 ! but not when i press a key
 URxvt.scrollTtyKeypress:	true
 
-! needed by ratpoison
-XTerm.allowSendEvents:		true
-! which disables allowColorOps, but empty the list of actual disabled ops
-! which effectively re-enables color ops
-XTerm.disallowedColorOps:
-
-XTerm.visualBell:		false
+!URxvt.geometry:			80x40
+URxvt.geometry:			80x100
 
 #ifdef HIDPI
-XTerm.vt100.faceName:		monospace:size=12.5
-URxvt.font:			xft:monospace:size=12.5,xft:noto emoji:size=12.5
-URxvt.boldFont:			xft:monospace:weight=bold:size=12.5,xft:noto emoji:weight=bold:size=12.5
+URxvt.font:			xft:Iosevka (jcs):size=12.5,xft:noto emoji:size=12.5
+URxvt.boldFont:			xft:Iosevka (jcs):weight=bold:size=12.5,xft:noto emoji:weight=bold:size=12.5
 URxvt.letterSpace:		-1
-URxvt.geometry:			100x100
 #else
 URxvt.font:			6x13,xft:noto emoji:size=12,xft:symbola
 URxvt.boldFont:			6x13bold,xft:noto emoji:weight=bold:size=12
 URxvt.letterSpace:		0
-XTerm*geometry:			80x40
-URxvt.geometry:			80x40
 #endif
 
 ! make alt+v/command+v paste clipboard
-XTerm.vt100.translations:	#override\
-    Meta <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)\n\
-    Super <KeyPress> V: insert-selection(CLIPBOARD, PRIMARY, CUT_BUFFER0)
 URxvt.keysym.M-v:		eval:paste_clipboard
 URxvt.keysym.Mod4-v:		eval:paste_clipboard
 URxvt.cutchars:			"`\"'&()*,;<=>?@[]^{|}.:/-"
@@ -125,23 +109,9 @@ URxvt.matcher.button:		3
 URxvt.matcher.rend.0:		Uline
 
 ! disable paste warning
-URxvt.perl-ext:			-confirm-paste
-
-! make xaw scrollbars act like normal ones
-XTerm.*.Scrollbar.translations: #override\
-    <Btn1Down>: StartScroll(Continuous) MoveThumb() NotifyThumb() \n\
-    <Btn2Down>: StartScroll(Forward) \n\
-    <Btn3Down>: StartScroll(Backward) \n\
-    <Btn1Motion>: MoveThumb() NotifyThumb() \n\
-    <BtnUp>: NotifyScroll(Proportional) EndScroll()
+URxvt.perl-ext:			-confirm-paste,ls_l
 
 SshAskpass*inputTimeout:	15
-
-! invert for qconsole
-qconsole.*.background:		FG
-qconsole.*.foreground:		#999999
-qconsole.*.borderColor:		FG
-qconsole.*.color0:		#999999
 
 #ifdef HIDPI
 SshAskpass*Button.font:		-*-lucida-medium-r-*-*-32-*-*-*-*-*-*-*
