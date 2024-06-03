@@ -1,0 +1,25 @@
+#!/bin/sh
+
+echo "battery discharge started at `date`"
+
+sysctl -q \
+	hw.battery.chargestart=0 \
+	hw.battery.chargestop=100 \
+	hw.battery.chargemode=-1
+
+while true; do
+	REM=`sysctl -n hw.sensors.acpibat0.watthour3 | sed 's/ .*//'`
+
+	if [ "$REM" = "0.00" ]; then
+		break
+	fi
+
+	sleep 10
+done
+
+echo "battery discharge finished at `date`, starting recharge"
+
+sysctl -q hw.battery.chargemode=1 \
+	hw.battery.chargestop=91
+
+echo "battery status: `sysctl -n hw.sensors.acpibat0.raw1`"
