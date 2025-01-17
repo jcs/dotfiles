@@ -1,23 +1,22 @@
 #!/bin/sh
 
+D=`date`
+echo "[$D] locking"
+
+# force keyboard backlight to dim
+pkill -USR1 xdimmer
+
 # kill any active tokens
+doas -L
 ssh-add -D
-if [ `uname -s` = "OpenBSD" ]; then
-	doas -L
-else
-	sudo -k
-fi
 
 # clear clipboard
 echo -n | pbcopy
 
 pkill -KILL -f chat@
-
-if [ `uname -s` = "OpenBSD" ]; then
-	pkill -KILL -f chat@
+if [ ! `pgrep sdorfehs` = "" ]; then
 	echo nokeepalive > ~/.config/sdorfehs/bar-control
-	~/bin/music pause
-	slock
 fi
-
-# on macOS, hammerspoon's lock module pauses music
+~/bin/music pause
+pkill -9 vlc
+slock
