@@ -44,7 +44,7 @@ for f in $SETS; do
 	elif [ $f = "bsd.mp" ]; then
 		doas cp -f $f /bsd.snap
 	else
-		doas tar -xvpz -C / -f ${f}${REL}.tgz
+		doas tar -xpz -C / -f ${f}${REL}.tgz
 	fi
 done
 
@@ -54,9 +54,11 @@ doas rm -f /usr/share/relink/kernel.tgz
 # rebuild/install my local changes
 cd /usr/src && git catchup && doas make includes
 cd /usr/src/sbin/sysctl && (make clean depend all && doas make install)
+cd /usr/src/bin/dd && (make clean depend all && doas make install)
 
 (cd /dev; doas sh MAKEDEV all)
 doas env USER=$USER sh /etc/X11/xenodm/GiveConsole
 doas sysmerge
 doas rm -vf /etc/fonts/conf.d/{11-lcdfilter-default.conf,30-metric-aliases.conf,31-nonmst.conf,60-generic.conf}
 doas pkg_add -u -Dsnap
+doas rm -rf /usr/local/share/vlc/skins2/
