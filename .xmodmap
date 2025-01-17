@@ -4,6 +4,9 @@ clear control
 keycode 66 = Control_L
 add control = Control_L Control_R
 
+! make print-screen key another windows key
+keycode 111 = Super_L
+
 ! swap left alt and windows keys
 remove Mod1 = Alt_L
 remove Mod4 = Super_L
