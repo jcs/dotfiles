@@ -1,0 +1,11 @@
+#!/bin/sh
+
+audtool playback-stop
+
+audtool playlist-clear
+find ~/Music -type f \
+	\( -name \*.m4a -o -name \*.mp3 \) -a \( -not -path \*stversion\* \) \
+	-print0 | sort -zn | xargs -t -0 -L1 audtool playlist-addurl 2>&1 | sed 's,.*/Music/,,'
+
+audtool playlist-shuffle-toggle
+audtool playlist-shuffle-toggle
