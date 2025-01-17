@@ -109,7 +109,7 @@ URxvt.matcher.button:		3
 URxvt.matcher.rend.0:		Uline
 
 ! disable paste warning
-URxvt.perl-ext:			-confirm-paste,ls_l
+URxvt.perl-ext:			-confirm-paste,ls_l,warn_on_close
 
 SshAskpass*inputTimeout:	15
 
