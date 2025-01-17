@@ -1,4 +1,10 @@
-#!/bin/sh -x
+#!/bin/sh
+
+#set -x
+
+if [ -f ~/.xsession.local ]; then
+	. ~/.xsession.local
+fi
 
 cleanup() {
 	echo "cleaning up"
@@ -48,6 +54,11 @@ xmodmap ~/.xmodmap
 xset b 0 0 0
 xset r rate 350 35
 
+# touchpad - Accel Constant Deceleration
+xinput set-float-prop /dev/wsmouse0 300 0.4
+# touchpad - Accel Velocity Scaling
+xinput set-float-prop /dev/wsmouse0 302 1.5
+
 # disable built-in saver, because xidle will handle it
 xset s off
 # disable dpms, because slock will handle it
@@ -57,28 +68,39 @@ xset dpms 0 0 0
 eval `dbus-launch --sh-syntax`
 
 # ~/bin/lock does some protections and runs slock
-xidle -timeout 900 -ne -program ~/bin/lock &
+xidle -timeout 1800 -sw -program ~/bin/lock &
 
 xbanish &
+tpadnav &
+xdimmer -kn -t 10 -s 1 -K &
 
-hsetroot -solid "#a3ccbd"
-picom -b
-
-#xdimmer -n -a &
-
-# turn off the touchscreen
-#xinput disable /dev/wsmouse2
+xcalib ~/.icc/x1nano.icc
 
 # run after any icc profile loading
-redshift -l 41.90:-87.66 -t 6500:3500 -m randr &
+redshift -l 41.90:-87.66 -t 5000:3500 -m randr &
 
-# finally, run the window manager and block
-if [ -x ~/code/sdorfehs/sdorfehs ]; then
+if [ "$WM" = "progman" -a -x ~/code/progman/progman ]; then
+	(sleep 1; xbatticon) &
+	(sleep 1.2; FMT=`printf "%%a %%b %%d\n%%H:%%M"`; xcalicon -f "$FMT") &
+	(sleep 1.4; xweathericon -k $WEATHER_API_KEY -z $WEATHER_ZIPCODE) &
+
+	# debugging setup:
+	#tmux new-session -d ~/code/progman/progman
+	#sleep 1
+	#while pgrep -q progman; do
+	#	sleep 1
+	#done
+	~/code/progman/progman
+elif [ "$WM" = "sdorfehs" -a -x ~/code/sdorfehs/sdorfehs ]; then
+	hsetroot -solid "#a3ccbd"
+	picom -b
 	~/code/sdorfehs/sdorfehs
-elif [ -x /usr/local/bin/sdorfehs ]; then
-	/usr/local/bin/sdorfehs
-else
+elif [ "$WM" = "xterm" ]; then
+	/usr/X11R6/bin/xterm
+elif [ -x /usr/X11R6/bin/fvwm ]; then
 	/usr/X11R6/bin/fvwm
+else
+	/usr/X11R6/bin/xterm
 fi
 
 cleanup
