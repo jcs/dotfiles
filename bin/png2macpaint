@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$1" = "" ]; then
+	echo "usage: ${0} <file.png>"
+	exit 1
+fi
+
+convert $1 pbm:- | pbmtomacp -norle -left 0 -top 0 > $1.macp
