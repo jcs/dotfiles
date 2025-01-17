@@ -1,3 +1,13 @@
 #!/bin/sh
 
-~/bin/xsudo -u _firefox -t /usr/local/bin/firefox $*
+#~/bin/xsudo -u _firefox -t /usr/local/bin/firefox $*
+
+rm -f ~/firefox.core
+
+if [ ! `pgrep sdorfehs` = "" ]; then
+	sdorfehs -c 'vselect 1'
+fi
+
+/usr/local/bin/firefox $*
+
+rm -f ~/firefox.core
