@@ -1,16 +1,35 @@
 #!/bin/sh
 
+OSD_CAT="osd_cat -p top -A center -f \"Helvetica Neue Bold 28\" \
+	-b percentage -o 150 -c \"#00ee00\" -s 1 -l 1 -d 1"
+
 case "$1" in
 up)
 	sndioctl -q output.mute=0 output.level=+0.025
-	pkill -USR1 i3status
+	VAL=`sndioctl -n output.level`
+	PERC=`echo "${VAL} 100 * p" | dc`
+	pgrep -q sdorfehs || \
+		(pkill osd_cat; sh -c "${OSD_CAT} -T Volume -P ${PERC}")
 	;;
 down)
 	sndioctl -q output.mute=0 output.level=-0.025
-	pkill -USR1 i3status
+	VAL=`sndioctl -n output.level`
+	PERC=`echo "${VAL} 100 * p" | dc`
+	pgrep -q sdorfehs || \
+		(pkill osd_cat; sh -c "${OSD_CAT} -T Volume -P ${PERC}")
 	;;
 mute)
-	sndioctl -q output.mute=!
+	if [ `sndioctl -n output.mute` = "0" ]; then
+		sndioctl -q output.mute=1
+		pgrep -q sdorfehs || \
+			(pkill osd_cat; sh -c "${OSD_CAT} -T 'Volume - Mute' -P 0")
+	else
+		sndioctl -q output.mute=0
+		VAL=`sndioctl -n output.level`
+		PERC=`echo "${VAL} 100 * p" | dc`
+		pgrep -q sdorfehs || \
+			(pkill osd_cat; sh -c "${OSD_CAT} -T Volume -P ${PERC}")
+	fi
 	;;
 *)
 	echo "unknown command \"${1}\""
@@ -19,3 +38,4 @@ mute)
 esac
 
 pkill -USR1 i3status
+exit 0
