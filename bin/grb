@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# git interactive rebase of all commits since yesterday
+#
+
+FCOM=`git log --since=yesterday | grep "^commit" | sed 's/commit //' | tail -n1`
+
+git rebase -i ${FCOM}~1
