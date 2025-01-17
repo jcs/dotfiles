@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# visit
+# https://api.imgur.com/oauth2/addclient
+# and register an application with auth type "oauth 2 without a callback"
+#
+# then visit
+# https://api.imgur.com/oauth2/authorize?client_id=#YOUR_CLIENT_ID#&response_type=token
+#
+# after auth, you'll be redirected to an imgur.com url, save the access_token
+# and `export IMGUR_ACCESS_TOKEN=(access token here)`
+#
+
+if [ X"${IMGUR_ACCESS_TOKEN}" = X"" ]; then
+  echo "\$IMGUR_ACCESS_TOKEN not set"
+  exit 1
+fi
+
+TMP=`mktemp /tmp/imgur.XXXXXX`
+
+curl \
+	-s \
+	-o $TMP \
+	-X POST \
+	-H "Authorization: Bearer ${IMGUR_ACCESS_TOKEN}" \
+	-F "image=@${1}" \
+	https://api.imgur.com/3/upload
+
+URL=`sed -e 's/.*"link":"//' -e 's/".*//' < $TMP`
+
+if [ X"$URL" = "" ]; then
+	echo "failed parsing JSON output:"
+	cat $TMP
+else
+	echo $URL
+fi
+
+rm $TMP
