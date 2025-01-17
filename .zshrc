@@ -133,7 +133,6 @@ fi
 
 if [[ $OSTYPE != darwin* ]]; then
    watch=
-   alias pbcopy="xclip -in -selection clipboard"
 fi
 
 case $TERM in
