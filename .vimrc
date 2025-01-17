@@ -282,6 +282,7 @@ abbr shold should
 abbr appologize apologize
 abbr propogate propagate
 abbr eachother each other
+abbr occured occurred
 
 
 " when starting up, restore cursor position from viminfo
