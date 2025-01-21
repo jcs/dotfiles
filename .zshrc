@@ -138,7 +138,7 @@ fi
 case $TERM in
 xterm*)
     precmd() { print -Pn "\e]0;%m:%~$\a" }
-    preexec() { print -Pn "\e]0;%m:%~$ $1\a" }
+    preexec() { print -Pn "\e]0;%m:%~$ ${~1:gs/%/%%}\a" }
 ;;
 esac
 
