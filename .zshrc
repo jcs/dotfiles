@@ -70,7 +70,7 @@ fi
 setopt noclobber                     # halp me
 setopt nohup                         # don't kill things when i logout
 setopt print_exit_value              # i want to know if something went wrong
-HISTSIZE=500
+HISTSIZE=5000
 PS1="%m:%~%(!.#.$) "                 # prompt
 TMOUT=0                              # don't auto logout
 
