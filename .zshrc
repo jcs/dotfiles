@@ -32,7 +32,7 @@ bindkey -e
 
 # i'm too lazy to type these out
 alias calc='perl -pe "print eval(\$_) . chr(10);"'
-alias cdgmp='cd /usr/src/sys/arch/`arch -s`/compile/GENERIC.MP'
+alias cdgmp='cd /usr/src/sys/arch/`machine`/compile/GENERIC.MP'
 alias cdu="cvs -q diff -upRN"
 alias cp="cp -i"
 alias gd="git diff"
