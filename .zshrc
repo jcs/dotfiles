@@ -91,6 +91,12 @@ _block_quick_bail() {
 zle -N _block_quick_bail
 bindkey '^d' _block_quick_bail
 
+# do tab completion for dd
+compctl -k '(if of conv ibs obs bs cbs files skip file seek count)' \
+	-S '=' -x 's[if=], s[of=]' -f - 'C[0,conv=*,*] n[-1,,], s[conv=]' \
+	-k '(ascii ebcdic ibm block unblock lcase ucase swap noerror sync)' \
+	-q -S ',' - 'n[-1,=]' -X '<number>'  -- dd
+
 # show all logins and such
 watch=all
 WATCHFMT="%B%n%b %a %l at %@"
