@@ -9,16 +9,27 @@
 	fixup = rebase -i HEAD~5
 	tree = log --graph --pretty=format:'[%h] [%<(8,trunc)%al] [%cs] %<(50,trunc)%s' --abbrev-commit
 	touch = commit --amend --reset-author --no-edit
-[commit]
-	verbose = true
-[push]
-	default = simple
 [color]
 	ui = never
+[commit]
+	verbose = true
 [diff]
 	compaction-heuristic = true
 	noprefix = true
 [http]
 	cookiefile = /home/jcs/.gitcookies
+[merge]
+	conflictStyle = "diff3"
+[merge "mergiraf"]
+	name = mergiraf
+	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+[push]
+	default = simple
 [rebase]
 	autostash = true
+[safe]
+	directory = /usr/src
+	directory = /usr/xenocara
+	directory = /usr/xenocara.cvs
+	directory = /usr/ports
+	directory = /mnt/src
