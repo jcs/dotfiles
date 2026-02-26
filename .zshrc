@@ -32,7 +32,8 @@ bindkey -e
 
 # i'm too lazy to type these out
 alias calc='perl -pe "print eval(\$_) . chr(10);"'
-alias cdgmp='cd /usr/src/sys/arch/`machine`/compile/GENERIC.MP'
+[ $(sysctl -n hw.ncpuonline) -gt 1 ] && MP=".MP" || MP=""
+alias cdgmp='cd /usr/src/sys/arch/`machine`/compile/GENERIC${MP}'
 alias cdu="cvs -q diff -upRN"
 alias cp="cp -i"
 alias gd="git diff"
