@@ -4,6 +4,8 @@
 # gzip (68010): 56.13%, 27m52s left (1804580 bytes/sec)
 #
 
+require "shellwords"
+
 DIFFS_COUNT = 20
 
 if !(file = ARGV[0])
@@ -15,7 +17,7 @@ diffs = []
 
 last_off = -1
 loop do
-  fs = `fstat -o #{file}`.split("\n")
+  fs = `fstat -o #{Shellwords.escape(file)}`.split("\n")
   if fs.count == 1
     if last_off > -1
       exit
@@ -44,7 +46,11 @@ loop do
 
   if diffs.any?
     avg = diffs.sum / diffs.count.to_f
-    secs = ((size.to_i - off.to_i) / avg.to_f).floor
+    if avg.to_f == 0.0
+      secs = 0
+    else
+      secs = ((size.to_i - off.to_i) / avg.to_f).floor
+    end
     rem = ""
     if secs > (60 * 60)
       h = (secs / (60 * 60).to_f).floor
