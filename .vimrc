@@ -108,7 +108,7 @@ nmap <C-n> :bn<CR>
 nmap <C-p> :bp<CR>
 " sbd plugin
 nmap <C-x> :Sbd<CR>
-" control+/
+" control+/ to comment out a block
 noremap <C-_> :Commentary<CR>
 
 " prevent those from running the nerdtree
@@ -198,12 +198,11 @@ augroup END
 " gutentags
 let g:gutentags_cache_dir="~/.vim/gutentags"
 " use ectags
-if filereadable("/usr/local/bin/ectags")
-	let g:gutentags_ctags_executable="/usr/local/bin/ectags"
+if filereadable("/usr/local/bin/uctags")
+	let g:gutentags_ctags_executable="/usr/local/bin/uctags"
 elseif filereadable("/opt/homebrew/bin/ctags")
 	let g:gutentags_ctags_executable="/opt/homebrew/bin/ctags"
 endif
-let g:gutentags_ctags_executable_go="~/go/bin/gotags"
 let g:gutentags_project_root=[ "CVS", ".git", ".gutentags_stop" ]
 " i'll manually invoke :GutentagsUpdate when i need to
 let g:gutentags_generate_on_missing=0
