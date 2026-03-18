@@ -8,10 +8,10 @@ fi
 
 cleanup() {
 	echo "cleaning up"
-	pkill ssh-agent-card-prompt dbus-daemon redshift picom
+	pkill ssh-agent-card-prompt dbus-daemon redshift picom deskflow-core pushover-ws
 	pkill -f "ruby.*sdorfehs-bar"
 	rm -f ~/.Xauthority
-	rm -f ~/audacious.core
+	rm -f ~/audacious.core ~/firefox.core
 	rm -rf ~/.local/share/Trash
 }
 trap cleanup INT TERM QUIT
@@ -49,6 +49,7 @@ else
 fi
 
 xsetroot -cursor_name left_ptr
+hsetroot -tile ~/.config/progman/marble.png
 
 xmodmap ~/.xmodmap
 xset b 0 0 0
@@ -79,17 +80,19 @@ xcalib ~/.icc/x1nano.icc
 # run after any icc profile loading
 redshift -l 41.90:-87.66 -t 5000:3500 -m randr &
 
+deskflow-core server >/dev/null &
+
 if [ "$WM" = "progman" -a -x ~/code/progman/progman ]; then
-	(sleep 1; xbatticon) &
-	(sleep 1.2; FMT=`printf "%%a %%b %%d\n%%H:%%M"`; xcalicon -f "$FMT") &
+	(sleep 1; FMT=`printf "%%a %%b %%d\n%%H:%%M"`; xcalicon -f "$FMT") &
+	(sleep 1.2; xbatticon) &
 	(sleep 1.4; xweathericon -k $WEATHER_API_KEY -z $WEATHER_ZIPCODE) &
 
-	# debugging setup:
-	#tmux new-session -d ~/code/progman/progman
-	#sleep 1
-	#while pgrep -q progman; do
-	#	sleep 1
-	#done
+#	# debugging setup:
+#	tmux new-session -d ~/code/progman/progman
+#	sleep 1
+#	while pgrep -q progman; do
+#		sleep 1
+#	done
 	~/code/progman/progman
 elif [ "$WM" = "sdorfehs" -a -x ~/code/sdorfehs/sdorfehs ]; then
 	hsetroot -solid "#a3ccbd"
