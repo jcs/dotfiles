@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+bits = sprintf("%032b", ARGV[0]).split("")
+
+puts bits.join("")
+
+bits.each_with_index do |b,x|
+  if b.to_i == 1
+    puts "bit #{sprintf("% 2d", 31 - x)}"
+  end
+end
