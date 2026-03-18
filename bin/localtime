@@ -2,6 +2,10 @@
 
 require "date"
 
-dt = DateTime.parse(ARGV[0])
+if ARGV[0].to_s.match(/^[0-9]+$/)
+  dt = Time.at(ARGV[0].to_i).to_datetime
+else
+  dt = DateTime.parse(ARGV[0])
+end
 puts "#{dt.to_time} (#{dt.zone}) -> " +
   "#{dt.new_offset(Time.now.zone).to_time} (#{Time.now.zone})"
